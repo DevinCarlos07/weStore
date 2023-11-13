@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:we_store/Admin/home.dart';
+import 'package:we_store/common/bottomnav.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
@@ -11,7 +11,7 @@ class Welcome extends StatelessWidget {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => AdminHome(),
+            builder: (context) => MyBottam(),
           ));
     });
     return Scaffold(

@@ -6,9 +6,9 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:we_store/Admin/home.dart';
 import 'package:we_store/common/signup.dart';
+import 'package:we_store/common/welcome.dart';
 
 import 'package:we_store/database/db_models.dart';
-import 'package:we_store/user/home.dart';
 
 const SAVE_KEY_NAME = 'saveUserEmail';
 
@@ -137,7 +137,7 @@ class _LoginState extends State<Login> {
     }
 
     final RegExp passwordRegExp = RegExp(
-      r'^[a-z-0-9]{8}$',
+      r'^[a-z-0-9]',
     );
 
     if (!passwordRegExp.hasMatch(trimmedValue)) {
@@ -165,7 +165,7 @@ class _LoginState extends State<Login> {
 
   //to login
   void login(String email, String password, BuildContext context) async {
-    final signupDB = await Hive.openBox<SignupDetails>('signupDB');
+    final signupDB = await Hive.openBox<SignupDetails>('signup_db');
 
     SignupDetails? signup;
 
@@ -180,11 +180,12 @@ class _LoginState extends State<Login> {
     }
 
     if (signup != null) {
+      print(email);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool(SAVE_KEY_NAME, true);
       await saveUserEmail(email);
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => UserHome()));
+          context, MaterialPageRoute(builder: (context) => Welcome()));
     } else {
       showDialog(
           context: context,

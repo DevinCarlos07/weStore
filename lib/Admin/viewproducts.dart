@@ -47,7 +47,7 @@ class _ViewProductState extends State<ViewProduct> {
               children: [
                 Image(
                   image: NetworkImage(
-                    'https://imageio.forbes.com/specials-images/imageserve/632c5a9fa04361ee3044b11e/0x0.jpg?format=jpg&height=900&width=1600&fit=bounds',
+                    'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MME73?wid=2000&hei=2000&fmt=jpeg&qlt=95&.v=1632861342000',
                   ),
                   width: 190,
                   height: 130,

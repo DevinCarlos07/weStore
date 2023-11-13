@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:we_store/Admin/addproduct.dart';
-import 'package:we_store/Admin/feedback.dart';
+
 import 'package:we_store/Admin/ordersdetails.dart';
 import 'package:we_store/Admin/userslist.dart';
 import 'package:we_store/Admin/viewproducts.dart';
+import 'package:we_store/common/bottomnav.dart';
 
 import 'package:we_store/common/signup.dart';
+import 'package:we_store/user/home.dart';
 
 class AdminHome extends StatelessWidget {
   const AdminHome({super.key});
@@ -141,7 +143,7 @@ class AdminHome extends StatelessWidget {
                     ),
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (ctx) => FeedbackPage()));
+                          MaterialPageRoute(builder: (ctx) => MyBottam()));
                     },
                   ),
                 ),

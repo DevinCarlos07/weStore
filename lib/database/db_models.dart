@@ -3,7 +3,7 @@ part 'db_models.g.dart';
 
 @HiveType(typeId: 1)
 class SignupDetails {
-  @HiveField(6)
+  @HiveField(5)
   int? id;
   @HiveField(0)
   String name;

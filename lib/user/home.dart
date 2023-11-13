@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 class UserHome extends StatefulWidget {
@@ -8,12 +8,6 @@ class UserHome extends StatefulWidget {
   @override
   State<UserHome> createState() => _UserHomeState();
 }
-
-int indexNum = 0;
-
-List screen = [
-  UserHome(),
-];
 
 class _UserHomeState extends State<UserHome> {
   @override
@@ -58,26 +52,8 @@ class _UserHomeState extends State<UserHome> {
         ),
         elevation: 0,
       ),
-      backgroundColor: Colors.white,
-      body: screen.elementAt(indexNum),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_outlined)),
-          BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.bus),
-            //label: 'Bus',
-          )
-        ],
-        currentIndex: indexNum,
-        showUnselectedLabels: true,
-        selectedItemColor: Colors.amber,
-        unselectedItemColor: Colors.blue,
-        onTap: (int index) {
-          setState(() {
-            indexNum = index;
-          });
-        },
-      ),
+      backgroundColor: const Color.fromARGB(255, 78, 76, 76),
+      // body: MyBottam(),
     );
   }
 }
