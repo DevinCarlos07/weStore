@@ -8,7 +8,6 @@ import 'package:we_store/Admin/viewproducts.dart';
 import 'package:we_store/common/bottomnav.dart';
 
 import 'package:we_store/common/signup.dart';
-import 'package:we_store/user/home.dart';
 
 class AdminHome extends StatelessWidget {
   const AdminHome({super.key});

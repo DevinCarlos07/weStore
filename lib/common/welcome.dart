@@ -15,35 +15,37 @@ class Welcome extends StatelessWidget {
           ));
     });
     return Scaffold(
-      body: Align(
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            SizedBox(
-              height: 370,
-            ),
-            Text(
-              'Welcome to We Store',
-              style: GoogleFonts.pollerOne(
-                  fontSize: 26, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 60,
-            ),
-            Image.network(
-              'https://c.tenor.com/K2UGDd4acJUAAAAC/tenor.gif',
-              height: 64,
-              //width: 100,
-            ),
-            SizedBox(
-              height: 130,
-            ),
-            Text(
-              'Authorized Apple Store In Kerala',
-              style: GoogleFonts.questrial(
-                  fontWeight: FontWeight.w500, fontSize: 15),
-            )
-          ],
+      body: SingleChildScrollView(
+        child: Align(
+          alignment: Alignment.center,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 370,
+              ),
+              Text(
+                'Welcome to We Store',
+                style: GoogleFonts.pollerOne(
+                    fontSize: 26, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 60,
+              ),
+              Image.network(
+                'https://c.tenor.com/K2UGDd4acJUAAAAC/tenor.gif',
+                height: 64,
+                //width: 100,
+              ),
+              SizedBox(
+                height: 130,
+              ),
+              Text(
+                'Authorized Apple Store In Kerala',
+                style: GoogleFonts.questrial(
+                    fontWeight: FontWeight.w500, fontSize: 15),
+              )
+            ],
+          ),
         ),
       ),
     );

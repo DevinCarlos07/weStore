@@ -25,6 +25,7 @@ class _MyBottamState extends State<MyBottam> {
     return Scaffold(
       body: screen.elementAt(indexNum),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: const [
           //Item1
           BottomNavigationBarItem(
@@ -46,7 +47,7 @@ class _MyBottamState extends State<MyBottam> {
           //item 4
           BottomNavigationBarItem(
               label: 'Profile',
-              icon: Icon(Icons.auto_awesome_motion),
+              icon: Icon(Icons.person),
               backgroundColor: Color.fromARGB(255, 252, 254, 255)),
         ],
         currentIndex: indexNum,
@@ -56,7 +57,7 @@ class _MyBottamState extends State<MyBottam> {
             indexNum = index;
           });
         },
-        // iconSize: 30,
+        iconSize: 30,
         showUnselectedLabels: true,
         selectedItemColor: Color.fromARGB(255, 4, 133, 239),
         unselectedItemColor: Colors.black,
