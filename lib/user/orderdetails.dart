@@ -14,7 +14,7 @@ class _OrderDetailsState extends State<OrderDetails> {
     'assets/images/iphoneforcat.webp'
   ];
 
-  List<String> model = ['iWatch', 'iPhone 13'];
+  List<String> model = ['iWatch', 'iPhone'];
   List<String> spec = ['ULTRA', '512 GB'];
   List<String> price = ['₹ 1,00,00', '₹ 1,25,000'];
   List<String> qty = ['Qty: 1', 'Qty: 1'];
@@ -23,7 +23,6 @@ class _OrderDetailsState extends State<OrderDetails> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(
             height: 17,
@@ -46,6 +45,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                         height: 10,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.start, //lastupdate
                         children: [
                           SizedBox(
                             width: 10,
@@ -91,6 +91,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
+                            //   mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Text(
                                 'OrderPlaced',
