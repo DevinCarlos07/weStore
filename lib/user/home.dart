@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:we_store/user/fav.dart';
 
 class UserHome extends StatefulWidget {
   const UserHome({Key? key}) : super(key: key);
@@ -12,62 +13,51 @@ class UserHome extends StatefulWidget {
 class _UserHomeState extends State<UserHome> {
   icon() => null;
   List<AssetImage> assetimage = [
-    AssetImage('images/break.jpg'),
-    AssetImage('images/lunch.jpg'),
-    AssetImage('images/diner.jpg'),
-    AssetImage('images/burger.jpg'),
-    AssetImage('images/drink.jpg'),
-    AssetImage('images/piza.jpg'),
-    AssetImage('images/prof.jpg'),
+    AssetImage('assets/images/apple1.jpg'),
+    AssetImage('assets/images/iphoneforcat.webp'),
+    AssetImage('assets/images/airpode.jpg'),
+    AssetImage('assets/images/ipad.jpeg'),
+    AssetImage('assets/images/macforcat.jpeg'),
+    AssetImage('assets/images/case.webp'),
+    AssetImage('assets/images/charger.jpg'),
   ];
   List<String> names = [
-    'Break Fast',
-    'Lunch',
-    'Dinner',
-    'Burger',
-    'Drinks',
-    'Piza',
-    'Other',
+    'Iwatches',
+    'Iphone',
+    'Airpode',
+    'iPad',
+    'MacBook',
+    'Case',
+    'Charger',
   ];
   List<AssetImage> image = [
-    AssetImage(
-      'images/biri.jpg',
-    ),
-    AssetImage('images/bur.jpg'),
-    AssetImage('images/burg.jpg'),
-    AssetImage('images/chick.jpg'),
-    AssetImage('images/masa.jpg'),
-    AssetImage('images/piza.jpg'),
-    AssetImage('images/burge.jpg'),
-    AssetImage('images/drink.jpg'),
-    AssetImage('images/piza.jpg'),
-    AssetImage('images/biri.jpg'),
+    AssetImage('assets/images/airpode.jpg'),
+    AssetImage('assets/images/iphoneforcat.webp'),
+    AssetImage('assets/images/charger.jpg'),
+    AssetImage('assets/images/case.webp'),
+    AssetImage('assets/images/macforcat.jpeg'),
+    AssetImage('assets/images/ipad.jpeg'),
+    AssetImage('assets/images/iphoneforcat.webp'),
   ];
   List<String> name = [
-    'Biriyani',
-    'Fluff Screamer',
-    'Slugburger',
-    'chicken',
-    'Masala Dosa',
-    'Neapolitan Piza',
-    'Luther Burger',
-    'Fritz Kola & Fritz Limo',
-    'Detroit Pizza',
-    'chicken Biriyani',
+    'AirPodes',
+    'iPhone',
+    'charger',
+    'Case',
+    'MacBook',
+    'iPad',
   ];
 
   List<String> rate = [
-    '₹100.0',
-    '₹250.0',
-    '₹200.0',
-    '₹650.0',
-    '₹60.0',
-    '₹600.0',
-    '₹300.0',
-    '₹40.0',
-    '₹750.0',
-    '₹100.0',
+    '₹24,000',
+    '₹1,15,000',
+    '₹2000',
+    '₹500',
+    '₹1,80,000',
+    '₹1,5,0000',
   ];
+
+  List<String> about = ['White', '128 GB', '20W', 'Silicon', 'M2Pro', 'M1'];
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -81,9 +71,10 @@ class _UserHomeState extends State<UserHome> {
             child: Container(
               margin: EdgeInsets.only(left: 10),
               child: CircleAvatar(
-                child: Icon(
-                  Icons.person,
-                ),
+                backgroundImage: AssetImage('assets/images/alexa2.0.png'),
+                // child: Icon(
+                //   Icons.person,
+                // ),
               ),
             ),
           ),
@@ -93,12 +84,21 @@ class _UserHomeState extends State<UserHome> {
               SizedBox(
                 height: 5,
               ),
-              Text(
-                'Username',
-                style: GoogleFonts.poppins(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  fontWeight: FontWeight.bold,
-                ),
+              Row(
+                children: [
+                  Text('Hy',
+                      style: GoogleFonts.rubik(
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 17)),
+                  Text(
+                    ' Alexa',
+                    style: GoogleFonts.poppins(
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: 5,
@@ -113,6 +113,14 @@ class _UserHomeState extends State<UserHome> {
               ),
             ],
           ),
+          actions: [
+            IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.black,
+                ))
+          ],
           // bottom: TabBar(
           //   labelColor: Colors.black,
           //   labelStyle: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
@@ -128,24 +136,26 @@ class _UserHomeState extends State<UserHome> {
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
         body: Column(
           children: [
-            SizedBox(
-              height: 10,
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Categorys',
+                    style: GoogleFonts.rubik(
+                        fontSize: 18, fontWeight: FontWeight.w500),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'See All',
+                      style: GoogleFonts.rubik(fontWeight: FontWeight.w500),
+                    ),
+                  )
+                ],
+              ),
             ),
-            Align(
-                alignment: Alignment.topLeft,
-                child: Row(
-                  children: [
-                    SizedBox(
-                      height: 30,
-                      width: 10,
-                    ),
-                    Text(
-                      'Categorys',
-                      style: GoogleFonts.rubik(
-                          fontSize: 18, fontWeight: FontWeight.w500),
-                    ),
-                  ],
-                )),
             SizedBox(
               height: 100,
               child: ListView.builder(
@@ -155,15 +165,24 @@ class _UserHomeState extends State<UserHome> {
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                     onTap: () {
-                      // Navigator.push(context,MaterialPageRoute(builder: (context) => CategoriesScreen()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Favourite()));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: [
-                          CircleAvatar(
-                            radius: 30,
-                            backgroundImage: assetimage[index],
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Favourite()));
+                            },
+                            child: CircleAvatar(
+                              radius: 30,
+                              backgroundImage: assetimage[index],
+                            ),
                           ),
                           SizedBox(height: 4),
                           Text(
@@ -197,9 +216,12 @@ class _UserHomeState extends State<UserHome> {
                     )),
               ],
             ),
+            SizedBox(
+              height: 15,
+            ),
             Expanded(
               child: GridView.builder(
-                itemCount: 10,
+                itemCount: 6,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 12.0,
@@ -209,68 +231,75 @@ class _UserHomeState extends State<UserHome> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {},
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16.0),
-                        color: Color.fromARGB(255, 255, 255, 255),
-                      ),
-                      child: Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(16.0),
-                              topRight: Radius.circular(16.0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16.0),
+                          color: Color.fromARGB(255, 234, 228, 228),
+                        ),
+                        child: Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(16.0),
+                                topRight: Radius.circular(16.0),
+                              ),
+                              child: Image(
+                                image: image[index],
+                                height: 163,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                            child: Image(
-                              image: image[index],
-                              height: 170,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  name[index],
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .subtitle1!
-                                      .merge(
-                                        const TextStyle(
-                                            fontWeight: FontWeight.w700),
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        name[index],
+                                        style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w600),
                                       ),
-                                ),
-                                const SizedBox(
-                                  height: 8.0,
-                                ),
-                                Text(rate[index]),
-                                const SizedBox(
-                                  height: 8.0,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    IconButton(
-                                      icon: Icon(Icons.favorite_border),
-                                      onPressed: () {
-                                        // Handle favorite button tap
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: Icon(Icons.shopping_cart_outlined),
-                                      onPressed: () {
-                                        // Handle shopping cart button tap
-                                      },
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          )
-                        ],
+                                      Text(rate[index],
+                                          style: GoogleFonts.rubik(
+                                              color: Colors.green,
+                                              fontSize: 15))
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 4.0,
+                                  ),
+                                  Text(about[index],
+                                      style: GoogleFonts.rubik(fontSize: 15)),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      IconButton(
+                                        icon: Icon(Icons.favorite_border),
+                                        onPressed: () {
+                                          // Handle favorite button tap
+                                        },
+                                      ),
+                                      IconButton(
+                                        icon:
+                                            Icon(Icons.shopping_cart_outlined),
+                                        onPressed: () {
+                                          // Handle shopping cart button tap
+                                        },
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   );
