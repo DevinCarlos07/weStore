@@ -67,22 +67,17 @@ class _UserHomeState extends State<UserHome> {
           toolbarHeight: 80,
           backgroundColor: Color.fromARGB(255, 255, 255, 255),
           leading: Padding(
-            padding: const EdgeInsets.only(left: 0),
-            child: Container(
-              margin: EdgeInsets.only(left: 10),
-              child: CircleAvatar(
-                backgroundImage: AssetImage('assets/images/alexa2.0.png'),
-                // child: Icon(
-                //   Icons.person,
-                // ),
-              ),
+            padding: EdgeInsets.only(left: 7),
+            child: CircleAvatar(
+              backgroundImage: AssetImage('assets/images/alexa2.0.png'),
             ),
           ),
+
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 5,
+                height: 3,
               ),
               Row(
                 children: [
@@ -137,7 +132,7 @@ class _UserHomeState extends State<UserHome> {
         body: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.only(left: 12, right: 12),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

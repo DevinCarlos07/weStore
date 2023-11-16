@@ -13,7 +13,7 @@ class _OrderDetailsState extends State<OrderDetails> {
     'assets/images/apple1.jpg',
     'assets/images/iphoneforcat.webp'
   ];
-
+  List<String> about = ['White', '128 GB', '20W', 'Silicon', 'M2Pro', 'M1'];
   List<String> model = ['iWatch', 'iPhone'];
   List<String> spec = ['ULTRA', '512 GB'];
   List<String> price = ['₹ 1,00,00', '₹ 1,25,000'];

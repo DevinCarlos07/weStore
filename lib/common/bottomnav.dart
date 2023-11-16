@@ -46,7 +46,7 @@ class _MyBottamState extends State<MyBottam> {
               backgroundColor: Color.fromARGB(255, 255, 255, 255)),
           //item 4
           BottomNavigationBarItem(
-              label: 'Profile',
+              label: 'Account',
               icon: Icon(Icons.person),
               backgroundColor: Color.fromARGB(255, 252, 254, 255)),
         ],
