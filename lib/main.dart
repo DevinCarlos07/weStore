@@ -8,8 +8,6 @@ import 'package:we_store/database/db_models.dart';
 Future<void> main() async {
   Hive.initFlutter();
 
-  Hive.openBox<SignupDetails>('signup_db');
-
   if (!Hive.isAdapterRegistered(SignupDetailsAdapter().typeId)) {
     Hive.registerAdapter(SignupDetailsAdapter());
   }

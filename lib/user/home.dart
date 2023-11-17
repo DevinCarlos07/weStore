@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 import 'package:we_store/user/fav.dart';
 
 class UserHome extends StatefulWidget {
@@ -11,6 +12,18 @@ class UserHome extends StatefulWidget {
 }
 
 class _UserHomeState extends State<UserHome> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _openBox();
+  }
+
+  late Box UserBox = Hive.box('signup_db');
+  Future<void> _openBox() async {
+    UserBox = await Hive.openBox('signup_db');
+  }
+
   icon() => null;
   List<AssetImage> assetimage = [
     AssetImage('assets/images/apple1.jpg'),
@@ -156,7 +169,7 @@ class _UserHomeState extends State<UserHome> {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
-                itemCount: 7,
+                itemCount: image.length,
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                     onTap: () {

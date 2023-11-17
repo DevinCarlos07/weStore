@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:we_store/common/login.dart';
 import 'package:we_store/user/subpages/editprofile.dart';
 
 class Profile extends StatefulWidget {
@@ -170,7 +171,12 @@ class _ProfileState extends State<Profile> {
                     ),
                     borderRadius: BorderRadius.circular(18)),
                 child: ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Login()),
+                    );
+                  },
                   leading: Icon(
                     Icons.logout,
                     color: Colors.black,
