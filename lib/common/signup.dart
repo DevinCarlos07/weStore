@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:we_store/common/login.dart';
-import 'package:we_store/database/db_fuctions.dart';
-import 'package:we_store/database/db_models.dart';
+import 'package:we_store/database/functions/signup_fuctions.dart';
+import 'package:we_store/database/models/db_models.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});

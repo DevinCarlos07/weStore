@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:we_store/database/db_models.dart';
+import 'package:we_store/database/models/db_models.dart';
 
 ValueNotifier<List<SignupDetails>> signuplist = ValueNotifier([]);
 

@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:we_store/database/functions/addproduct_fuctions.dart';
+import 'package:we_store/database/models/addproduct_models.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({super.key});
@@ -11,6 +13,10 @@ class AddProduct extends StatefulWidget {
 }
 
 class _AddProductState extends State<AddProduct> {
+  final _productnameController = TextEditingController();
+  final _productpriceController = TextEditingController();
+  final _productdetailsContoller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +32,7 @@ class _AddProductState extends State<AddProduct> {
               height: 40,
             ),
             TextFormField(
+              controller: _productnameController,
               decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 25, horizontal: 25),
@@ -41,6 +48,7 @@ class _AddProductState extends State<AddProduct> {
               height: 20,
             ),
             TextFormField(
+              controller: _productpriceController,
               decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 25, horizontal: 30),
@@ -56,6 +64,7 @@ class _AddProductState extends State<AddProduct> {
               height: 20,
             ),
             TextFormField(
+              controller: _productdetailsContoller,
               decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 40, horizontal: 30),
@@ -109,5 +118,60 @@ class _AddProductState extends State<AddProduct> {
         ),
       ),
     );
+  }
+
+  //to validate Product_name
+  String? validateProductName(String? value) {
+    final trimmedvalue = value?.trim();
+
+    if (trimmedvalue == null || trimmedvalue.isEmpty) {
+      return 'enter product name';
+    }
+    return null;
+  }
+
+  //to validate product_price
+
+  String? validateProductPrice(String? value) {
+    final trimmedvalue = value?.trim();
+
+    if (trimmedvalue == null || trimmedvalue.isEmpty) {
+      return 'enter the price';
+    }
+    final RegExp priceRegExp = RegExp(r'^[0-9 ]+$');
+
+    if (!priceRegExp.hasMatch(trimmedvalue)) {
+      return 'enter the price';
+    }
+    return null;
+  }
+
+  //to validate product_details
+
+  String? validateProductDetails(String? value) {
+    final trimmedvalue = value?.trim();
+
+    if (trimmedvalue == null || trimmedvalue.isEmpty) {
+      return 'enter the details';
+    }
+    return null;
+  }
+
+  //button
+
+  Future<void> addButton() async {
+    final _name = _productnameController.text.trim();
+    final _price = _productpriceController.text.trim();
+    final _details = _productdetailsContoller.text.trim();
+
+    if (_formKey.currentState!.validate()) {
+      final _add = Addproducts(name: _name, price: _price, details: _details);
+      addproduct(_add);
+    } else {
+      showSnackBar(context, 'New Product Failed!');
+      _productdetailsContoller.clear();
+      _productpriceController.clear();
+      _productnameController.clear();
+    }
   }
 }

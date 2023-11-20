@@ -255,7 +255,7 @@ class _UserHomeState extends State<UserHome> {
                               ),
                               child: Image(
                                 image: image[index],
-                                height: 163,
+                                height: 160,
                                 width: double.infinity,
                                 fit: BoxFit.cover,
                               ),
