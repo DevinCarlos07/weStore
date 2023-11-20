@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:we_store/Admin/home.dart';
+import 'package:we_store/database/functions/signup_fuctions.dart';
+import 'package:we_store/database/models/db_models.dart';
 
 class UsersList extends StatefulWidget {
   const UsersList({Key? key}) : super(key: key);
@@ -14,14 +15,8 @@ class UsersList extends StatefulWidget {
 class _UsersListState extends State<UsersList> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _openBox();
-  }
-
-  late Box UserBox = Hive.box('signup_db');
-  Future<void> _openBox() async {
-    UserBox = await Hive.openBox('signup_db');
+    getuser();
   }
 
   @override
@@ -49,13 +44,13 @@ class _UsersListState extends State<UsersList> {
         ),
       ),
       body: ValueListenableBuilder(
-          valueListenable: UserBox.listenable(),
-          builder: (context, userBox, _) {
-            final userdatas = userBox.values.toList();
+          valueListenable: signuplist,
+          builder: (context, List<SignupDetails> signuplist, Widget? child) {
+            //  final userdatas = userBox.values.toList();
             return ListView.builder(
-              itemCount: userdatas.length,
+              itemCount: signuplist.length,
               itemBuilder: (BuildContext context, int index) {
-                final userdata = userdatas[index];
+                final userdata = signuplist[index];
                 return Column(
                   children: [
                     SizedBox(

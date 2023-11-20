@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
+
+import 'package:we_store/database/functions/addproduct_fuctions.dart';
+import 'package:we_store/database/models/addproduct_models.dart';
 import 'package:we_store/user/fav.dart';
 
 class UserHome extends StatefulWidget {
@@ -14,14 +18,8 @@ class UserHome extends StatefulWidget {
 class _UserHomeState extends State<UserHome> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _openBox();
-  }
-
-  late Box UserBox = Hive.box('signup_db');
-  Future<void> _openBox() async {
-    UserBox = await Hive.openBox('signup_db');
+    getproducts();
   }
 
   icon() => null;
@@ -227,96 +225,123 @@ class _UserHomeState extends State<UserHome> {
             SizedBox(
               height: 15,
             ),
-            Expanded(
-              child: GridView.builder(
-                itemCount: 6,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 12.0,
-                  mainAxisSpacing: 12.0,
-                  mainAxisExtent: 290,
-                ),
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.0),
-                          color: Color.fromARGB(255, 234, 228, 228),
-                        ),
-                        child: Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(16.0),
-                                topRight: Radius.circular(16.0),
+            ValueListenableBuilder(
+                valueListenable: productlist,
+                builder: (context, List<Addproducts> addlist, Widget? child) {
+                  // final addproduct = addBox.values.toList();
+
+                  return Expanded(
+                    child: GridView.builder(
+                      itemCount: addlist.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 12.0,
+                        mainAxisSpacing: 12.0,
+                        mainAxisExtent: 290,
+                      ),
+                      itemBuilder: (context, index) {
+                        final addproducts = addlist[index];
+                        return GestureDetector(
+                          onTap: () {},
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16.0),
+                                color: Color.fromARGB(255, 234, 228, 228),
                               ),
-                              child: Image(
-                                image: image[index],
-                                height: 160,
-                                width: double.infinity,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        name[index],
-                                        style: GoogleFonts.poppins(
-                                            fontWeight: FontWeight.w600),
+                                  ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(16.0),
+                                      topRight: Radius.circular(16.0),
+                                    ),
+                                    child: Image.file(
+                                      File(
+                                        addproducts.imagepath,
                                       ),
-                                      Text(rate[index],
-                                          style: GoogleFonts.rubik(
-                                              color: Colors.green,
-                                              fontSize: 15))
-                                    ],
+                                      height: 160,
+                                      width: double.infinity,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                  const SizedBox(
-                                    height: 4.0,
-                                  ),
-                                  Text(about[index],
-                                      style: GoogleFonts.rubik(fontSize: 15)),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      IconButton(
-                                        icon: Icon(Icons.favorite_border),
-                                        onPressed: () {
-                                          // Handle favorite button tap
-                                        },
-                                      ),
-                                      IconButton(
-                                        icon:
-                                            Icon(Icons.shopping_cart_outlined),
-                                        onPressed: () {
-                                          // Handle shopping cart button tap
-                                        },
-                                      ),
-                                    ],
+                                  Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              addproducts.name,
+                                              style: GoogleFonts.poppins(
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            Text(addproducts.price,
+                                                style: GoogleFonts.rubik(
+                                                    color: Colors.green,
+                                                    fontSize: 15))
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 4.0,
+                                        ),
+                                        Text(addproducts.details,
+                                            style: GoogleFonts.rubik(
+                                                fontSize: 15)),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            IconButton(
+                                              icon: Icon(Icons.favorite_border),
+                                              onPressed: () {
+                                                // Handle favorite button tap
+                                              },
+                                            ),
+                                            IconButton(
+                                              icon: Icon(
+                                                  Icons.shopping_cart_outlined),
+                                              onPressed: () {
+                                                // Handle shopping cart button tap
+                                                _bootmsheet(context);
+                                              },
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   )
                                 ],
                               ),
-                            )
-                          ],
-                        ),
-                      ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   );
-                },
-              ),
-            )
+                })
           ],
         ),
       ),
     );
+  }
+
+  //bottomsheet
+  void _bootmsheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext builder) {
+          return Container(
+            height: 200,
+            child: Column(
+              children: [Text('okey')],
+            ),
+          );
+        });
   }
 }

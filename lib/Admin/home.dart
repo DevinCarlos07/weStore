@@ -6,7 +6,7 @@ import 'package:we_store/Admin/ordersdetails.dart';
 import 'package:we_store/Admin/userslist.dart';
 import 'package:we_store/Admin/viewproducts.dart';
 import 'package:we_store/common/bottomnav.dart';
-import 'package:hive/hive.dart';
+
 import 'package:we_store/common/signup.dart';
 
 class AdminHome extends StatefulWidget {
@@ -17,17 +17,6 @@ class AdminHome extends StatefulWidget {
 }
 
 class _AdminHomeState extends State<AdminHome> {
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _openBox();
-  }
-
-  late Box UserBox = Hive.box('signup_db');
-  Future<void> _openBox() async {
-    UserBox = await Hive.openBox('signup_db');
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

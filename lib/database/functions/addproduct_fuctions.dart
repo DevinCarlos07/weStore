@@ -11,3 +11,10 @@ Future<void> addproduct(Addproducts value) async {
   productlist.value.add(value);
   productlist.notifyListeners();
 }
+
+Future<void> getproducts() async {
+  final productDB = await Hive.openBox<Addproducts>('add_product');
+  productlist.value.clear();
+  productlist.value.addAll(productDB.values);
+  productlist.notifyListeners();
+}

@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-part '../db_models.g.dart';
+part 'db_models.g.dart';
 
 @HiveType(typeId: 1)
 class SignupDetails {

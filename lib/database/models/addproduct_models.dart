@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+part 'addproduct_models.g.dart';
 
 @HiveType(typeId: 2)
 class Addproducts {
@@ -14,8 +15,12 @@ class Addproducts {
   @HiveField(3)
   String details;
 
+  @HiveField(6)
+  String imagepath;
+
   Addproducts(
-      {required this.name,
+      {required this.imagepath,
+      required this.name,
       required this.price,
       required this.details,
       this.id});
