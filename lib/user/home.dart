@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:we_store/database/functions/addproduct_fuctions.dart';
 import 'package:we_store/database/models/addproduct_models.dart';
 import 'package:we_store/user/fav.dart';
+import 'package:we_store/user/subpages/cart.dart';
 
 class UserHome extends StatefulWidget {
   const UserHome({Key? key}) : super(key: key);
@@ -16,6 +18,16 @@ class UserHome extends StatefulWidget {
 }
 
 class _UserHomeState extends State<UserHome> {
+  bool fav = false;
+  void change() {
+    if (fav == false) {
+      print('set');
+    } else {
+      print('fail');
+      fav = true;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -124,6 +136,15 @@ class _UserHomeState extends State<UserHome> {
                 onPressed: () {},
                 icon: Icon(
                   Icons.search,
+                  color: Colors.black,
+                )),
+            IconButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => CartScreen()));
+                },
+                icon: Icon(
+                  Icons.shopping_cart_outlined,
                   color: Colors.black,
                 ))
           ],
@@ -242,7 +263,14 @@ class _UserHomeState extends State<UserHome> {
                       itemBuilder: (context, index) {
                         final addproducts = addlist[index];
                         return GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            _bootmsheet(
+                                context,
+                                addproducts.name,
+                                addproducts.imagepath,
+                                addproducts.price,
+                                addproducts.details);
+                          },
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
@@ -281,7 +309,7 @@ class _UserHomeState extends State<UserHome> {
                                               style: GoogleFonts.poppins(
                                                   fontWeight: FontWeight.w600),
                                             ),
-                                            Text(addproducts.price,
+                                            Text('₹${addproducts.price}',
                                                 style: GoogleFonts.rubik(
                                                     color: Colors.green,
                                                     fontSize: 15))
@@ -298,17 +326,26 @@ class _UserHomeState extends State<UserHome> {
                                               MainAxisAlignment.center,
                                           children: [
                                             IconButton(
-                                              icon: Icon(Icons.favorite_border),
+                                              icon: Icon(
+                                                Icons.favorite_border,
+                                                color: Colors.black,
+                                              ),
                                               onPressed: () {
-                                                // Handle favorite button tap
+                                                setState(() {
+                                                  change();
+                                                });
                                               },
                                             ),
                                             IconButton(
                                               icon: Icon(
                                                   Icons.shopping_cart_outlined),
                                               onPressed: () {
-                                                // Handle shopping cart button tap
-                                                _bootmsheet(context);
+                                                _bootmsheet(
+                                                    context,
+                                                    addproducts.name,
+                                                    addproducts.imagepath,
+                                                    addproducts.price,
+                                                    addproducts.details);
                                               },
                                             ),
                                           ],
@@ -332,16 +369,108 @@ class _UserHomeState extends State<UserHome> {
   }
 
   //bottomsheet
-  void _bootmsheet(BuildContext context) {
+  void _bootmsheet(BuildContext context, String name, String imagepath,
+      String price, String details) {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext builder) {
           return Container(
-            height: 200,
+            decoration:
+                BoxDecoration(color: Color.fromARGB(255, 214, 204, 204)),
+            height: 320,
             child: Column(
-              children: [Text('okey')],
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 26),
+                  child: Text(
+                    'Buy This',
+                    style: GoogleFonts.rubik(
+                        fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 30, right: 30, top: 30, bottom: 20),
+                      child: Container(
+                        width: 150,
+                        height: 150,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: FileImage(File(imagepath)),
+                                fit: BoxFit.cover),
+                            border: Border.all(color: Colors.black),
+                            borderRadius: BorderRadius.circular(20)),
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          name,
+                          style: GoogleFonts.rubik(
+                              fontSize: 21, fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          details,
+                          style: TextStyle(
+                              color: Colors.green,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400),
+                        ),
+                        SizedBox(
+                          height: 17,
+                        ),
+                        Text(
+                          '₹$price',
+                          style: TextStyle(
+                              color: const Color.fromARGB(255, 0, 0, 0),
+                              fontSize: 17,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 80, right: 80),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(onPressed: () {}, child: Text('Cancel')),
+                      ElevatedButton(
+                          onPressed: () {},
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.green),
+                          ),
+                          child: Text(
+                            'Buy Now',
+                            style: TextStyle(color: Colors.black),
+                          ))
+                    ],
+                  ),
+                )
+              ],
             ),
           );
         });
+  }
+
+  //add button
+  int currentValue = 0;
+
+  void _addButton() {
+    currentValue++;
+  }
+
+  void _subtractButton() {
+    if (currentValue > 0) {
+      currentValue--;
+    }
   }
 }
