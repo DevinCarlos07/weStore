@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:we_store/database/functions/addproduct_fuctions.dart';
-import 'package:we_store/database/models/addproduct_models.dart';
+import 'package:we_store/database/functions/addproduct/addproduct_fuctions.dart';
+import 'package:we_store/database/functions/addproduct/addproduct_models.dart';
+import 'package:we_store/database/functions/cart/addcart_btn.dart';
 import 'package:we_store/user/fav.dart';
 import 'package:we_store/user/subpages/cart.dart';
 
@@ -340,12 +341,13 @@ class _UserHomeState extends State<UserHome> {
                                               icon: Icon(
                                                   Icons.shopping_cart_outlined),
                                               onPressed: () {
-                                                _bootmsheet(
-                                                    context,
-                                                    addproducts.name,
-                                                    addproducts.imagepath,
-                                                    addproducts.price,
-                                                    addproducts.details);
+                                                // _bootmsheet(
+                                                //     context,
+                                                //     addproducts.name,
+                                                //     addproducts.imagepath,
+                                                //     addproducts.price,
+                                                //     addproducts.details);
+                                                checkCart(addproducts, context);
                                               },
                                             ),
                                           ],
@@ -459,18 +461,5 @@ class _UserHomeState extends State<UserHome> {
             ),
           );
         });
-  }
-
-  //add button
-  int currentValue = 0;
-
-  void _addButton() {
-    currentValue++;
-  }
-
-  void _subtractButton() {
-    if (currentValue > 0) {
-      currentValue--;
-    }
   }
 }

@@ -5,8 +5,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:we_store/database/functions/addproduct_fuctions.dart';
-import 'package:we_store/database/models/addproduct_models.dart';
+import 'package:we_store/database/functions/addproduct/addproduct_fuctions.dart';
+import 'package:we_store/database/functions/addproduct/addproduct_models.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({super.key});

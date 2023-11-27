@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:we_store/database/models/addproduct_models.dart';
+import 'package:we_store/database/functions/addproduct/addproduct_models.dart';
 
 ValueNotifier<List<Addproducts>> productlist = ValueNotifier([]);
 

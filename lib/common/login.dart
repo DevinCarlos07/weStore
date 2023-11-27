@@ -8,7 +8,7 @@ import 'package:we_store/Admin/home.dart';
 import 'package:we_store/common/signup.dart';
 import 'package:we_store/common/welcome.dart';
 
-import 'package:we_store/database/models/db_models.dart';
+import 'package:we_store/database/functions/signup/db_models.dart';
 
 const SAVE_KEY_NAME = 'saveUserEmail';
 

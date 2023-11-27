@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:we_store/Admin/home.dart';
-import 'package:we_store/database/functions/signup_fuctions.dart';
-import 'package:we_store/database/models/db_models.dart';
+import 'package:we_store/database/functions/signup/signup_fuctions.dart';
+import 'package:we_store/database/functions/signup/db_models.dart';
 
 class UsersList extends StatefulWidget {
   const UsersList({Key? key}) : super(key: key);

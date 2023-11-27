@@ -1,5 +1,13 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sort_child_properties_last
+
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:we_store/database/functions/cart/addcart_btn.dart';
+import 'package:we_store/database/functions/cart/cart_functions.dart';
+import 'package:we_store/database/functions/cart/cart_models.dart';
 
 class CartScreen extends StatefulWidget {
   CartScreen({super.key});
@@ -10,243 +18,248 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   @override
+  void initState() {
+    super.initState();
+    getcart();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         appBar: AppBar(
-          backgroundColor: Colors.redAccent.shade700,
-          title: Text("Cart"),
+          elevation: 0,
+          centerTitle: true,
+          backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          title: Text(
+            "Cart",
+            style: GoogleFonts.rubik(
+                color: Colors.black, fontSize: 22, fontWeight: FontWeight.w500),
+          ),
         ),
-        body: ListView(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: 20,
-                      // // left: 10,
-                      bottom: 10,
-                    ),
-                  ),
-                  //items
-
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 9),
-                    child: Container(
-                      width: 380,
-                      height: 115,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 3,
-                              blurRadius: 10,
-                              offset: Offset(0, 3),
-                            )
-                          ]),
-                      child: Row(
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            child: Image.asset(
-                              "images/br.jpg",
-                              height: 80,
-                            ),
-                            width: 150,
-                          ),
-                          // ignore: sized_box_for_whitespace
-                          Container(
-                            width: 190,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: const [
-                                Text(
-                                  "Burger",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              SizedBox(
+                height: 400,
+                child: ValueListenableBuilder(
+                    valueListenable: addcartlist,
+                    builder:
+                        (context, List<AddCart> addcartlist, Widget? child) {
+                      return ListView.builder(
+                          itemCount: addcartlist.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final cart = addcartlist[index];
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 10, bottom: 10),
+                              child: Container(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Container(
+                                        width: 90,
+                                        height: 108,
+                                        child: Image.file(
+                                          File(cart.imagepath),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text(
+                                          cart.name,
+                                          style: GoogleFonts.rubik(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        Text(cart.price),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        Text(cart.details)
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10, right: 10),
+                                      child: Container(
+                                        height: 114,
+                                        decoration: BoxDecoration(
+                                            color: const Color.fromARGB(
+                                                255, 198, 202, 205),
+                                            border:
+                                                Border.all(color: Colors.black),
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(
+                                                CupertinoIcons.add,
+                                              ),
+                                              iconSize: 20,
+                                            ),
+                                            Text('asdfdsf'),
+                                            IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(CupertinoIcons.minus),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                Text(
-                                  "Taste our burger",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                Text(
-                                  "₹100",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 10,
-                            ),
-                            child: Container(
-                              padding: EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(10),
+                                width: double.infinity,
+                                height: 120,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    borderRadius: BorderRadius.circular(20)),
                               ),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Icon(
-                                    CupertinoIcons.minus,
-                                    color: Colors.white,
-                                  ),
-                                  Text(
-                                    "2",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white),
-                                  ),
-                                  Icon(
-                                    CupertinoIcons.plus,
-                                    color: Colors.white,
-                                  )
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                    child: Column(
+                            );
+                          });
+                    }),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Items",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
-                              Text(
-                                "10",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ],
+                        Text(
+                          "Items",
+                          style: TextStyle(
+                            fontSize: 20,
                           ),
                         ),
-                        Divider(
-                          color: Colors.black,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Sub-Total",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
-                              Text(
-                                "₹100",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Divider(
-                          color: Colors.black,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Delivery",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
-                              Text(
-                                "₹50",
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Divider(
-                          color: Colors.black,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Total",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
-                              Text(
-                                "₹150",
-                                style:
-                                    TextStyle(fontSize: 20, color: Colors.red),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
+                        Text(
+                          "10",
+                          style: TextStyle(fontSize: 20),
                         ),
                       ],
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    // ignore: sized_box_for_whitespace
-                    child: Container(
-                      height: 50,
-                      width: 400,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          // ignore: deprecated_member_use
-                          primary: Colors.redAccent.shade700,
-                        ),
-                        child: Text(
-                          'Place Order',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                    Divider(
+                      color: Colors.black,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Sub-Total",
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
                           ),
-                        ),
+                          Text(
+                            "₹100",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Divider(
+                      color: Colors.black,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Delivery",
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                          Text(
+                            "₹50",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Divider(
+                      color: Colors.black,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Total",
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                          Text(
+                            "₹150",
+                            style: TextStyle(fontSize: 20, color: Colors.red),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                // ignore: sized_box_for_whitespace
+                child: Container(
+                  height: 50,
+                  width: 400,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      // ignore: deprecated_member_use
+                      primary: Colors.redAccent.shade700,
+                    ),
+                    child: Text(
+                      'Place Order',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                ],
+                ),
               ),
-            )
-          ],
+            ],
+          ),
         ));
+  }
+
+  //add button
+  int currentValue = 0;
+
+  void _addButton() {
+    currentValue++;
+  }
+
+  void _subtractButton() {
+    if (currentValue > 0) {
+      currentValue--;
+    }
   }
 }
