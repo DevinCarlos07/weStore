@@ -4,8 +4,11 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:we_store/database/functions/addproduct/addproduct_fuctions.dart';
 import 'package:we_store/database/functions/cart/addcart_btn.dart';
+
 import 'package:we_store/database/functions/cart/cart_functions.dart';
 import 'package:we_store/database/functions/cart/cart_models.dart';
 
@@ -55,84 +58,110 @@ class _CartScreenState extends State<CartScreen> {
                             return Padding(
                               padding:
                                   const EdgeInsets.only(top: 10, bottom: 10),
-                              child: Container(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Container(
-                                        width: 90,
-                                        height: 108,
-                                        child: Image.file(
-                                          File(cart.imagepath),
-                                          fit: BoxFit.cover,
+                              child: Slidable(
+                                startActionPane: ActionPane(
+                                    motion: StretchMotion(),
+                                    children: [
+                                      SlidableAction(
+                                        label: 'Remove',
+                                        onPressed: (context) {
+                                          setState(() {
+                                            delete_cart(cart.id!);
+                                          });
+                                        },
+                                        icon: Icons.delete,
+                                        autoClose: true,
+                                        backgroundColor: Colors.red,
+                                        borderRadius: BorderRadius.circular(20),
+                                      )
+                                    ]),
+                                child: Container(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10),
+                                        child: Container(
+                                          width: 90,
+                                          height: 108,
+                                          child: Image.file(
+                                            File(cart.imagepath),
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Text(
-                                          cart.name,
-                                          style: GoogleFonts.rubik(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        Text(cart.price),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        Text(cart.details)
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10, right: 10),
-                                      child: Container(
-                                        height: 114,
-                                        decoration: BoxDecoration(
-                                            color: const Color.fromARGB(
-                                                255, 198, 202, 205),
-                                            border:
-                                                Border.all(color: Colors.black),
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            IconButton(
-                                              onPressed: () {},
-                                              icon: Icon(
-                                                CupertinoIcons.add,
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          Text(
+                                            cart.name,
+                                            style: GoogleFonts.rubik(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Text(cart.price),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Text(cart.details)
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 10, right: 10),
+                                        child: Container(
+                                          height: 114,
+                                          decoration: BoxDecoration(
+                                              color: const Color.fromARGB(
+                                                  255, 198, 202, 205),
+                                              border: Border.all(
+                                                  color: Colors.black),
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                          child: Column(
+                                            children: [
+                                              IconButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    _addButton();
+                                                  });
+                                                },
+                                                icon: Icon(
+                                                  CupertinoIcons.add,
+                                                ),
+                                                iconSize: 20,
                                               ),
-                                              iconSize: 20,
-                                            ),
-                                            Text('asdfdsf'),
-                                            IconButton(
-                                              onPressed: () {},
-                                              icon: Icon(CupertinoIcons.minus),
-                                            )
-                                          ],
+                                              Text('$currentValue'),
+                                              IconButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    _subtractButton();
+                                                  });
+                                                },
+                                                icon:
+                                                    Icon(CupertinoIcons.minus),
+                                              )
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    )
-                                  ],
+                                      )
+                                    ],
+                                  ),
+                                  width: double.infinity,
+                                  height: 120,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.black),
+                                      borderRadius: BorderRadius.circular(20)),
                                 ),
-                                width: double.infinity,
-                                height: 120,
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black),
-                                    borderRadius: BorderRadius.circular(20)),
                               ),
                             );
                           });
@@ -140,88 +169,94 @@ class _CartScreenState extends State<CartScreen> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Items",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                        Text(
-                          "10",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ],
-                    ),
-                    Divider(
-                      color: Colors.black,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: ValueListenableBuilder(
+                    valueListenable: addcartlist,
+                    builder:
+                        (context, List<AddCart> addcartlist, Widget? child) {
+                      return Column(
                         children: [
-                          Text(
-                            "Sub-Total",
-                            style: TextStyle(
-                              fontSize: 20,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Items",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
+                              Text(
+                                'sdfjg',
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ],
+                          ),
+                          Divider(
+                            color: Colors.black,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Sub-Total",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                Text(
+                                  "₹100",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ],
                             ),
                           ),
-                          Text(
-                            "₹100",
-                            style: TextStyle(fontSize: 20),
+                          Divider(
+                            color: Colors.black,
                           ),
-                        ],
-                      ),
-                    ),
-                    Divider(
-                      color: Colors.black,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Delivery",
-                            style: TextStyle(
-                              fontSize: 20,
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Delivery",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                Text(
+                                  "₹50",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ],
                             ),
                           ),
-                          Text(
-                            "₹50",
-                            style: TextStyle(fontSize: 20),
+                          Divider(
+                            color: Colors.black,
                           ),
-                        ],
-                      ),
-                    ),
-                    Divider(
-                      color: Colors.black,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Total",
-                            style: TextStyle(
-                              fontSize: 20,
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Total",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                Text(
+                                  "₹150",
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.red),
+                                ),
+                              ],
                             ),
                           ),
-                          Text(
-                            "₹150",
-                            style: TextStyle(fontSize: 20, color: Colors.red),
-                          ),
                         ],
-                      ),
-                    ),
-                  ],
-                ),
+                      );
+                    }),
               ),
               Padding(
                 padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
@@ -254,11 +289,13 @@ class _CartScreenState extends State<CartScreen> {
   int currentValue = 0;
 
   void _addButton() {
-    currentValue++;
+    if (currentValue < 9) {
+      currentValue++;
+    }
   }
 
   void _subtractButton() {
-    if (currentValue > 0) {
+    if (currentValue > 1) {
       currentValue--;
     }
   }

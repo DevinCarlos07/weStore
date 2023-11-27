@@ -20,10 +20,11 @@ void checkCart(Addproducts addproducts, BuildContext context) async {
     ));
   } else {
     final cart = AddCart(
-        name: addproducts.name,
-        price: addproducts.price,
-        details: addproducts.details,
-        imagepath: addproducts.imagepath);
+      name: addproducts.name,
+      price: addproducts.price,
+      details: addproducts.details,
+      imagepath: addproducts.imagepath,
+    );
     addtoCatlist(cart);
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
       duration: Duration(seconds: 1),
@@ -31,4 +32,12 @@ void checkCart(Addproducts addproducts, BuildContext context) async {
       backgroundColor: Colors.green,
     ));
   }
+}
+//delete_cart_button
+
+Future<void> delete_cart(int id) async {
+  final remove = await Hive.openBox<AddCart>('add_cart');
+  remove.delete(id);
+  print('sdfdasfdf');
+  getcart();
 }

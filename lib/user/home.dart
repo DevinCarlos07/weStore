@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:we_store/database/functions/addproduct/addproduct_fuctions.dart';
 import 'package:we_store/database/functions/addproduct/addproduct_models.dart';
 import 'package:we_store/database/functions/cart/addcart_btn.dart';
+import 'package:we_store/database/functions/wishlist/addwishlist.dart';
 import 'package:we_store/user/fav.dart';
 import 'package:we_store/user/subpages/cart.dart';
 
@@ -35,7 +36,6 @@ class _UserHomeState extends State<UserHome> {
     getproducts();
   }
 
-  icon() => null;
   List<AssetImage> assetimage = [
     AssetImage('assets/images/apple1.jpg'),
     AssetImage('assets/images/iphoneforcat.webp'),
@@ -53,32 +53,6 @@ class _UserHomeState extends State<UserHome> {
     'MacBook',
     'Case',
     'Charger',
-  ];
-  List<AssetImage> image = [
-    AssetImage('assets/images/airpode.jpg'),
-    AssetImage('assets/images/iphoneforcat.webp'),
-    AssetImage('assets/images/charger.jpg'),
-    AssetImage('assets/images/case.webp'),
-    AssetImage('assets/images/macforcat.jpeg'),
-    AssetImage('assets/images/ipad.jpeg'),
-    AssetImage('assets/images/iphoneforcat.webp'),
-  ];
-  List<String> name = [
-    'AirPodes',
-    'iPhone',
-    'charger',
-    'Case',
-    'MacBook',
-    'iPad',
-  ];
-
-  List<String> rate = [
-    '₹24,000',
-    '₹1,15,000',
-    '₹2000',
-    '₹500',
-    '₹1,80,000',
-    '₹1,5,0000',
   ];
 
   List<String> about = ['White', '128 GB', '20W', 'Silicon', 'M2Pro', 'M1'];
@@ -189,7 +163,7 @@ class _UserHomeState extends State<UserHome> {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
-                itemCount: image.length,
+                itemCount: assetimage.length,
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                     onTap: () {
@@ -332,21 +306,14 @@ class _UserHomeState extends State<UserHome> {
                                                 color: Colors.black,
                                               ),
                                               onPressed: () {
-                                                setState(() {
-                                                  change();
-                                                });
+                                                addfav_button(
+                                                    addproducts, context);
                                               },
                                             ),
                                             IconButton(
                                               icon: Icon(
                                                   Icons.shopping_cart_outlined),
                                               onPressed: () {
-                                                // _bootmsheet(
-                                                //     context,
-                                                //     addproducts.name,
-                                                //     addproducts.imagepath,
-                                                //     addproducts.price,
-                                                //     addproducts.details);
                                                 checkCart(addproducts, context);
                                               },
                                             ),

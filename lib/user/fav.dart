@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:we_store/database/functions/addproduct/addproduct_models.dart';
+import 'package:we_store/database/functions/cart/addcart_btn.dart';
+import 'package:we_store/database/functions/wishlist/addwishlist.dart';
+import 'package:we_store/database/functions/wishlist/fav_function.dart';
+import 'package:we_store/database/functions/wishlist/fav_model.dart';
 
 class Favourite extends StatefulWidget {
   const Favourite({super.key});
@@ -9,6 +14,12 @@ class Favourite extends StatefulWidget {
 }
 
 class _FavouriteState extends State<Favourite> {
+  @override
+  void initState() {
+    super.initState();
+    geterfav();
+  }
+
   List<AssetImage> image = [
     AssetImage('assets/images/airpode.jpg'),
     AssetImage('assets/images/iphoneforcat.webp'),
@@ -64,94 +75,105 @@ class _FavouriteState extends State<Favourite> {
           SizedBox(
             height: 25,
           ),
-          Expanded(
-            child: GridView.builder(
-              itemCount: name.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 12.0,
-                mainAxisSpacing: 12.0,
-                mainAxisExtent: 290,
-              ),
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16.0),
-                        color: Color.fromARGB(255, 234, 228, 228),
-                      ),
-                      child: Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(16.0),
-                              topRight: Radius.circular(16.0),
+          ValueListenableBuilder(
+              valueListenable: addfavlist,
+              builder: (context, List<AddFav> addfavlist, Widget? child) {
+                return Expanded(
+                  child: GridView.builder(
+                    itemCount: addfavlist.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 12.0,
+                      mainAxisSpacing: 12.0,
+                      mainAxisExtent: 290,
+                    ),
+                    itemBuilder: (context, index) {
+                      final addfav = addfavlist[index];
+
+                      return GestureDetector(
+                        onTap: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16.0),
+                              color: Color.fromARGB(255, 234, 228, 228),
                             ),
-                            child: Image(
-                              image: image[index],
-                              height: 160,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      name[index],
-                                      style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    Text(rate[index],
-                                        style: GoogleFonts.rubik(
-                                            color: Colors.green, fontSize: 15))
-                                  ],
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(16.0),
+                                    topRight: Radius.circular(16.0),
+                                  ),
+                                  child: Image(
+                                    image: image[index],
+                                    height: 160,
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                                const SizedBox(
-                                  height: 4.0,
-                                ),
-                                Text(about[index],
-                                    style: GoogleFonts.rubik(fontSize: 15)),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    IconButton(
-                                      icon: Icon(
-                                        Icons.favorite,
-                                        color: Colors.red,
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            addfav.name,
+                                            style: GoogleFonts.poppins(
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                          Text(addfav.price,
+                                              style: GoogleFonts.rubik(
+                                                  color: Colors.green,
+                                                  fontSize: 15))
+                                        ],
                                       ),
-                                      onPressed: () {
-                                        // Handle favorite button tap
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: Icon(Icons.shopping_cart_outlined),
-                                      onPressed: () {
-                                        // Handle shopping cart button tap
-                                      },
-                                    ),
-                                  ],
+                                      const SizedBox(
+                                        height: 4.0,
+                                      ),
+                                      Text(addfav.details,
+                                          style:
+                                              GoogleFonts.rubik(fontSize: 15)),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          IconButton(
+                                            icon: Icon(
+                                              Icons.favorite,
+                                              color: Colors.red,
+                                            ),
+                                            onPressed: () {
+                                              setState(() {
+                                                deletefav(addfav.id!);
+                                              });
+                                            },
+                                          ),
+                                          IconButton(
+                                            icon: Icon(
+                                                Icons.shopping_cart_outlined),
+                                            onPressed: () {},
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 )
                               ],
                             ),
-                          )
-                        ],
-                      ),
-                    ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 );
-              },
-            ),
-          )
+              })
         ],
       ),
     );
