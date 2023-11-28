@@ -180,7 +180,6 @@ class _LoginState extends State<Login> {
     }
 
     if (signup != null) {
-      print(email);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool(SAVE_KEY_NAME, true);
       await saveUserEmail(email);

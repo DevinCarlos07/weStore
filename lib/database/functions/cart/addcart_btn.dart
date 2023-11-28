@@ -35,9 +35,8 @@ void checkCart(Addproducts addproducts, BuildContext context) async {
 }
 //delete_cart_button
 
-Future<void> delete_cart(int id) async {
+Future<void> delete_cart(int? id) async {
   final remove = await Hive.openBox<AddCart>('add_cart');
   remove.delete(id);
-  print('sdfdasfdf');
   getcart();
 }

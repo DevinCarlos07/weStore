@@ -21,7 +21,23 @@ class _AddProductState extends State<AddProduct> {
   final _productnameController = TextEditingController();
   final _productpriceController = TextEditingController();
   final _productdetailsContoller = TextEditingController();
+  late String _productCategory;
   File? _selectImage;
+
+  List<String> categories = [
+    'Iwatches',
+    'Iphone',
+    'Airpode',
+    'Ipad',
+    'MacBook',
+    'Case',
+    'Charger'
+  ];
+  @override
+  void initState() {
+    super.initState();
+    _productCategory = categories.first;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +56,7 @@ class _AddProductState extends State<AddProduct> {
                 height: 40,
               ),
               TextFormField(
+                maxLength: 16,
                 validator: validateProductName,
                 controller: _productnameController,
                 decoration: InputDecoration(
@@ -54,9 +71,10 @@ class _AddProductState extends State<AddProduct> {
                         borderRadius: BorderRadius.circular(20))),
               ),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               TextFormField(
+                keyboardType: TextInputType.number,
                 validator: validateProductPrice,
                 controller: _productpriceController,
                 decoration: InputDecoration(
@@ -71,9 +89,42 @@ class _AddProductState extends State<AddProduct> {
                         borderRadius: BorderRadius.circular(20))),
               ),
               SizedBox(
-                height: 20,
+                height: 30,
+              ),
+              DropdownButtonFormField<String>(
+                value: _productCategory,
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.category),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 25, horizontal: 30),
+                    fillColor: Color(0xABFFFEFE),
+                    labelText: 'Product Category',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(
+                            color: Colors.black, width: double.infinity))),
+                items: categories.map((String category) {
+                  return DropdownMenuItem<String>(
+                      value: category, child: Text(category));
+                }).toList(),
+                onChanged: (String? value) {
+                  setState(() {
+                    _productCategory = value!;
+                  });
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'select a category';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(
+                height: 30,
               ),
               TextFormField(
+                maxLength: 10,
+                maxLines: 5,
                 validator: validateProductDetails,
                 controller: _productdetailsContoller,
                 decoration: InputDecoration(
@@ -88,7 +139,7 @@ class _AddProductState extends State<AddProduct> {
                         borderRadius: BorderRadius.circular(20))),
               ),
               SizedBox(
-                height: 30,
+                height: 10,
               ),
               Row(
                 children: [
@@ -182,16 +233,19 @@ class _AddProductState extends State<AddProduct> {
     final _name = _productnameController.text.trim();
     final _price = _productpriceController.text.trim();
     final _details = _productdetailsContoller.text.trim();
+    final _category = _productCategory;
     if (_selectImage == null) {
       return;
     }
     if (_formKey.currentState!.validate() &&
         _name.isNotEmpty &&
         _price.isNotEmpty &&
-        _details.isNotEmpty) {
+        _details.isNotEmpty &&
+        _category.isNotEmpty) {
       final _add = Addproducts(
           name: _name,
           price: _price,
+          category: _category,
           details: _details,
           imagepath: _selectImage!.path);
       addproduct(_add);
@@ -201,9 +255,6 @@ class _AddProductState extends State<AddProduct> {
       _productnameController.clear();
     } else {
       showSnackBar(context, 'Product adding failed!');
-      _productdetailsContoller.clear();
-      _productpriceController.clear();
-      _productnameController.clear();
     }
   }
 

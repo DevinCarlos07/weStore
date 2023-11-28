@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:we_store/database/functions/addproduct/addproduct_models.dart';
@@ -102,17 +104,16 @@ class _FavouriteState extends State<Favourite> {
                             child: Column(
                               children: [
                                 ClipRRect(
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(16.0),
-                                    topRight: Radius.circular(16.0),
-                                  ),
-                                  child: Image(
-                                    image: image[index],
-                                    height: 160,
-                                    width: double.infinity,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(16.0),
+                                      topRight: Radius.circular(16.0),
+                                    ),
+                                    child: Image.file(
+                                      File(addfav.imagepath),
+                                      fit: BoxFit.cover,
+                                      height: 163,
+                                      width: double.infinity,
+                                    )),
                                 Padding(
                                   padding: EdgeInsets.all(8.0),
                                   child: Column(

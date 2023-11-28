@@ -66,7 +66,7 @@ class _CartScreenState extends State<CartScreen> {
                                         label: 'Remove',
                                         onPressed: (context) {
                                           setState(() {
-                                            delete_cart(cart.id!);
+                                            delete_cart(cart.id);
                                           });
                                         },
                                         icon: Icons.delete,

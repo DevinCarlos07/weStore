@@ -15,6 +15,9 @@ class Addproducts {
   @HiveField(3)
   String details;
 
+  @HiveField(4)
+  String category;
+
   @HiveField(6)
   String imagepath;
 
@@ -23,5 +26,6 @@ class Addproducts {
       required this.name,
       required this.price,
       required this.details,
+      required this.category,
       this.id});
 }

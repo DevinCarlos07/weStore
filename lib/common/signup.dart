@@ -55,6 +55,7 @@ class _SignUpState extends State<SignUp> {
 
                   //phonenumber
                   TextFormField(
+                    keyboardType: TextInputType.phone,
                     validator: validatePhone,
                     controller: _phoneController,
                     decoration: InputDecoration(
@@ -66,6 +67,7 @@ class _SignUpState extends State<SignUp> {
 
                   //email
                   TextFormField(
+                    keyboardType: TextInputType.emailAddress,
                     validator: validateEmail,
                     controller: _emailController,
                     decoration: InputDecoration(
@@ -128,31 +130,6 @@ class _SignUpState extends State<SignUp> {
       ),
     );
   }
-
-  // Future<void> signupButtonClicked() async {
-  //   final _name = _nameController.text.trim();
-  //   final _phone = _phoneController.text.trim();
-  //   final _email = _emailController.text.trim();
-  //   final _createpassword = _createpasswordController.text.trim();
-  //   final _conformpassword = _conformpasswordController.text.trim();
-  //   if (_name.isEmpty ||
-  //       _phone.isEmpty ||
-  //       _email.isEmpty ||
-  //       _createpassword.isEmpty ||
-  //       _conformpassword.isEmpty) {
-  //     return;
-  //   }
-  //   print('$_name,$_phone,$_email,$_createpassword,$_conformpassword');
-
-  //   final _signup = SignupDetails(
-  //       name: _name,
-  //       phone: _phone,
-  //       email: _email,
-  //       createpassword: _createpassword,
-  //       conformpassword: _conformpassword);
-
-  //   addSignup(_signup);
-  // }
 
   //to validate name
   String? validateName(String? value) {

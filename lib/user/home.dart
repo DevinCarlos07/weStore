@@ -20,16 +20,6 @@ class UserHome extends StatefulWidget {
 }
 
 class _UserHomeState extends State<UserHome> {
-  bool fav = false;
-  void change() {
-    if (fav == false) {
-      print('set');
-    } else {
-      print('fail');
-      fav = true;
-    }
-  }
-
   @override
   void initState() {
     super.initState();

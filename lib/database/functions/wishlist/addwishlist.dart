@@ -24,6 +24,7 @@ void addfav_button(Addproducts addproducts, BuildContext context) async {
         details: addproducts.details,
         imagepath: addproducts.imagepath);
     addtofav(fav);
+
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
       content: Text('Added to Favourite'),
       duration: Duration(seconds: 2),
