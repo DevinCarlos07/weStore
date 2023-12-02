@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +10,7 @@ import 'package:we_store/database/functions/addproduct/addproduct_fuctions.dart'
 import 'package:we_store/database/functions/addproduct/addproduct_models.dart';
 import 'package:we_store/database/functions/cart/addcart_btn.dart';
 import 'package:we_store/database/functions/wishlist/addwishlist.dart';
+import 'package:we_store/user/category.dart';
 import 'package:we_store/user/fav.dart';
 import 'package:we_store/user/subpages/cart.dart';
 
@@ -60,7 +62,6 @@ class _UserHomeState extends State<UserHome> {
               backgroundImage: AssetImage('assets/images/alexa2.0.png'),
             ),
           ),
-
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -113,16 +114,6 @@ class _UserHomeState extends State<UserHome> {
                   color: Colors.black,
                 ))
           ],
-          // bottom: TabBar(
-          //   labelColor: Colors.black,
-          //   labelStyle: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-          //   tabs: const [
-          //     Tab(
-          //       text: 'Home',
-          //     ),
-          //     Tab(text: 'Category')
-          //   ],
-          // ),
           elevation: 0,
         ),
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
@@ -155,37 +146,32 @@ class _UserHomeState extends State<UserHome> {
                 shrinkWrap: true,
                 itemCount: assetimage.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Favourite()));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Favourite()));
-                            },
-                            child: CircleAvatar(
-                              radius: 30,
-                              backgroundImage: assetimage[index],
-                            ),
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CategoryScreen(
+                                        categorys: names[index])));
+                          },
+                          child: CircleAvatar(
+                            radius: 30,
+                            backgroundImage: assetimage[index],
                           ),
-                          SizedBox(height: 4),
-                          Text(
-                            names[index],
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          names[index],
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   );
                 },

@@ -50,6 +50,7 @@ class _LoginState extends State<Login> {
                   //email
 
                   TextFormField(
+                    keyboardType: TextInputType.emailAddress,
                     controller: _validEmailController,
                     validator: validateEmail,
                     decoration: InputDecoration(

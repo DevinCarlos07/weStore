@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:we_store/database/functions/addproduct/addproduct_fuctions.dart';
 import 'package:we_store/database/functions/cart/addcart_btn.dart';
 
 import 'package:we_store/database/functions/cart/cart_functions.dart';
@@ -30,6 +29,7 @@ class _CartScreenState extends State<CartScreen> {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.black),
           elevation: 0,
           centerTitle: true,
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
