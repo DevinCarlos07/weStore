@@ -172,10 +172,7 @@ class _ProfileState extends State<Profile> {
                     borderRadius: BorderRadius.circular(18)),
                 child: ListTile(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Login()),
-                    );
+                    logout(context);
                   },
                   leading: Icon(
                     Icons.logout,

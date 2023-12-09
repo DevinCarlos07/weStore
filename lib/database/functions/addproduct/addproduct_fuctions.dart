@@ -6,10 +6,18 @@ ValueNotifier<List<Addproducts>> productlist = ValueNotifier([]);
 
 Future<void> addproduct(Addproducts value) async {
   final productDB = await Hive.openBox<Addproducts>('add_product');
-  final _addproduct = await productDB.add(value);
-  value.id = _addproduct;
-  productlist.value.add(value);
-  productlist.notifyListeners();
+  final id = await productDB.add(value);
+  final produtdata = productDB.get(id);
+  await productDB.put(
+      id,
+      Addproducts(
+          imagepath: produtdata!.imagepath,
+          name: produtdata.name,
+          price: produtdata.price,
+          details: produtdata.details,
+          category: produtdata.category,
+          id: id));
+  getproducts();
 }
 
 Future<void> getproducts() async {

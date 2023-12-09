@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:we_store/common/bottomnav.dart';
+import 'package:we_store/common/login.dart';
 import 'package:we_store/common/sign_or_log.dart';
+import 'package:we_store/user/home.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,14 +14,13 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
+  void initState() {
+    checkUserLoggin();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => SigninLogin(),
-          ));
-    });
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: Center(
@@ -48,5 +50,24 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> gotoLogin() async {
+    await Future.delayed(Duration(seconds: 3));
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (ctx) => SigninLogin()));
+  }
+
+  Future<void> checkUserLoggin() async {
+    final _sharedprefs = await SharedPreferences.getInstance();
+    final _userLoggedin = _sharedprefs.getBool(SAVE_KEY_NAME);
+
+    if (_userLoggedin == null || _userLoggedin == false) {
+      gotoLogin();
+    } else {
+      await Future.delayed(Duration(seconds: 2));
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (ctx) => MyBottam()));
+    }
   }
 }

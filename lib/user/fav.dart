@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:we_store/database/functions/addproduct/addproduct_models.dart';
-import 'package:we_store/database/functions/cart/addcart_btn.dart';
 import 'package:we_store/database/functions/wishlist/addwishlist.dart';
 import 'package:we_store/database/functions/wishlist/fav_function.dart';
 import 'package:we_store/database/functions/wishlist/fav_model.dart';
@@ -21,28 +19,6 @@ class _FavouriteState extends State<Favourite> {
     super.initState();
     geterfav();
   }
-
-  List<AssetImage> image = [
-    AssetImage('assets/images/airpode.jpg'),
-    AssetImage('assets/images/iphoneforcat.webp'),
-    AssetImage('assets/images/case.webp'),
-  ];
-  List<String> name = [
-    'AirPodes',
-    'iPhone',
-    'charger',
-  ];
-
-  List<String> rate = [
-    '₹24,000',
-    '₹1,15,000',
-    '₹500',
-  ];
-  List<String> about = [
-    'White',
-    '128 GB',
-    'Silicon',
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +66,7 @@ class _FavouriteState extends State<Favourite> {
                       mainAxisExtent: 290,
                     ),
                     itemBuilder: (context, index) {
-                      final addfav = addfavlist[index];
+                      final addfav = addfavlist.reversed.toList()[index];
 
                       return GestureDetector(
                         onTap: () {},
@@ -152,7 +128,7 @@ class _FavouriteState extends State<Favourite> {
                                             ),
                                             onPressed: () {
                                               setState(() {
-                                                deletefav(addfav.id!);
+                                                removefav(context, addfav.id);
                                               });
                                             },
                                           ),

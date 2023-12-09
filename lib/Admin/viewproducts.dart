@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:we_store/Admin/addproduct.dart';
 import 'package:we_store/database/functions/addproduct/addproduct_fuctions.dart';
 import 'package:we_store/database/functions/addproduct/addproduct_models.dart';
 
@@ -64,10 +63,12 @@ class _ViewProductState extends State<ViewProduct> {
                     final productdata = pdlists[index];
 
                     return Padding(
-                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      padding: const EdgeInsets.only(
+                          left: 10, right: 10, bottom: 10),
                       child: Container(
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black)),
+                            border: Border.all(color: Colors.black),
+                            borderRadius: BorderRadius.circular(20)),
                         child: Row(
                           children: [
                             Image.file(

@@ -4,9 +4,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:we_store/database/functions/addproduct/addproduct_fuctions.dart';
 import 'package:we_store/database/functions/addproduct/addproduct_models.dart';
+import 'package:we_store/database/functions/category/models.dart';
+import 'package:we_store/database/functions/category/newcategory.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({super.key});
@@ -21,22 +24,31 @@ class _AddProductState extends State<AddProduct> {
   final _productnameController = TextEditingController();
   final _productpriceController = TextEditingController();
   final _productdetailsContoller = TextEditingController();
-  late String _productCategory;
+  late Box<CategoryAdd> catBox;
   File? _selectImage;
 
-  List<String> categories = [
-    'Iwatches',
-    'Iphone',
-    'Airpode',
-    'Ipad',
-    'MacBook',
-    'Case',
-    'Charger'
-  ];
+  List<CategoryAdd> categories = [];
+  String? _productCategory;
   @override
   void initState() {
     super.initState();
-    _productCategory = categories.first;
+
+    setState(() {
+      openHivebox();
+    });
+  }
+
+  Future<void> openHivebox() async {
+    catBox = await Hive.openBox<CategoryAdd>('add_cat');
+    setState(() {
+      updateList();
+    });
+  }
+
+  void updateList() {
+    setState(() {
+      categories = catBox.values.toList();
+    });
   }
 
   @override
@@ -103,9 +115,10 @@ class _AddProductState extends State<AddProduct> {
                         borderRadius: BorderRadius.circular(20),
                         borderSide: BorderSide(
                             color: Colors.black, width: double.infinity))),
-                items: categories.map((String category) {
+                items: categories.map((CategoryAdd categories) {
                   return DropdownMenuItem<String>(
-                      value: category, child: Text(category));
+                      value: categories.catname,
+                      child: Text(categories.catname));
                 }).toList(),
                 onChanged: (String? value) {
                   setState(() {
@@ -116,11 +129,19 @@ class _AddProductState extends State<AddProduct> {
                   if (value == null || value.isEmpty) {
                     return 'select a category';
                   }
+
                   return null;
                 },
               ),
+              TextButton.icon(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (ctx) => NewCategory()));
+                  },
+                  icon: Icon(Icons.add),
+                  label: Text('Add new category')),
               SizedBox(
-                height: 30,
+                height: 10,
               ),
               TextFormField(
                 maxLength: 10,
@@ -241,18 +262,22 @@ class _AddProductState extends State<AddProduct> {
         _name.isNotEmpty &&
         _price.isNotEmpty &&
         _details.isNotEmpty &&
-        _category.isNotEmpty) {
+        _category!.isNotEmpty) {
       final _add = Addproducts(
           name: _name,
           price: _price,
           category: _category,
           details: _details,
-          imagepath: _selectImage!.path);
+          imagepath: _selectImage!.path,
+          id: -1);
       addproduct(_add);
       showSnackBar(context, 'Added Succesfully!');
       _productdetailsContoller.clear();
       _productpriceController.clear();
       _productnameController.clear();
+      setState(() {
+        _selectImage = null;
+      });
     } else {
       showSnackBar(context, 'Product adding failed!');
     }
@@ -262,7 +287,7 @@ class _AddProductState extends State<AddProduct> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(message),
       duration: Duration(seconds: 3),
-      backgroundColor: Colors.red,
+      backgroundColor: Color.fromARGB(255, 98, 54, 244),
     ));
   }
 

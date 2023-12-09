@@ -54,7 +54,7 @@ class _CartScreenState extends State<CartScreen> {
                       return ListView.builder(
                           itemCount: addcartlist.length,
                           itemBuilder: (BuildContext context, int index) {
-                            final cart = addcartlist[index];
+                            final cart = addcartlist.reversed.toList()[index];
                             return Padding(
                               padding:
                                   const EdgeInsets.only(top: 10, bottom: 10),
@@ -66,7 +66,8 @@ class _CartScreenState extends State<CartScreen> {
                                         label: 'Remove',
                                         onPressed: (context) {
                                           setState(() {
-                                            delete_cart(cart.id);
+                                            // delete_cart(cart.id);
+                                            removecart(context, cart.id);
                                           });
                                         },
                                         icon: Icons.delete,

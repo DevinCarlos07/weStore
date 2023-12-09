@@ -5,11 +5,18 @@ import 'package:we_store/database/functions/cart/cart_models.dart';
 ValueNotifier<List<AddCart>> addcartlist = ValueNotifier([]);
 Future<void> addtoCatlist(AddCart value) async {
   final addcartDB = await Hive.openBox<AddCart>('add_cart');
-  final _addcart = await addcartDB.add(value);
+  final id = await addcartDB.add(value);
+  final data = addcartDB.get(id);
 
-  value.id = _addcart;
-  addcartlist.value.add(value);
-  addcartlist.notifyListeners();
+  await addcartDB.put(
+      id,
+      AddCart(
+          details: data!.details,
+          imagepath: data.imagepath,
+          name: data.name,
+          price: data.price,
+          id: id));
+  getcart();
 }
 
 Future<void> getcart() async {

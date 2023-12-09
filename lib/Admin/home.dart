@@ -6,6 +6,7 @@ import 'package:we_store/Admin/ordersdetails.dart';
 import 'package:we_store/Admin/userslist.dart';
 import 'package:we_store/Admin/viewproducts.dart';
 import 'package:we_store/common/bottomnav.dart';
+import 'package:we_store/common/login.dart';
 
 import 'package:we_store/common/signup.dart';
 
@@ -166,8 +167,7 @@ class _AdminHomeState extends State<AdminHome> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     onTap: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (ctx) => SignUp()));
+                      logout(context);
                     },
                   ),
                 )

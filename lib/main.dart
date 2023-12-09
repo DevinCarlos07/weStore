@@ -5,6 +5,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:we_store/common/splash.dart';
 import 'package:we_store/database/functions/addproduct/addproduct_models.dart';
 import 'package:we_store/database/functions/cart/cart_models.dart';
+import 'package:we_store/database/functions/category/models.dart';
 import 'package:we_store/database/functions/signup/db_models.dart';
 import 'package:we_store/database/functions/wishlist/fav_model.dart';
 
@@ -16,6 +17,7 @@ Future<void> main() async {
   Hive.openBox<Addproducts>('add_product');
   Hive.openBox<AddCart>('add_cart');
   Hive.openBox<AddFav>('add_fav');
+  Hive.openBox<CategoryAdd>('add_cat');
 
   // Hive.initFlutter();
 
@@ -30,6 +32,9 @@ Future<void> main() async {
   }
   if (!Hive.isAdapterRegistered(AddFavAdapter().typeId)) {
     Hive.registerAdapter(AddFavAdapter());
+  }
+  if (!Hive.isAdapterRegistered(CategoryAddAdapter().typeId)) {
+    Hive.registerAdapter(CategoryAddAdapter());
   }
   runApp(const MyApp());
 }
