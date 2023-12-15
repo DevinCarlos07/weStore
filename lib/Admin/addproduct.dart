@@ -62,149 +62,152 @@ class _AddProductState extends State<AddProduct> {
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
-          child: Column(
-            children: [
-              SizedBox(
-                height: 40,
-              ),
-              TextFormField(
-                maxLength: 16,
-                validator: validateProductName,
-                controller: _productnameController,
-                decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 25, horizontal: 25),
-                    prefixIcon: Icon(Icons.abc),
-                    label: Text(
-                      'Add Product Name',
-                      style: GoogleFonts.inter(color: Colors.black),
-                    ),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20))),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                keyboardType: TextInputType.number,
-                validator: validateProductPrice,
-                controller: _productpriceController,
-                decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 25, horizontal: 30),
-                    prefixIcon: Icon(Icons.attach_money),
-                    label: Text(
-                      'Add Product Prize',
-                      style: GoogleFonts.inter(color: Colors.black),
-                    ),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20))),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              DropdownButtonFormField<String>(
-                value: _productCategory,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.category),
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 25, horizontal: 30),
-                    fillColor: Color(0xABFFFEFE),
-                    labelText: 'Product Category',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: BorderSide(
-                            color: Colors.black, width: double.infinity))),
-                items: categories.map((CategoryAdd categories) {
-                  return DropdownMenuItem<String>(
-                      value: categories.catname,
-                      child: Text(categories.catname));
-                }).toList(),
-                onChanged: (String? value) {
-                  setState(() {
-                    _productCategory = value!;
-                  });
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'select a category';
-                  }
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  maxLength: 16,
+                  validator: validateProductName,
+                  controller: _productnameController,
+                  decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 25, horizontal: 25),
+                      prefixIcon: Icon(Icons.abc),
+                      label: Text(
+                        'Add Product Name',
+                        style: GoogleFonts.inter(color: Colors.black),
+                      ),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20))),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  keyboardType: TextInputType.number,
+                  validator: validateProductPrice,
+                  controller: _productpriceController,
+                  decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 25, horizontal: 30),
+                      prefixIcon: Icon(Icons.attach_money),
+                      label: Text(
+                        'Add Product Prize',
+                        style: GoogleFonts.inter(color: Colors.black),
+                      ),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20))),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                DropdownButtonFormField<String>(
+                  value: _productCategory,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.category),
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 25, horizontal: 30),
+                      fillColor: Color(0xABFFFEFE),
+                      labelText: 'Product Category',
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(
+                              color: Colors.black, width: double.infinity))),
+                  items: categories.map((CategoryAdd categories) {
+                    return DropdownMenuItem<String>(
+                        value: categories.catname,
+                        child: Text(categories.catname));
+                  }).toList(),
+                  onChanged: (String? value) {
+                    setState(() {
+                      _productCategory = value!;
+                    });
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'select a category';
+                    }
 
-                  return null;
-                },
-              ),
-              TextButton.icon(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (ctx) => NewCategory()));
+                    return null;
                   },
-                  icon: Icon(Icons.add),
-                  label: Text('Add new category')),
-              SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                maxLength: 10,
-                maxLines: 5,
-                validator: validateProductDetails,
-                controller: _productdetailsContoller,
-                decoration: InputDecoration(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 40, horizontal: 30),
-                    prefixIcon: Icon(Icons.edit),
-                    label: Text(
-                      'Add Product Details',
-                      style: GoogleFonts.inter(color: Colors.black),
+                ),
+                TextButton.icon(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (ctx) => NewCategory()));
+                    },
+                    icon: Icon(Icons.add),
+                    label: Text('Add new category')),
+                SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  maxLength: 10,
+                  maxLines: 5,
+                  validator: validateProductDetails,
+                  controller: _productdetailsContoller,
+                  decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 40, horizontal: 30),
+                      prefixIcon: Icon(Icons.edit),
+                      label: Text(
+                        'Add Product Details',
+                        style: GoogleFonts.inter(color: Colors.black),
+                      ),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20))),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 10,
                     ),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20))),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    child: _selectImage != null
-                        ? Image.file(
-                            _selectImage!,
-                            fit: BoxFit.cover,
-                          )
-                        : const Icon(
-                            Icons.person,
-                            size: 50,
-                          ),
-                    height: 160,
-                    width: 160,
-                    decoration:
-                        BoxDecoration(border: Border.all(color: Colors.black)),
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Column(
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            _selectedImage();
-                          },
-                          icon: Icon(Icons.photo))
-                    ],
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 35,
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    addButton();
-                  },
-                  child: Text('Save Item'))
-            ],
+                    Container(
+                      child: _selectImage != null
+                          ? Image.file(
+                              _selectImage!,
+                              fit: BoxFit.cover,
+                            )
+                          : const Icon(
+                              Icons.person,
+                              size: 50,
+                            ),
+                      height: 160,
+                      width: 160,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black)),
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Column(
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              _selectedImage();
+                            },
+                            icon: Icon(Icons.photo))
+                      ],
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 35,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      addButton();
+                    },
+                    child: Text('Save Item'))
+              ],
+            ),
           ),
         ),
       ),

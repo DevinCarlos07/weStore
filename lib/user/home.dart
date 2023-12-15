@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_import
+
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -12,8 +14,8 @@ import 'package:we_store/database/functions/cart/addcart_btn.dart';
 import 'package:we_store/database/functions/category/fuctions.dart';
 import 'package:we_store/database/functions/category/models.dart';
 import 'package:we_store/database/functions/wishlist/addwishlist.dart';
+import 'package:we_store/database/functions/wishlist/fav_function.dart';
 import 'package:we_store/user/category.dart';
-import 'package:we_store/user/fav.dart';
 import 'package:we_store/user/subpages/cart.dart';
 
 class UserHome extends StatefulWidget {
@@ -29,28 +31,9 @@ class _UserHomeState extends State<UserHome> {
     super.initState();
     getproducts();
     getcategory();
+    geterfav();
   }
 
-  List<AssetImage> assetimage = [
-    AssetImage('assets/images/apple1.jpg'),
-    AssetImage('assets/images/iphoneforcat.webp'),
-    AssetImage('assets/images/airpode.jpg'),
-    AssetImage('assets/images/ipad.jpeg'),
-    AssetImage('assets/images/macforcat.jpeg'),
-    AssetImage('assets/images/case.webp'),
-    AssetImage('assets/images/charger.jpg'),
-  ];
-  List<String> names = [
-    'hsgdfhsjd',
-    'Iphone',
-    'Airpode',
-    'iPad',
-    'MacBook',
-    'Case',
-    'Charger',
-  ];
-
-  List<String> about = ['White', '128 GB', '20W', 'Silicon', 'M2Pro', 'M1'];
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -109,8 +92,10 @@ class _UserHomeState extends State<UserHome> {
                 )),
             IconButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => CartScreen()));
+                  setState(() {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => CartScreen()));
+                  });
                 },
                 icon: Icon(
                   Icons.shopping_cart_outlined,
@@ -208,8 +193,6 @@ class _UserHomeState extends State<UserHome> {
             ValueListenableBuilder(
                 valueListenable: productlist,
                 builder: (context, List<Addproducts> addlist, Widget? child) {
-                  // final addproduct = addBox.values.toList();
-
                   return Expanded(
                     child: GridView.builder(
                       itemCount: addlist.length,
@@ -285,14 +268,13 @@ class _UserHomeState extends State<UserHome> {
                                               MainAxisAlignment.center,
                                           children: [
                                             IconButton(
-                                              icon: Icon(
-                                                Icons.favorite_border,
-                                                color: Colors.black,
-                                              ),
+                                              icon: getIcon(addproducts),
                                               onPressed: () {
                                                 setState(() {
                                                   addfav_button(
-                                                      addproducts, context);
+                                                    addproducts,
+                                                    context,
+                                                  );
                                                 });
                                               },
                                             ),

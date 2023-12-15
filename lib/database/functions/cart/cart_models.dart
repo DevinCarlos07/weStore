@@ -18,10 +18,14 @@ class AddCart {
   @HiveField(5)
   String imagepath;
 
+  @HiveField(6)
+  int count;
+
   AddCart(
       {required this.name,
       required this.price,
       required this.details,
       required this.imagepath,
+      required this.count,
       this.id});
 }

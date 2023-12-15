@@ -1,3 +1,6 @@
+// ignore_for_file: non_constant_identifier_names, use_build_context_synchronously
+
+// ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -7,7 +10,9 @@ import 'package:we_store/database/functions/wishlist/fav_function.dart';
 import 'package:we_store/database/functions/wishlist/fav_model.dart';
 
 Future<void> addfav_button(
-    Addproducts addproducts, BuildContext context) async {
+  Addproducts addproducts,
+  BuildContext context,
+) async {
   await Hive.openBox<AddFav>('add_fav');
   final addfavBox = Hive.box<AddFav>('add_fav');
 
@@ -68,4 +73,22 @@ Future<void> deletefav(context, int? id) async {
 
   Navigator.of(context)
       .pop(MaterialPageRoute(builder: (context) => MyBottam()));
+}
+
+Icon getIcon(Addproducts addproducts) {
+  final addfavBox = Hive.box<AddFav>('add_fav');
+  final favexists =
+      addfavBox.values.any((user) => user.name == addproducts.name);
+
+  if (favexists) {
+    return Icon(
+      Icons.favorite,
+      color: Colors.red,
+    );
+  } else {
+    return Icon(
+      Icons.favorite_border,
+      color: Colors.black,
+    );
+  }
 }

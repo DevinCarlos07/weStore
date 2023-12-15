@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:we_store/common/bottomnav.dart';
+
 import 'package:we_store/user/profile.dart';
 
 class EditProfile extends StatefulWidget {

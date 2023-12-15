@@ -5,10 +5,9 @@ import 'package:we_store/Admin/addproduct.dart';
 import 'package:we_store/Admin/ordersdetails.dart';
 import 'package:we_store/Admin/userslist.dart';
 import 'package:we_store/Admin/viewproducts.dart';
-import 'package:we_store/common/bottomnav.dart';
-import 'package:we_store/common/login.dart';
 
-import 'package:we_store/common/signup.dart';
+import 'package:we_store/common/login.dart';
+import 'package:we_store/database/functions/category/newcategory.dart';
 
 class AdminHome extends StatefulWidget {
   const AdminHome({super.key});
@@ -36,9 +35,6 @@ class _AdminHomeState extends State<AdminHome> {
             padding: const EdgeInsets.all(28.0),
             child: Column(
               children: [
-                SizedBox(
-                  height: 35,
-                ),
                 Image.asset(
                   'assets/images/star.jpg',
                   width: 60,
@@ -53,7 +49,27 @@ class _AdminHomeState extends State<AdminHome> {
                   ),
                 ),
                 SizedBox(
-                  height: 55,
+                  height: 20,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Colors.grey[300]),
+                  clipBehavior: Clip.antiAlias,
+                  child: ListTile(
+                    title: Text(
+                      'New Category',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (ctx) => NewCategory()));
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -146,10 +162,7 @@ class _AdminHomeState extends State<AdminHome> {
                       textAlign: TextAlign.center,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (ctx) => MyBottam()));
-                    },
+                    onTap: () {},
                   ),
                 ),
                 SizedBox(

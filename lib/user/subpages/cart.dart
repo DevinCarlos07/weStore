@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sort_child_properties_last
+// ignore_for_file: prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sort_child_properties_last, unnecessary_import, prefer_const_constructors_in_immutables, annotate_overrides, sized_box_for_whitespace, duplicate_ignore
 
 import 'dart:io';
 
@@ -6,10 +6,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:we_store/database/functions/cart/addcart_btn.dart';
 
 import 'package:we_store/database/functions/cart/cart_functions.dart';
 import 'package:we_store/database/functions/cart/cart_models.dart';
+import 'package:we_store/database/functions/cart/qty_button.dart';
 
 class CartScreen extends StatefulWidget {
   CartScreen({super.key});
@@ -19,13 +21,54 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  late Box<AddCart> cartBox = Hive.box<AddCart>('add_cart');
+  var total = 0;
+  var items;
+  // double totalprice = 0;
+
+  // int quantity = 1;
+
+  // void incrementQuantity() {
+  //   setState(() {
+  //     if (quantity < 9) {
+  //       quantity++;
+  //     } else {
+  //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //         content: Text('Max Limit'),
+  //         duration: Duration(seconds: 2),
+  //         backgroundColor: Colors.red,
+  //       ));
+  //     }
+  //   });
+  // }
+
+  // void decrementQuantity() {
+  //   setState(() {
+  //     if (quantity > 1) {
+  //       quantity--;
+  //     }
+  //   });
+  // }
+
   @override
   void initState() {
     super.initState();
     getcart();
+    Future.delayed(Duration(microseconds: 1), () {
+      setState(() {});
+    });
+  }
+
+  @override
+  void didUpdateWidget(covariant CartScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    // Delay the execution to ensure it's after the build phase
   }
 
   Widget build(BuildContext context) {
+    total = 0;
+
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         appBar: AppBar(
@@ -55,9 +98,18 @@ class _CartScreenState extends State<CartScreen> {
                           itemCount: addcartlist.length,
                           itemBuilder: (BuildContext context, int index) {
                             final cart = addcartlist.reversed.toList()[index];
+                            // cart.count = 1;
+                            // print(cart.count);
+                            // int quantity = 1;
+                            int price = int.parse(cart.price);
+                            int quantity = cart.count;
+                            int totalPrice = price * quantity;
+
+                            total += totalPrice;
+
                             return Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 10, bottom: 10),
+                              padding: const EdgeInsets.only(
+                                  top: 10, bottom: 10, right: 10, left: 10),
                               child: Slidable(
                                 startActionPane: ActionPane(
                                     motion: StretchMotion(),
@@ -120,10 +172,10 @@ class _CartScreenState extends State<CartScreen> {
                                         padding: const EdgeInsets.only(
                                             left: 10, right: 10),
                                         child: Container(
-                                          height: 114,
+                                          height: 124,
                                           decoration: BoxDecoration(
-                                              color: const Color.fromARGB(
-                                                  255, 198, 202, 205),
+                                              color: Color.fromARGB(
+                                                  255, 67, 130, 178),
                                               border: Border.all(
                                                   color: Colors.black),
                                               borderRadius:
@@ -133,7 +185,23 @@ class _CartScreenState extends State<CartScreen> {
                                               IconButton(
                                                 onPressed: () {
                                                   setState(() {
-                                                    _addButton();
+                                                    //add(cart.count);
+                                                    // cart.count++;
+                                                    if (cart.count < 9) {
+                                                      cart.count++;
+                                                    } else {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                              SnackBar(
+                                                        content:
+                                                            Text('Max Limit'),
+                                                        duration: Duration(
+                                                            seconds: 2),
+                                                        backgroundColor:
+                                                            Colors.red,
+                                                      ));
+                                                    }
                                                   });
                                                 },
                                                 icon: Icon(
@@ -141,16 +209,28 @@ class _CartScreenState extends State<CartScreen> {
                                                 ),
                                                 iconSize: 20,
                                               ),
-                                              Text('$currentValue'),
+                                              Text('${cart.count}'),
                                               IconButton(
                                                 onPressed: () {
                                                   setState(() {
-                                                    _subtractButton();
+                                                    if (cart.count > 1) {
+                                                      cart.count--;
+                                                    }
                                                   });
                                                 },
                                                 icon:
                                                     Icon(CupertinoIcons.minus),
                                               )
+
+                                              // GestureDetector(
+                                              //     onTap: () {
+                                              //       setState(() {});
+                                              //     },
+                                              //     child: QuantityButton(
+                                              //       totalprice: totalprice,
+                                              //       price: double.parse(
+                                              //           cart.price),
+                                              //     )),
                                             ],
                                           ),
                                         ),
@@ -170,30 +250,36 @@ class _CartScreenState extends State<CartScreen> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                child: ValueListenableBuilder(
-                    valueListenable: addcartlist,
-                    builder:
-                        (context, List<AddCart> addcartlist, Widget? child) {
+                child: ValueListenableBuilder<Box<AddCart>>(
+                    valueListenable: cartBox.listenable(),
+                    builder: (context, cartBox, _) {
+                      //final cartitems = cartBox.values.toList();
+                      // double totalprice = 0.0
+                      // for (var item in cartitems) {
+                      //   final price = double.parse(item.price);
+                      //   totalprice += price;
+                      //print('total price $totalprice');
+                      // }
                       return Column(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Items",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
-                              Text(
-                                'sdfjg',
-                                style: TextStyle(fontSize: 20),
-                              ),
-                            ],
-                          ),
-                          Divider(
-                            color: Colors.black,
-                          ),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: [
+                          //     Text(
+                          //       "Items",
+                          //       style: TextStyle(
+                          //         fontSize: 20,
+                          //       ),
+                          //     ),
+                          //     Text(
+                          //       '${items}',
+                          //       style: TextStyle(fontSize: 20),
+                          //     ),
+                          //   ],
+                          // ),
+                          // Divider(
+                          //   color: Colors.black,
+                          // ),
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: Row(
@@ -206,7 +292,7 @@ class _CartScreenState extends State<CartScreen> {
                                   ),
                                 ),
                                 Text(
-                                  "₹100",
+                                  total.toString(),
                                   style: TextStyle(fontSize: 20),
                                 ),
                               ],
@@ -248,7 +334,7 @@ class _CartScreenState extends State<CartScreen> {
                                   ),
                                 ),
                                 Text(
-                                  "₹150",
+                                  "${total + 50}", // Assuming total is the correct variable
                                   style: TextStyle(
                                       fontSize: 20, color: Colors.red),
                                 ),
@@ -272,7 +358,7 @@ class _CartScreenState extends State<CartScreen> {
                       primary: Colors.redAccent.shade700,
                     ),
                     child: Text(
-                      'Place Order',
+                      'Continue',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -284,20 +370,5 @@ class _CartScreenState extends State<CartScreen> {
             ],
           ),
         ));
-  }
-
-  //add button
-  int currentValue = 0;
-
-  void _addButton() {
-    if (currentValue < 9) {
-      currentValue++;
-    }
-  }
-
-  void _subtractButton() {
-    if (currentValue > 1) {
-      currentValue--;
-    }
   }
 }

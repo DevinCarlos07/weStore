@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,6 +50,7 @@ class _LoginState extends State<Login> {
                   //email
 
                   TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     keyboardType: TextInputType.emailAddress,
                     controller: _validEmailController,
                     validator: validateEmail,
@@ -68,6 +69,7 @@ class _LoginState extends State<Login> {
                   //password
 
                   TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     controller: _validPasswordController,
                     validator: validatePassword,
                     obscureText: true,
@@ -266,6 +268,7 @@ void logout(BuildContext context) {
 
 //signoutfuntion
 signout(BuildContext context) async {
+  // ignore: no_leading_underscores_for_local_identifiers
   final _sharedPrefs = await SharedPreferences.getInstance();
   await _sharedPrefs.clear();
   Navigator.of(context).pushAndRemoveUntil(

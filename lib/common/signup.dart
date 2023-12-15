@@ -42,6 +42,7 @@ class _SignUpState extends State<SignUp> {
 
                   //name
                   TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: validateName,
                     controller: _nameController,
                     decoration: InputDecoration(
@@ -55,6 +56,7 @@ class _SignUpState extends State<SignUp> {
 
                   //phonenumber
                   TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     keyboardType: TextInputType.phone,
                     validator: validatePhone,
                     controller: _phoneController,
@@ -67,6 +69,7 @@ class _SignUpState extends State<SignUp> {
 
                   //email
                   TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     keyboardType: TextInputType.emailAddress,
                     validator: validateEmail,
                     controller: _emailController,
@@ -79,6 +82,7 @@ class _SignUpState extends State<SignUp> {
 
                   //createpassword
                   TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: validateCreatepassword,
                     controller: _createpasswordController,
                     obscureText: true,
@@ -92,6 +96,7 @@ class _SignUpState extends State<SignUp> {
 
                   //conformpassowrd
                   TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: validateConformpassword,
                     controller: _conformpasswordController,
                     obscureText: true,

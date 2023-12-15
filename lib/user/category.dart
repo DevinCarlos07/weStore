@@ -20,8 +20,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(widget.categorys),
+        iconTheme: IconThemeData(color: Colors.black),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Text(
+          widget.categorys,
+          style: GoogleFonts.rubik(color: Colors.black),
+        ),
         centerTitle: true,
         //backgroundColor: Colors.white,
       ),
@@ -34,7 +41,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
               .toList();
           if (filterdlist.isEmpty) {
             return Center(
-              child: Text('No Product'),
+              child: //Text('No Product'),
+                  Image.asset(
+                'assets/images/nodata.gif',
+              ),
             );
           } else {
             return GridView.builder(
@@ -97,12 +107,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       IconButton(
-                                        icon: Icon(
-                                          Icons.favorite_border,
-                                          color: Colors.black,
-                                        ),
+                                        icon: getIcon(categoryadd),
                                         onPressed: () {
-                                          addfav_button(categoryadd, context);
+                                          setState(() {
+                                            addfav_button(categoryadd, context);
+                                          });
                                         },
                                       ),
                                       IconButton(

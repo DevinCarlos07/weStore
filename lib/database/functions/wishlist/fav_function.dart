@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_visible_for_testing_member
+
 import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:we_store/database/functions/wishlist/fav_model.dart';
@@ -22,5 +24,6 @@ Future<void> geterfav() async {
   final addfavbox = await Hive.openBox<AddFav>('add_fav');
   addfavlist.value.clear();
   addfavlist.value.addAll(addfavbox.values);
+  // ignore: invalid_use_of_protected_member
   addfavlist.notifyListeners();
 }

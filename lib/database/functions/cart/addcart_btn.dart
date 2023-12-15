@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, unnecessary_import
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -25,6 +27,7 @@ void checkCart(Addproducts addproducts, BuildContext context) async {
         price: addproducts.price,
         details: addproducts.details,
         imagepath: addproducts.imagepath,
+        count: 1,
         id: -1);
     addtoCatlist(cart);
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -59,6 +62,7 @@ void removecart(BuildContext context, int? id) {
       });
 }
 
+// ignore: non_constant_identifier_names
 Future<void> delete_cart(context, int? id) async {
   final remove = await Hive.openBox<AddCart>('add_cart');
   remove.delete(id);
@@ -67,3 +71,7 @@ Future<void> delete_cart(context, int? id) async {
     MaterialPageRoute(builder: (context) => CartScreen()),
   );
 }
+
+//count functions
+
+

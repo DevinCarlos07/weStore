@@ -1,9 +1,10 @@
+// ignore_for_file: use_build_context_synchronously, no_leading_underscores_for_local_identifiers
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:we_store/common/bottomnav.dart';
 import 'package:we_store/common/login.dart';
 import 'package:we_store/common/sign_or_log.dart';
-import 'package:we_store/user/home.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

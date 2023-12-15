@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:we_store/database/functions/addproduct/addproduct_models.dart';
@@ -25,4 +27,33 @@ Future<void> getproducts() async {
   productlist.value.clear();
   productlist.value.addAll(productDB.values);
   productlist.notifyListeners();
+}
+
+//to edit product
+Future<void> editProduct(
+  int id,
+  String name,
+  String price,
+  String imagepath,
+  String details,
+) async {
+  final deptBox = await Hive.openBox<Addproducts>('add_product');
+  final existingDoctor =
+      deptBox.values.firstWhere((product) => product.id == id);
+
+  // ignore: unnecessary_null_comparison
+  if (existingDoctor == null) {
+    //print("no doc");
+  } else {
+    // Update
+
+    existingDoctor.name = name;
+    existingDoctor.price = price;
+    existingDoctor.imagepath = imagepath;
+    existingDoctor.details = details;
+
+    // Save the updated
+    await deptBox.put(id, existingDoctor);
+    getproducts();
+  }
 }
