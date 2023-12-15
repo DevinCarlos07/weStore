@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:we_store/common/login.dart';
+import 'package:we_store/user/subpages/adressadd.dart';
 import 'package:we_store/user/subpages/editprofile.dart';
+import 'package:we_store/user/subpages/viewaddress.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -93,7 +95,10 @@ class _ProfileState extends State<Profile> {
                     ),
                     borderRadius: BorderRadius.circular(18)),
                 child: ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (ctx) => ViewAddress()));
+                  },
                   leading: Icon(
                     Icons.edit_document,
                     color: Colors.black,
@@ -103,7 +108,7 @@ class _ProfileState extends State<Profile> {
                     color: Colors.black,
                   ),
                   title: Text(
-                    'Change Address',
+                    'Address',
                     style:
                         GoogleFonts.poppins(color: Colors.black, fontSize: 17),
                   ),

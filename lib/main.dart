@@ -4,6 +4,7 @@ import 'package:hive_flutter/adapters.dart';
 
 import 'package:we_store/common/splash.dart';
 import 'package:we_store/database/functions/addproduct/addproduct_models.dart';
+import 'package:we_store/database/functions/address/address_models.dart';
 import 'package:we_store/database/functions/cart/cart_models.dart';
 import 'package:we_store/database/functions/category/models.dart';
 import 'package:we_store/database/functions/signup/db_models.dart';
@@ -18,6 +19,7 @@ Future<void> main() async {
   Hive.openBox<AddCart>('add_cart');
   Hive.openBox<AddFav>('add_fav');
   Hive.openBox<CategoryAdd>('add_cat');
+  Hive.openBox<Addressmodel>('address');
 
   // Hive.initFlutter();
 
@@ -35,6 +37,9 @@ Future<void> main() async {
   }
   if (!Hive.isAdapterRegistered(CategoryAddAdapter().typeId)) {
     Hive.registerAdapter(CategoryAddAdapter());
+  }
+  if (!Hive.isAdapterRegistered(AddressmodelAdapter().typeId)) {
+    Hive.registerAdapter(AddressmodelAdapter());
   }
   runApp(const MyApp());
 }

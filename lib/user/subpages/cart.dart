@@ -11,7 +11,6 @@ import 'package:we_store/database/functions/cart/addcart_btn.dart';
 
 import 'package:we_store/database/functions/cart/cart_functions.dart';
 import 'package:we_store/database/functions/cart/cart_models.dart';
-import 'package:we_store/database/functions/cart/qty_button.dart';
 
 class CartScreen extends StatefulWidget {
   CartScreen({super.key});
@@ -22,33 +21,7 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   late Box<AddCart> cartBox = Hive.box<AddCart>('add_cart');
-  var total = 0;
-  var items;
-  // double totalprice = 0;
-
-  // int quantity = 1;
-
-  // void incrementQuantity() {
-  //   setState(() {
-  //     if (quantity < 9) {
-  //       quantity++;
-  //     } else {
-  //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //         content: Text('Max Limit'),
-  //         duration: Duration(seconds: 2),
-  //         backgroundColor: Colors.red,
-  //       ));
-  //     }
-  //   });
-  // }
-
-  // void decrementQuantity() {
-  //   setState(() {
-  //     if (quantity > 1) {
-  //       quantity--;
-  //     }
-  //   });
-  // }
+  int total = 0;
 
   @override
   void initState() {
@@ -62,8 +35,6 @@ class _CartScreenState extends State<CartScreen> {
   @override
   void didUpdateWidget(covariant CartScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
-
-    // Delay the execution to ensure it's after the build phase
   }
 
   Widget build(BuildContext context) {
@@ -98,9 +69,7 @@ class _CartScreenState extends State<CartScreen> {
                           itemCount: addcartlist.length,
                           itemBuilder: (BuildContext context, int index) {
                             final cart = addcartlist.reversed.toList()[index];
-                            // cart.count = 1;
-                            // print(cart.count);
-                            // int quantity = 1;
+
                             int price = int.parse(cart.price);
                             int quantity = cart.count;
                             int totalPrice = price * quantity;
@@ -221,16 +190,6 @@ class _CartScreenState extends State<CartScreen> {
                                                 icon:
                                                     Icon(CupertinoIcons.minus),
                                               )
-
-                                              // GestureDetector(
-                                              //     onTap: () {
-                                              //       setState(() {});
-                                              //     },
-                                              //     child: QuantityButton(
-                                              //       totalprice: totalprice,
-                                              //       price: double.parse(
-                                              //           cart.price),
-                                              //     )),
                                             ],
                                           ),
                                         ),
@@ -253,33 +212,8 @@ class _CartScreenState extends State<CartScreen> {
                 child: ValueListenableBuilder<Box<AddCart>>(
                     valueListenable: cartBox.listenable(),
                     builder: (context, cartBox, _) {
-                      //final cartitems = cartBox.values.toList();
-                      // double totalprice = 0.0
-                      // for (var item in cartitems) {
-                      //   final price = double.parse(item.price);
-                      //   totalprice += price;
-                      //print('total price $totalprice');
-                      // }
                       return Column(
                         children: [
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //   children: [
-                          //     Text(
-                          //       "Items",
-                          //       style: TextStyle(
-                          //         fontSize: 20,
-                          //       ),
-                          //     ),
-                          //     Text(
-                          //       '${items}',
-                          //       style: TextStyle(fontSize: 20),
-                          //     ),
-                          //   ],
-                          // ),
-                          // Divider(
-                          //   color: Colors.black,
-                          // ),
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: Row(
