@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:we_store/common/login.dart';
-import 'package:we_store/user/subpages/adressadd.dart';
 import 'package:we_store/user/subpages/editprofile.dart';
+
 import 'package:we_store/user/subpages/viewaddress.dart';
 
 class Profile extends StatefulWidget {

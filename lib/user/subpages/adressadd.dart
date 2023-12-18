@@ -170,6 +170,63 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                     ),
                   ),
                 ),
+                // ValueListenableBuilder(
+                //     valueListenable: addresslist,
+                //     builder:
+                //         (context, List<Addressmodel> address, Widget? child) {
+                //       return ListView.builder(
+                //           itemCount: address.length,
+                //           itemBuilder: (BuildContext context, int index) {
+                //             final newaddress =
+                //                 address.reversed.toList()[index];
+                //             return Container(
+                //               decoration: BoxDecoration(
+                //                 border: Border.all(),
+                //                 borderRadius: BorderRadius.circular(20),
+                //               ),
+                //               height: 120,
+                //               width: double.infinity,
+                //               child: Row(
+                //                 children: [
+                //                   SizedBox(
+                //                     width: 20,
+                //                   ),
+                //                   // Radio(
+                //                   //   value: index,
+                //                   //   groupValue: selectedAddressIndex,
+                //                   //   onChanged: (int? value) {
+                //                   //     setState(() {
+                //                   //       selectedAddressIndex = value;
+                //                   //       ink = selectedAddressIndex;
+                //                   //     });
+                //                   //   },
+                //                   // ),
+                //                   SizedBox(
+                //                     width: 20,
+                //                   ),
+                //                   Column(
+                //                     crossAxisAlignment:
+                //                         CrossAxisAlignment.start,
+                //                     children: [
+                //                       SizedBox(
+                //                         height: 10,
+                //                       ),
+                //                       Text(
+                //                         newaddress.name,
+                //                         style: TextStyle(fontSize: 20),
+                //                       ),
+                //                       Text(
+                //                         newaddress.contact,
+                //                         style: TextStyle(fontSize: 18),
+                //                       ),
+                //                       Text(newaddress.address),
+                //                     ],
+                //                   ),
+                //                 ],
+                //               ),
+                //             );
+                //           });
+                //     })
               ],
             ),
           ),

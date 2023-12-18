@@ -275,31 +275,31 @@ class _CartScreenState extends State<CartScreen> {
                               ],
                             ),
                           ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 14, bottom: 10),
+                            // ignore: sized_box_for_whitespace
+                            child: Container(
+                              height: 50,
+                              width: 400,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  // ignore: deprecated_member_use
+                                  primary: Colors.redAccent.shade700,
+                                ),
+                                child: Text(
+                                  'Continue',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       );
                     }),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                // ignore: sized_box_for_whitespace
-                child: Container(
-                  height: 50,
-                  width: 400,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      // ignore: deprecated_member_use
-                      primary: Colors.redAccent.shade700,
-                    ),
-                    child: Text(
-                      'Continue',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
               ),
             ],
           ),
