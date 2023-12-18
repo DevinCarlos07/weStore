@@ -11,6 +11,7 @@ import 'package:we_store/database/functions/cart/addcart_btn.dart';
 
 import 'package:we_store/database/functions/cart/cart_functions.dart';
 import 'package:we_store/database/functions/cart/cart_models.dart';
+import 'package:we_store/user/subpages/viewaddress.dart';
 
 class CartScreen extends StatefulWidget {
   CartScreen({super.key});
@@ -130,7 +131,10 @@ class _CartScreenState extends State<CartScreen> {
                                           SizedBox(
                                             height: 15,
                                           ),
-                                          Text(cart.price),
+                                          Text('₹${cart.price}',
+                                              style: GoogleFonts.rubik(
+                                                  color: Colors.green,
+                                                  fontSize: 15)),
                                           SizedBox(
                                             height: 15,
                                           ),
@@ -247,7 +251,7 @@ class _CartScreenState extends State<CartScreen> {
                                   ),
                                 ),
                                 Text(
-                                  "₹50",
+                                  "Free",
                                   style: TextStyle(fontSize: 20),
                                 ),
                               ],
@@ -268,7 +272,7 @@ class _CartScreenState extends State<CartScreen> {
                                   ),
                                 ),
                                 Text(
-                                  "${total + 50}", // Assuming total is the correct variable
+                                  "${total}", // Assuming total is the correct variable
                                   style: TextStyle(
                                       fontSize: 20, color: Colors.red),
                                 ),
@@ -282,7 +286,14 @@ class _CartScreenState extends State<CartScreen> {
                               height: 50,
                               width: 400,
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (ctx) => ViewAddress(
+                                                total: total,
+                                              )));
+                                },
                                 style: ElevatedButton.styleFrom(
                                   // ignore: deprecated_member_use
                                   primary: Colors.redAccent.shade700,

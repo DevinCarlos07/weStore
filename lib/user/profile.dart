@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:we_store/common/login.dart';
+import 'package:we_store/user/subpages/adressadd.dart';
 import 'package:we_store/user/subpages/editprofile.dart';
 
 import 'package:we_store/user/subpages/viewaddress.dart';
@@ -96,8 +97,10 @@ class _ProfileState extends State<Profile> {
                     borderRadius: BorderRadius.circular(18)),
                 child: ListTile(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (ctx) => ViewAddress()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (ctx) => AddAddressScreen()));
                   },
                   leading: Icon(
                     Icons.edit_document,

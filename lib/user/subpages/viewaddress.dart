@@ -126,20 +126,22 @@
 // ignore_for_file: sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart'; // Import shared_preferences
+// import 'package:shared_preferences/shared_preferences.dart'; // Import shared_preferences
 import 'package:we_store/database/functions/address/address_fuction.dart';
 import 'package:we_store/database/functions/address/address_models.dart';
 import 'package:we_store/user/subpages/adressadd.dart';
+import 'package:we_store/user/subpages/buy.dart';
 
 class ViewAddress extends StatefulWidget {
-  const ViewAddress({Key? key}) : super(key: key);
+  final int total;
+  const ViewAddress({required this.total, Key? key}) : super(key: key);
 
   @override
   State<ViewAddress> createState() => _ViewAddressState();
 }
 
 class _ViewAddressState extends State<ViewAddress> {
-  late SharedPreferences _prefs; // Declare SharedPreferences instance
+  //late SharedPreferences _prefs; // Declare SharedPreferences instance
   int? selectedAddressIndex;
 
   @override
@@ -148,11 +150,11 @@ class _ViewAddressState extends State<ViewAddress> {
     getaddress();
 
     // Initialize SharedPreferences
-    SharedPreferences.getInstance().then((prefs) {
-      setState(() {
-        _prefs = prefs;
-      });
-    });
+    // SharedPreferences.getInstance().then((prefs) {
+    //   setState(() {
+    //     // _prefs = prefs;
+    //   });
+    // });
   }
 
   @override
@@ -262,14 +264,21 @@ class _ViewAddressState extends State<ViewAddress> {
   void _handleRadioValueChange(int? value, Addressmodel selectedAddress) {
     setState(() {
       selectedAddressIndex = value;
-      print(selectedAddress.name);
+
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (buy) => BuyPage(
+                    address: selectedAddress,
+                    total: widget.total,
+                  )));
     });
 
     // Store selected address in SharedPreferences
-    if (_prefs != null) {
-      _prefs.setString('selected_address_name', selectedAddress.name);
-      _prefs.setString('selected_address_contact', selectedAddress.contact);
-      _prefs.setString('selected_address_address', selectedAddress.address);
-    }
+    // if (_prefs != null) {
+    //   _prefs.setString('selected_address_name', selectedAddress.name);
+    //   _prefs.setString('selected_address_contact', selectedAddress.contact);
+    //   _prefs.setString('selected_address_address', selectedAddress.address);
+    // }
   }
 }
