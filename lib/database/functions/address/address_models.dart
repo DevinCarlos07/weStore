@@ -18,10 +18,14 @@ class Addressmodel {
   @HiveField(6)
   String city;
 
+  @HiveField(7)
+  String pincode;
+
   Addressmodel(
       {required this.name,
       required this.contact,
       required this.address,
       required this.city,
+      required this.pincode,
       this.id});
 }

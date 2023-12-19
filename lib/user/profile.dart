@@ -19,7 +19,7 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color.fromARGB(255, 227, 224, 224),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         centerTitle: true,
         title: Text(
           'Account',
@@ -32,16 +32,22 @@ class _ProfileState extends State<Profile> {
           children: [
             Container(
               width: double.infinity,
-              height: 260,
+              height: 230,
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 227, 224, 224),
+                color: Color.fromARGB(255, 255, 255, 255),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  SizedBox(
+                    height: 30,
+                  ),
                   CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/alexa2.0.png'),
-                    radius: 100,
+                    backgroundImage: AssetImage('assets/images/star.jpg'),
+                    radius: 50,
+                  ),
+                  SizedBox(
+                    height: 40,
                   ),
                   Text(
                     'Alexa',
@@ -58,37 +64,39 @@ class _ProfileState extends State<Profile> {
                 ],
               ),
             ),
+            // Padding(
+            //   padding: const EdgeInsets.only(
+            //       left: 13, right: 13, top: 10, bottom: 10),
+            //   child: Container(
+            //     decoration: BoxDecoration(
+            //         border: Border.all(
+            //           color: Colors.black,
+            //         ),
+            //         borderRadius: BorderRadius.circular(18)),
+            //     child: ListTile(
+            //       onTap: () {
+            //         Navigator.push(context,
+            //             MaterialPageRoute(builder: (context) => EditProfile()));
+            //       },
+            //       leading: Icon(
+            //         Icons.person,
+            //         color: Colors.black,
+            //       ),
+            //       trailing: Icon(
+            //         Icons.arrow_forward_ios,
+            //         color: Colors.black,
+            //       ),
+            //       title: Text(
+            //         'Edit Profile',
+            //         style:
+            //             GoogleFonts.poppins(color: Colors.black, fontSize: 17),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Padding(
-              padding: const EdgeInsets.all(8),
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                    ),
-                    borderRadius: BorderRadius.circular(18)),
-                child: ListTile(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => EditProfile()));
-                  },
-                  leading: Icon(
-                    Icons.person,
-                    color: Colors.black,
-                  ),
-                  trailing: Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.black,
-                  ),
-                  title: Text(
-                    'Edit Profile',
-                    style:
-                        GoogleFonts.poppins(color: Colors.black, fontSize: 17),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.only(
+                  left: 13, right: 13, top: 10, bottom: 10),
               child: Container(
                 decoration: BoxDecoration(
                     border: Border.all(
@@ -111,7 +119,7 @@ class _ProfileState extends State<Profile> {
                     color: Colors.black,
                   ),
                   title: Text(
-                    'Address',
+                    'New Address',
                     style:
                         GoogleFonts.poppins(color: Colors.black, fontSize: 17),
                   ),
@@ -119,7 +127,8 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.only(
+                  left: 13, right: 13, top: 10, bottom: 10),
               child: Container(
                 decoration: BoxDecoration(
                     border: Border.all(
@@ -145,7 +154,8 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.only(
+                  left: 13, right: 13, top: 10, bottom: 10),
               child: Container(
                 decoration: BoxDecoration(
                     border: Border.all(
@@ -155,7 +165,7 @@ class _ProfileState extends State<Profile> {
                 child: ListTile(
                   onTap: () {},
                   leading: Icon(
-                    Icons.location_on_rounded,
+                    Icons.privacy_tip_outlined,
                     color: Colors.black,
                   ),
                   trailing: Icon(
@@ -163,7 +173,7 @@ class _ProfileState extends State<Profile> {
                     color: Colors.black,
                   ),
                   title: Text(
-                    'Location',
+                    'Privacy Policy',
                     style:
                         GoogleFonts.poppins(color: Colors.black, fontSize: 17),
                   ),
@@ -171,7 +181,8 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.only(
+                  left: 13, right: 13, top: 10, bottom: 10),
               child: Container(
                 decoration: BoxDecoration(
                     border: Border.all(
@@ -199,7 +210,7 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 25),
+              padding: const EdgeInsets.only(top: 20),
               child: Column(
                 children: [
                   Text(

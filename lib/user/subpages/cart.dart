@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sort_child_properties_last, unnecessary_import, prefer_const_constructors_in_immutables, annotate_overrides, sized_box_for_whitespace, duplicate_ignore
+// ignore_for_file: prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sort_child_properties_last, unnecessary_import, prefer_const_constructors_in_immutables, annotate_overrides, sized_box_for_whitespace, duplicate_ignore, unnecessary_brace_in_string_interps
 
 import 'dart:io';
 
@@ -12,6 +12,8 @@ import 'package:we_store/database/functions/cart/addcart_btn.dart';
 import 'package:we_store/database/functions/cart/cart_functions.dart';
 import 'package:we_store/database/functions/cart/cart_models.dart';
 import 'package:we_store/user/subpages/viewaddress.dart';
+import 'package:we_store/user/subpages/widgets/cart_widgets/custom_image.dart';
+import 'package:we_store/user/subpages/widgets/cart_widgets/custom_product.dart';
 
 class CartScreen extends StatefulWidget {
   CartScreen({super.key});
@@ -106,41 +108,9 @@ class _CartScreenState extends State<CartScreen> {
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(left: 10),
-                                        child: Container(
-                                          width: 90,
-                                          height: 108,
-                                          child: Image.file(
-                                            File(cart.imagepath),
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
+                                        child: cart_image(cart: cart),
                                       ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            height: 20,
-                                          ),
-                                          Text(
-                                            cart.name,
-                                            style: GoogleFonts.rubik(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Text('₹${cart.price}',
-                                              style: GoogleFonts.rubik(
-                                                  color: Colors.green,
-                                                  fontSize: 15)),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Text(cart.details)
-                                        ],
-                                      ),
+                                      custom_productdetails(cart: cart),
                                       Padding(
                                         padding: const EdgeInsets.only(
                                             left: 10, right: 10),

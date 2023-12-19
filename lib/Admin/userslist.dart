@@ -17,6 +17,7 @@ class _UsersListState extends State<UsersList> {
   void initState() {
     super.initState();
     getuser();
+    setState(() {});
   }
 
   @override
@@ -71,6 +72,8 @@ class _UsersListState extends State<UsersList> {
                                 Padding(
                                   padding: const EdgeInsets.all(11.0),
                                   child: CircleAvatar(
+                                    backgroundImage:
+                                        AssetImage('assets/images/star.jpg'),
                                     radius: 43,
                                     backgroundColor: Colors.blue,
                                   ),

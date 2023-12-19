@@ -39,20 +39,20 @@ class _EditProfileState extends State<EditProfile> {
             child: Column(
               children: [
                 SizedBox(
-                  height: 10,
+                  height: 220,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 30),
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage('assets/images/alexa2.0.png'),
-                    radius: 100,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 70),
-                  child: IconButton(
-                      onPressed: () {}, icon: Icon(Icons.edit_document)),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 30),
+                //   child: CircleAvatar(
+                //     backgroundImage: AssetImage('assets/images/alexa2.0.png'),
+                //     radius: 100,
+                //   ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.only(left: 70),
+                //   child: IconButton(
+                //       onPressed: () {}, icon: Icon(Icons.edit_document)),
+                // ),
                 Padding(
                   padding: const EdgeInsets.only(left: 40, right: 40),
                   child: TextFormField(

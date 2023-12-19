@@ -1,26 +1,33 @@
-// ignore: file_names
-
-// ignore_for_file: no_leading_underscores_for_local_identifiers
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:we_store/database/functions/address/address_fuction.dart';
-import 'package:we_store/database/functions/address/address_models.dart';
+import 'package:we_store/database/functions/address/edit_delete.dart';
 
-class AddAddressScreen extends StatefulWidget {
-  const AddAddressScreen({super.key});
+class EditAddress extends StatefulWidget {
+  final String name;
+  final String contact;
+  final String address;
+  final String city;
+  final String pincode;
+  final int id;
+  const EditAddress(
+      {required this.name,
+      required this.contact,
+      required this.address,
+      required this.city,
+      required this.pincode,
+      required this.id,
+      Key? key})
+      : super(key: key);
 
   @override
-  State<AddAddressScreen> createState() => _AddAddressScreenState();
+  State<EditAddress> createState() => _EditAddressState();
 }
 
-class _AddAddressScreenState extends State<AddAddressScreen> {
+class _EditAddressState extends State<EditAddress> {
   bool isPhone(String input) =>
       RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$')
           .hasMatch(input);
-
   final _formKey = GlobalKey<FormState>();
-
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _addresssController = TextEditingController();
@@ -28,6 +35,11 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   final TextEditingController _pincodeController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    _nameController.text = widget.name;
+    _phoneController.text = widget.contact;
+    _addresssController.text = widget.address;
+    _cityController.text = widget.city;
+    _pincodeController.text = widget.pincode;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -179,12 +191,14 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          _addAddress(context);
+                          edit_address(widget.id, widget.name, widget.contact,
+                              widget.address, widget.city, widget.pincode);
+                          Navigator.pop(context);
                         });
                       },
                       style: ElevatedButton.styleFrom(
                         // ignore: deprecated_member_use
-                        primary: Colors.redAccent.shade700,
+                        primary: Color.fromARGB(255, 8, 212, 8),
                       ),
                       child: Text(
                         'Save Address',
@@ -202,62 +216,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
         ),
       ),
     );
-  }
-
-  Future<void> _addAddress(BuildContext context) async {
-    final username = _nameController.text;
-    final number = _phoneController.text;
-    final address = _addresssController.text;
-    final city = _cityController.text;
-    final pincode = _pincodeController.text;
-
-    if (username.isNotEmpty &&
-        number.isNotEmpty &&
-        address.isNotEmpty &&
-        city.isNotEmpty &&
-        pincode.isNotEmpty) {
-      final _addAddress = Addressmodel(
-          name: username,
-          contact: number,
-          address: address,
-          city: city,
-          pincode: pincode);
-      addtoaddress(_addAddress);
-      Navigator.pop(context);
-      // _nameController.clear();
-      // _phoneController.clear();
-      // _addresssController.clear();
-      // _cityController.clear();
-
-      showDailogealert(context);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Please fill all Datas'),
-        behavior: SnackBarBehavior.floating,
-        margin: EdgeInsets.all(10),
-        duration: Duration(seconds: 2),
-      ));
-    }
-  }
-
-  void showDailogealert(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(
-            'Added address',
-          ),
-          content: Text('Address add succesfull'),
-          actions: [
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('OK'))
-          ],
-        );
-      },
-    );
+    ;
   }
 }

@@ -123,7 +123,7 @@
 //   }
 // }
 
-// ignore_for_file: sized_box_for_whitespace
+// ignore_for_file: sized_box_for_whitespace, sort_child_properties_last
 
 import 'package:flutter/material.dart';
 // import 'package:shared_preferences/shared_preferences.dart'; // Import shared_preferences
@@ -131,6 +131,7 @@ import 'package:we_store/database/functions/address/address_fuction.dart';
 import 'package:we_store/database/functions/address/address_models.dart';
 import 'package:we_store/user/subpages/adressadd.dart';
 import 'package:we_store/user/subpages/buy.dart';
+import 'package:we_store/user/subpages/editaddress.dart';
 
 class ViewAddress extends StatefulWidget {
   final int total;
@@ -160,24 +161,30 @@ class _ViewAddressState extends State<ViewAddress> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(top: 10, bottom: 12),
+        child: FloatingActionButton.extended(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (ctx) => AddAddressScreen()));
+          },
+          icon: Icon(Icons.add),
+          label: Text("Add Address"),
+        ),
+      ),
       appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (cts) => AddAddressScreen()),
-              );
-            },
-            icon: Icon(Icons.add),
-          )
-        ],
-        title: Text('Current Address'),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        title: Text(
+          'Current Address',
+          style: TextStyle(color: Colors.black),
+        ),
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.black),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(12.0),
         child: Container(
           width: 600,
           child: ValueListenableBuilder(
@@ -233,8 +240,42 @@ class _ViewAddressState extends State<ViewAddress> {
                                     style: TextStyle(fontSize: 18),
                                   ),
                                   Text(addressadd.address),
+                                  Text(addressadd.pincode)
                                 ],
                               ),
+                              SizedBox(
+                                width: 90,
+                              ),
+                              Column(
+                                children: [
+                                  IconButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (ctx) => EditAddress(
+                                                    name: addressadd.name,
+                                                    contact: addressadd.contact,
+                                                    address: addressadd.address,
+                                                    city: addressadd.city,
+                                                    pincode: addressadd.pincode,
+                                                    id: addressadd.id!)));
+                                      },
+                                      icon: Icon(Icons.edit)),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      ))
+                                ],
+                              ),
+                              SizedBox(
+                                width: 20,
+                              )
                             ],
                           ),
                         ),
@@ -273,12 +314,5 @@ class _ViewAddressState extends State<ViewAddress> {
                     total: widget.total,
                   )));
     });
-
-    // Store selected address in SharedPreferences
-    // if (_prefs != null) {
-    //   _prefs.setString('selected_address_name', selectedAddress.name);
-    //   _prefs.setString('selected_address_contact', selectedAddress.contact);
-    //   _prefs.setString('selected_address_address', selectedAddress.address);
-    // }
   }
 }

@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:we_store/database/functions/cart/addcart_btn.dart';
 import 'package:we_store/database/functions/cart/cart_functions.dart';
 import 'package:we_store/database/functions/cart/cart_models.dart';
+import 'package:we_store/user/subpages/payments.dart';
+import 'package:we_store/user/subpages/widgets/buy/price_bottom.dart';
 
 class BuyPage extends StatefulWidget {
   final dynamic address;
@@ -206,25 +208,7 @@ class _BuyPageState extends State<BuyPage> {
           Padding(
             padding:
                 const EdgeInsets.only(left: 20, bottom: 20, right: 20, top: 20),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 221, 177, 56),
-                  borderRadius: BorderRadius.circular(20)),
-              width: double.infinity,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Total Price : ${widget.total}'),
-                  SizedBox(
-                    width: 75,
-                  ),
-                  ElevatedButton(onPressed: () {}, child: Text('Place Order')),
-                  SizedBox(
-                    width: 1,
-                  )
-                ],
-              ),
-            ),
+            child: Price_bottom(widget: widget),
           )
         ],
       ),

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:we_store/Admin/home.dart';
 import 'package:we_store/database/functions/addproduct/addproduct_fuctions.dart';
 import 'package:we_store/database/functions/addproduct/addproduct_models.dart';
 import 'package:we_store/database/functions/category/models.dart';
@@ -275,6 +276,7 @@ class _AddProductState extends State<AddProduct> {
           id: -1);
       addproduct(_add);
       showSnackBar(context, 'Added Succesfully!');
+      Navigator.push(context, MaterialPageRoute(builder: (ctx) => AdminHome()));
       _productdetailsContoller.clear();
       _productpriceController.clear();
       _productnameController.clear();

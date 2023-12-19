@@ -17,6 +17,7 @@ Future<void> addtoaddress(Addressmodel value) async {
           contact: data.contact,
           address: data.address,
           city: data.city,
+          pincode: data.pincode,
           id: id));
   getaddress();
 }
