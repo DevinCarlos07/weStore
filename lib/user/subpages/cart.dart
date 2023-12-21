@@ -257,12 +257,17 @@ class _CartScreenState extends State<CartScreen> {
                               width: 400,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (ctx) => ViewAddress(
-                                                total: total,
-                                              )));
+                                  if (cartBox.isNotEmpty) {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (ctx) => ViewAddress(
+                                                  total: total,
+                                                )));
+                                  } else {
+                                    Navigator.pop(context);
+                                    showDailogealert(context);
+                                  }
                                 },
                                 style: ElevatedButton.styleFrom(
                                   // ignore: deprecated_member_use
@@ -285,5 +290,26 @@ class _CartScreenState extends State<CartScreen> {
             ],
           ),
         ));
+  }
+
+  void showDailogealert(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            'Cart was Empty',
+          ),
+          content: Text('You need to add a Product '),
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('OK'))
+          ],
+        );
+      },
+    );
   }
 }

@@ -211,32 +211,37 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     final city = _cityController.text;
     final pincode = _pincodeController.text;
 
-    if (username.isNotEmpty &&
-        number.isNotEmpty &&
-        address.isNotEmpty &&
-        city.isNotEmpty &&
-        pincode.isNotEmpty) {
-      final _addAddress = Addressmodel(
-          name: username,
-          contact: number,
-          address: address,
-          city: city,
-          pincode: pincode);
-      addtoaddress(_addAddress);
-      Navigator.pop(context);
-      // _nameController.clear();
-      // _phoneController.clear();
-      // _addresssController.clear();
-      // _cityController.clear();
+    if (address.length < 4) {
+      if (username.isNotEmpty &&
+          number.isNotEmpty &&
+          address.isNotEmpty &&
+          city.isNotEmpty &&
+          pincode.isNotEmpty) {
+        final _addAddress = Addressmodel(
+            name: username,
+            contact: number,
+            address: address,
+            city: city,
+            pincode: pincode);
+        addtoaddress(_addAddress);
+        Navigator.pop(context);
+        // _nameController.clear();
+        // _phoneController.clear();
+        // _addresssController.clear();
+        // _cityController.clear();
 
-      showDailogealert(context);
+        showDailogealert(context);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Please fill all Datas'),
+          behavior: SnackBarBehavior.floating,
+          margin: EdgeInsets.all(10),
+          duration: Duration(seconds: 2),
+        ));
+      }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Please fill all Datas'),
-        behavior: SnackBarBehavior.floating,
-        margin: EdgeInsets.all(10),
-        duration: Duration(seconds: 2),
-      ));
+      showDailoglimit(context);
+      Navigator.pop(context);
     }
   }
 
@@ -249,6 +254,27 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
             'Added address',
           ),
           content: Text('Address add succesfull'),
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('OK'))
+          ],
+        );
+      },
+    );
+  }
+
+  void showDailoglimit(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            'Address Limit',
+          ),
+          content: Text('You can add only few address!!'),
           actions: [
             ElevatedButton(
                 onPressed: () {

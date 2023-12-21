@@ -2,9 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:we_store/database/functions/cart/addcart_btn.dart';
 import 'package:we_store/database/functions/cart/cart_functions.dart';
 import 'package:we_store/database/functions/cart/cart_models.dart';
+import 'package:we_store/database/functions/place_order/functions.dart';
+import 'package:we_store/database/functions/place_order/models.dart';
 import 'package:we_store/user/subpages/payments.dart';
 import 'package:we_store/user/subpages/widgets/buy/price_bottom.dart';
 
@@ -26,6 +29,9 @@ class _BuyPageState extends State<BuyPage> {
     getcart();
     setState(() {});
   }
+
+  dynamic cartgl;
+  dynamic lengthcart;
 
   @override
   Widget build(BuildContext context) {
@@ -132,6 +138,7 @@ class _BuyPageState extends State<BuyPage> {
                   child: ListView.builder(
                       itemCount: cartadd.length,
                       itemBuilder: (BuildContext context, int index) {
+                        lengthcart = cartadd.length;
                         final cart = cartadd.reversed.toList()[index];
                         // int price = int.parse(cart.price);
                         // int quantity = cart.count;
@@ -139,6 +146,7 @@ class _BuyPageState extends State<BuyPage> {
 
                         // total += totalPrice;
 
+                        cartgl = cart;
                         return Padding(
                           padding: const EdgeInsets.only(
                               bottom: 7, right: 20, left: 20, top: 7),
@@ -161,7 +169,7 @@ class _BuyPageState extends State<BuyPage> {
                                       width: 92,
                                       height: 100,
                                       child: Image.file(
-                                        File(cart.imagepath),
+                                        File(cartgl.imagepath),
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -206,10 +214,91 @@ class _BuyPageState extends State<BuyPage> {
                 );
               }),
           Padding(
-            padding:
-                const EdgeInsets.only(left: 20, bottom: 20, right: 20, top: 20),
-            child: Price_bottom(widget: widget),
-          )
+              padding: const EdgeInsets.only(
+                  left: 20, bottom: 20, right: 20, top: 20),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Container(
+                      width: 280,
+                      height: 25,
+                      decoration: BoxDecoration(
+                          color: Colors.blue[100],
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.info_outline_rounded),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text('Only Accepted in Cash on Delivery')
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(),
+                        //color: Color.fromARGB(255, 221, 177, 56),
+                        borderRadius: BorderRadius.circular(20)),
+                    width: double.infinity,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Total Price : ${widget.total}'),
+                        SizedBox(
+                          width: 75,
+                        ),
+                        SizedBox(
+                          width: 150,
+                          child: ValueListenableBuilder(
+                              valueListenable: addcartlist,
+                              builder: (BuildContext context,
+                                  List<AddCart> cartlist, Widget? child) {
+                                return ElevatedButton(
+                                    onPressed: () async {
+                                      final cartlength =
+                                          await Hive.openBox<AddCart>(
+                                              'add_cart');
+                                      for (var i = 0;
+                                          i < cartlength.length;
+                                          i++) {
+                                        final data = cartlist[i];
+                                        final order = Oredrplace(
+                                            id: data.id,
+                                            productName: data.name,
+                                            productPrice: data.price,
+                                            productDetails: data.details,
+                                            productImage: data.imagepath,
+                                            totalPrice:
+                                                widget.total, //ith mattanam
+                                            productCount: data.count,
+                                            deliveryName: widget.address.name,
+                                            deliveryPhone:
+                                                widget.address.contact,
+                                            deliveryAddress:
+                                                widget.address.address,
+                                            deliveryCity: widget.address.city,
+                                            pincode: widget.address.pincode);
+                                        addtoorder(order);
+                                        cartlength.clear();
+                                        getcart();
+                                        print('adderd');
+                                      }
+                                    },
+                                    child: child);
+                              }),
+                        ),
+                        SizedBox(
+                          width: 1,
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ))
         ],
       ),
     );

@@ -191,8 +191,13 @@ class _EditAddressState extends State<EditAddress> {
                     child: ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          edit_address(widget.id, widget.name, widget.contact,
-                              widget.address, widget.city, widget.pincode);
+                          edit_address(
+                              widget.id,
+                              _nameController.text,
+                              _phoneController.text,
+                              _addresssController.text,
+                              _cityController.text,
+                              _pincodeController.text);
                           Navigator.pop(context);
                         });
                       },

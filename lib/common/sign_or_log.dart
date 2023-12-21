@@ -20,7 +20,7 @@ class _SigninLoginState extends State<SigninLogin> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              height: 99,
+              height: 100,
             ),
             Image.asset(
               'assets/images/appleall.jpg',
@@ -29,15 +29,18 @@ class _SigninLoginState extends State<SigninLogin> {
             Image.asset(
               'assets/images/star.jpg',
               //  width: 54,
-              height: 54,
+              height: 57,
             ),
             SizedBox(
-              height: 15,
+              height: 20,
             ),
             Text(
               'We Store',
               style: GoogleFonts.poppins(
                   fontSize: 35, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 13,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -85,7 +88,7 @@ class _SigninLoginState extends State<SigninLogin> {
               height: 12,
             ),
             Padding(
-              padding: const EdgeInsets.all(25),
+              padding: const EdgeInsets.only(left: 22, right: 20, top: 26),
               child: Center(
                 child: Text(
                   '“Obviously anything that accessorizes or enhances the iPhone is always pretty cool”',

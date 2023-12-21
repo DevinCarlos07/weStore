@@ -103,11 +103,11 @@ class _ViewProductState extends State<ViewProduct> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Text(
-                                  productdata.details,
-                                  style:
-                                      GoogleFonts.poppins(color: Colors.blue),
-                                )
+                                // Text(
+                                //   productdata.details,
+                                //   style:
+                                //       GoogleFonts.poppins(color: Colors.blue),
+                                // )
                               ],
                             ),
                             SizedBox(

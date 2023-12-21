@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:we_store/common/login.dart';
+import 'package:we_store/user/subpages/add_address_user.dart';
 import 'package:we_store/user/subpages/adressadd.dart';
 import 'package:we_store/user/subpages/editprofile.dart';
 
@@ -105,10 +106,8 @@ class _ProfileState extends State<Profile> {
                     borderRadius: BorderRadius.circular(18)),
                 child: ListTile(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (ctx) => AddAddressScreen()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (ctx) => Useraddress()));
                   },
                   leading: Icon(
                     Icons.edit_document,
@@ -119,7 +118,7 @@ class _ProfileState extends State<Profile> {
                     color: Colors.black,
                   ),
                   title: Text(
-                    'New Address',
+                    'Address',
                     style:
                         GoogleFonts.poppins(color: Colors.black, fontSize: 17),
                   ),
