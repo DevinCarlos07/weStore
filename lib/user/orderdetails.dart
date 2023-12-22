@@ -2,9 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:we_store/database/functions/order_cancel/cancel_button.dart';
+import 'package:we_store/database/functions/order_cancel/cancel_functions.dart';
+import 'package:we_store/database/functions/order_cancel/cancel_model.dart';
 import 'package:we_store/database/functions/place_order/functions.dart';
 import 'package:we_store/database/functions/place_order/models.dart';
 import 'package:we_store/database/functions/place_order/order_cancel.dart';
+import 'package:we_store/user/order_details.dart';
 
 class OrderDetails extends StatefulWidget {
   const OrderDetails({super.key});
@@ -128,7 +132,14 @@ class _OrderDetailsState extends State<OrderDetails> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (ctx) => DetailsOrder(
+                                                  name: orderdetail
+                                                      .productName)));
+                                    },
                                     style: ButtonStyle(
                                         backgroundColor:
                                             MaterialStateProperty.all<Color>(
@@ -140,9 +151,18 @@ class _OrderDetailsState extends State<OrderDetails> {
                                 ),
                                 ElevatedButton(
                                   onPressed: () {
-                                    setState(() {
-                                      cancel(context, orderdetail.id);
-                                    });
+                                    cancelbtn(orderdetail, context);
+
+                                    // final cancel = Cancelorder(
+                                    //     name: orderdetail.productName,
+                                    //     price: orderdetail.productPrice,
+                                    //     details: orderdetail.productDetails,
+                                    //     image: orderdetail.productImage,
+                                    //     id: orderdetail.id);
+                                    // cancelthisorder(cancel);
+                                    // getcancel();
+
+                                    cancel(context, orderdetail.id);
                                   },
                                   style: ButtonStyle(
                                       backgroundColor:

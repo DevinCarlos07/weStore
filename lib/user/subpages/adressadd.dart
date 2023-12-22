@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 import 'package:we_store/database/functions/address/address_fuction.dart';
 import 'package:we_store/database/functions/address/address_models.dart';
 
@@ -15,6 +16,7 @@ class AddAddressScreen extends StatefulWidget {
 }
 
 class _AddAddressScreenState extends State<AddAddressScreen> {
+  late Box<Addressmodel> addressBox = Hive.box<Addressmodel>('address');
   bool isPhone(String input) =>
       RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$')
           .hasMatch(input);
@@ -180,6 +182,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                       onPressed: () {
                         setState(() {
                           _addAddress(context);
+                          print('lkjh');
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -210,8 +213,8 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     final address = _addresssController.text;
     final city = _cityController.text;
     final pincode = _pincodeController.text;
-
-    if (address.length < 4) {
+    print('55');
+    if (addressBox.length < 4) {
       if (username.isNotEmpty &&
           number.isNotEmpty &&
           address.isNotEmpty &&
@@ -225,10 +228,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
             pincode: pincode);
         addtoaddress(_addAddress);
         Navigator.pop(context);
-        // _nameController.clear();
-        // _phoneController.clear();
-        // _addresssController.clear();
-        // _cityController.clear();
 
         showDailogealert(context);
       } else {
@@ -240,8 +239,9 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
         ));
       }
     } else {
-      showDailoglimit(context);
       Navigator.pop(context);
+      showDailoglimit(context);
+      print('work');
     }
   }
 
@@ -267,6 +267,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
   }
 
   void showDailoglimit(BuildContext context) {
+    //print('ithim');
     showDialog(
       context: context,
       builder: (context) {
@@ -285,5 +286,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
         );
       },
     );
+    print('hhhhhh');
   }
 }

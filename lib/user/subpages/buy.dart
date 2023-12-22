@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -9,6 +11,7 @@ import 'package:we_store/database/functions/cart/cart_models.dart';
 import 'package:we_store/database/functions/place_order/functions.dart';
 import 'package:we_store/database/functions/place_order/models.dart';
 import 'package:we_store/user/subpages/payments.dart';
+import 'package:we_store/user/subpages/succes_page.dart';
 import 'package:we_store/user/subpages/widgets/buy/price_bottom.dart';
 
 class BuyPage extends StatefulWidget {
@@ -286,9 +289,14 @@ class _BuyPageState extends State<BuyPage> {
                                         cartlength.clear();
                                         getcart();
                                         print('adderd');
+                                        Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (ctx) => CnfrmPage()),
+                                            (route) => false);
                                       }
                                     },
-                                    child: child);
+                                    child: Text('Place Order'));
                               }),
                         ),
                         SizedBox(

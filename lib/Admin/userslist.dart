@@ -17,7 +17,6 @@ class _UsersListState extends State<UsersList> {
   void initState() {
     super.initState();
     getuser();
-    setState(() {});
   }
 
   @override
