@@ -275,8 +275,8 @@ class _BuyPageState extends State<BuyPage> {
                                             productPrice: data.price,
                                             productDetails: data.details,
                                             productImage: data.imagepath,
-                                            totalPrice:
-                                                widget.total, //ith mattanam
+                                            totalPrice: int.parse(
+                                                data.price), //ith mattanam
                                             productCount: data.count,
                                             deliveryName: widget.address.name,
                                             deliveryPhone:

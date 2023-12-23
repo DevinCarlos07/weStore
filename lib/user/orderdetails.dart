@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:we_store/database/functions/addproduct/addproduct_fuctions.dart';
 import 'package:we_store/database/functions/order_cancel/cancel_button.dart';
 import 'package:we_store/database/functions/order_cancel/cancel_functions.dart';
 import 'package:we_store/database/functions/order_cancel/cancel_model.dart';
@@ -137,8 +138,29 @@ class _OrderDetailsState extends State<OrderDetails> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (ctx) => DetailsOrder(
-                                                  name: orderdetail
-                                                      .productName)));
+                                                    name:
+                                                        orderdetail.productName,
+                                                    price: orderdetail
+                                                        .productPrice,
+                                                    details: orderdetail
+                                                        .productDetails,
+                                                    total:
+                                                        orderdetail.totalPrice,
+                                                    addressname: orderdetail
+                                                        .deliveryName,
+                                                    address: orderdetail
+                                                        .deliveryAddress,
+                                                    contact: orderdetail
+                                                        .deliveryPhone,
+                                                    count: orderdetail
+                                                        .productCount,
+                                                    city: orderdetail
+                                                        .deliveryCity,
+                                                    pincode:
+                                                        orderdetail.pincode,
+                                                    image: orderdetail
+                                                        .productImage,
+                                                  )));
                                     },
                                     style: ButtonStyle(
                                         backgroundColor:
