@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:we_store/Admin/addproduct.dart';
+import 'package:we_store/Admin/cancel_details.dart';
 
 import 'package:we_store/Admin/ordersdetails.dart';
 import 'package:we_store/Admin/userslist.dart';
@@ -32,24 +33,24 @@ class _AdminHomeState extends State<AdminHome> {
         child: Align(
           alignment: Alignment.center,
           child: Padding(
-            padding: const EdgeInsets.all(28.0),
+            padding: const EdgeInsets.all(15.0),
             child: Column(
               children: [
                 Image.asset(
                   'assets/images/star.jpg',
-                  width: 60,
-                  height: 60,
+                  width: 50,
+                  height: 50,
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 8),
                 Text(
                   "We Store",
                   style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 28,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -143,8 +144,30 @@ class _AdminHomeState extends State<AdminHome> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (ctx) => OrdersDetailsAdmin()));
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Colors.grey[300]),
+                  // clipBehavior: Clip.antiAlias,
+                  child: ListTile(
+                    title: Text(
+                      'Cancel Details',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (ctx) => OrdersDetails()));
+                          MaterialPageRoute(builder: (ctx) => CancelAdmin()));
                     },
                   ),
                 ),

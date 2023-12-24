@@ -14,6 +14,7 @@ Future<void> addSignup(SignupDetails value) async {
   signuplist.value.add(value);
   // ignore: invalid_use_of_protected_member
   signuplist.notifyListeners();
+  getuser();
 }
 
 Future<void> getuser() async {

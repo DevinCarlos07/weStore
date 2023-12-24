@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,6 +19,13 @@ class _UsersListState extends State<UsersList> {
   void initState() {
     super.initState();
     getuser();
+    Future.delayed(Duration(microseconds: 1), () {
+      refresh();
+    });
+  }
+
+  void refresh() {
+    setState(() {});
   }
 
   @override
@@ -24,6 +33,18 @@ class _UsersListState extends State<UsersList> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                setState(() {
+                  refresh();
+                });
+              },
+              icon: Icon(
+                Icons.arrow_circle_left,
+                color: Colors.white,
+              ))
+        ],
         leading: IconButton(
             onPressed: () {
               Navigator.push(
