@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:we_store/database/functions/order_cancel/cancel_functions.dart';
 import 'package:we_store/database/functions/order_cancel/cancel_model.dart';
+import 'package:we_store/user/order_details.dart';
 
 class CancelAdmin extends StatefulWidget {
   const CancelAdmin({super.key});
@@ -56,7 +57,8 @@ class _CancelAdminState extends State<CancelAdmin> {
                               color: Colors.black,
                             )),
                         margin: EdgeInsets.all(10.0),
-                        height: 120,
+
+                        /// height: 120,
                         child: Column(
                           children: [
                             SizedBox(
@@ -130,6 +132,37 @@ class _CancelAdminState extends State<CancelAdmin> {
                                 )
                               ],
                             ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (ctx) => DetailsOrder(
+                                                name: cancelitem.name,
+                                                price: cancelitem.price,
+                                                details: cancelitem.details,
+                                                total:
+                                                    int.parse(cancelitem.price),
+                                                addressname:
+                                                    cancelitem.deliveryName,
+                                                address:
+                                                    cancelitem.deliveryAddress,
+                                                contact:
+                                                    cancelitem.deliveryPhone,
+                                                count: int.parse(
+                                                    cancelitem.productCount),
+                                                city: cancelitem.deliveryCity,
+                                                pincode: cancelitem.pincode,
+                                                image: cancelitem.image,
+                                              )));
+                                },
+                                child: Text('details')),
+                            SizedBox(
+                              height: 8,
+                            )
                           ],
                         ),
                       );

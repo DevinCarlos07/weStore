@@ -17,6 +17,12 @@ Future<void> cancelthisorder(Cancelorder values) async {
           price: data.price,
           details: data.details,
           image: data.image,
+          deliveryAddress: data.deliveryAddress,
+          deliveryCity: data.deliveryCity,
+          deliveryName: data.deliveryName,
+          deliveryPhone: data.deliveryPhone,
+          pincode: data.pincode,
+          productCount: data.productCount,
           id: id));
   getcancel();
 }

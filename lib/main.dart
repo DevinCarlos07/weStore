@@ -7,6 +7,7 @@ import 'package:we_store/database/functions/addproduct/addproduct_models.dart';
 import 'package:we_store/database/functions/address/address_models.dart';
 import 'package:we_store/database/functions/cart/cart_models.dart';
 import 'package:we_store/database/functions/category/models.dart';
+import 'package:we_store/database/functions/feedback/feedback_models.dart';
 import 'package:we_store/database/functions/order_cancel/cancel_model.dart';
 import 'package:we_store/database/functions/place_order/models.dart';
 import 'package:we_store/database/functions/signup/db_models.dart';
@@ -24,6 +25,7 @@ Future<void> main() async {
   Hive.openBox<Addressmodel>('address');
   Hive.openBox<Oredrplace>('order');
   Hive.openBox<Cancelorder>('cancel');
+  Hive.openBox<UserFeedback>('feedback');
 
   // Hive.initFlutter();
 
@@ -50,6 +52,9 @@ Future<void> main() async {
   }
   if (!Hive.isAdapterRegistered(CancelorderAdapter().typeId)) {
     Hive.registerAdapter(CancelorderAdapter());
+  }
+  if (!Hive.isAdapterRegistered(UserFeedbackAdapter().typeId)) {
+    Hive.registerAdapter(UserFeedbackAdapter());
   }
   runApp(const MyApp());
 }

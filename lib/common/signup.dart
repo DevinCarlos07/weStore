@@ -244,6 +244,7 @@ class _SignUpState extends State<SignUp> {
     final _email = _emailController.text.trim();
     final _createpassword = _createpasswordController.text.trim();
     final _conformpassword = _conformpasswordController.text.trim();
+    print(_name);
 
     if (_formKey.currentState!.validate() &&
         _createpasswordController.text == _conformpasswordController.text) {

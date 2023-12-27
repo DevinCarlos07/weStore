@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:we_store/database/functions/address/address_fuction.dart';
 import 'package:we_store/database/functions/address/address_models.dart';

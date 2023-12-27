@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:we_store/database/functions/cart/addcart_btn.dart';
 import 'package:we_store/database/functions/wishlist/addwishlist.dart';
 import 'package:we_store/database/functions/wishlist/fav_function.dart';
 import 'package:we_store/database/functions/wishlist/fav_model.dart';
@@ -135,7 +136,9 @@ class _FavouriteState extends State<Favourite> {
                                           IconButton(
                                             icon: Icon(
                                                 Icons.shopping_cart_outlined),
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              checkCart(addfav, context);
+                                            },
                                           ),
                                         ],
                                       )

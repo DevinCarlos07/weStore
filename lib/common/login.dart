@@ -208,38 +208,6 @@ class _LoginState extends State<Login> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('currentUser', email);
   }
-
-// //logout button
-//   void logout(BuildContext context) {
-//     showDialog(
-//         context: context,
-//         builder: (context) {
-//           return AlertDialog(
-//             title: Text('Logout'),
-//             content: Text('Do you want to logout...?'),
-//             actions: [
-//               ElevatedButton(
-//                   onPressed: () {
-//                     signout(context);
-//                   },
-//                   child: Text('Yes')),
-//               ElevatedButton(
-//                   onPressed: () {
-//                     Navigator.pop(context);
-//                   },
-//                   child: Text('No'))
-//             ],
-//           );
-//         });
-//   }
-
-//   //signoutfuntion
-//   signout(BuildContext context) async {
-//     final _sharedPrefs = await SharedPreferences.getInstance();
-//     await _sharedPrefs.clear();
-//     Navigator.of(context).pushAndRemoveUntil(
-//         MaterialPageRoute(builder: (ctx) => Login()), (route) => false);
-//   }
 }
 
 //logout button

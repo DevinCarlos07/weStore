@@ -182,7 +182,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                       onPressed: () {
                         setState(() {
                           _addAddress(context);
-                          print('lkjh');
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -213,7 +212,7 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     final address = _addresssController.text;
     final city = _cityController.text;
     final pincode = _pincodeController.text;
-    print('55');
+
     if (addressBox.length < 4) {
       if (username.isNotEmpty &&
           number.isNotEmpty &&
@@ -241,7 +240,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     } else {
       Navigator.pop(context);
       showDailoglimit(context);
-      print('work');
     }
   }
 
@@ -286,6 +284,5 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
         );
       },
     );
-    print('hhhhhh');
   }
 }

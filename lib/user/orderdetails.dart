@@ -2,10 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:we_store/database/functions/addproduct/addproduct_fuctions.dart';
 import 'package:we_store/database/functions/order_cancel/cancel_button.dart';
-import 'package:we_store/database/functions/order_cancel/cancel_functions.dart';
-import 'package:we_store/database/functions/order_cancel/cancel_model.dart';
 import 'package:we_store/database/functions/place_order/functions.dart';
 import 'package:we_store/database/functions/place_order/models.dart';
 import 'package:we_store/database/functions/place_order/order_cancel.dart';

@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:we_store/common/bottomnav.dart';
+import 'package:we_store/database/functions/feedback/feedback_function.dart';
+import 'package:we_store/database/functions/feedback/feedback_models.dart';
+import 'package:we_store/database/functions/signup/db_models.dart';
 
 class CnfrmPage extends StatefulWidget {
   const CnfrmPage({super.key});
@@ -10,6 +15,31 @@ class CnfrmPage extends StatefulWidget {
 }
 
 class _CnfrmPageState extends State<CnfrmPage> {
+  SignupDetails? currentUser;
+  initState() {
+    super.initState();
+    getUser();
+  }
+
+  Future<void> getUser() async {
+    // Retrieve currentUser email from shared preferences
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    //if(currentUser != null)
+    var userEmail = prefs.getString('currentUser');
+    print(userEmail);
+    // check the user in Hive using the email
+    final userBox = await Hive.openBox<SignupDetails>('signup_db');
+    currentUser = userBox.values.firstWhere(
+      (user) => user.email == userEmail,
+
+      //orElse: () => null,
+    );
+
+    setState(() {});
+  }
+
+  final TextEditingController _feedbackController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +85,7 @@ class _CnfrmPageState extends State<CnfrmPage> {
                   onPressed: () {
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => MyBottam()));
+                    // showfeedback(context);
                   },
                   style: ElevatedButton.styleFrom(
                     // ignore: deprecated_member_use
@@ -93,4 +124,42 @@ class _CnfrmPageState extends State<CnfrmPage> {
       ),
     );
   }
+
+  // void showfeedback(BuildContext context) {
+  //   showDialog(
+  //       context: context,
+  //       builder: (builder) {
+  //         return AlertDialog(
+  //           title: Text('Feedback'),
+  //           content: TextFormField(
+  //             controller: _feedbackController,
+  //             maxLines: 6,
+  //             decoration: InputDecoration(
+  //                 hintText: 'Enter Your Anonymous Feedback here!!'),
+  //           ),
+  //           actions: [
+  //             ElevatedButton(
+  //                 onPressed: () {
+  //                   addfeed(context);
+  //                   Navigator.pop(context);
+  //                 },
+  //                 child: Text('Submit'))
+  //           ],
+  //         );
+  //       });
+  // }
+
+  // Future<void> addfeed(BuildContext context) async {
+  //   print(_feedbackController.text);
+  //   final feed = UserFeedback(
+  //       feedback: _feedbackController.text, name: currentUser.name, id: -1);
+  //   print(feed);
+  //   addtofeedback(feed);
+  //   getfeedback();
+  //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+  //     content: Text('Feedback added!!'),
+  //     duration: Duration(seconds: 2),
+  //     backgroundColor: Colors.green,
+  //   ));
+  // }
 }

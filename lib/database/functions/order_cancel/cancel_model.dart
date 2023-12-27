@@ -14,10 +14,29 @@ class Cancelorder {
   String details;
   @HiveField(4)
   String image;
+  @HiveField(6)
+  String deliveryAddress;
+  @HiveField(7)
+  String deliveryName;
+  @HiveField(8)
+  String deliveryPhone;
+  @HiveField(9)
+  String deliveryCity;
+  @HiveField(10)
+  String pincode;
+  @HiveField(11)
+  String productCount;
+
   Cancelorder(
       {required this.name,
       required this.price,
       required this.details,
       required this.image,
+      required this.deliveryAddress,
+      required this.deliveryName,
+      required this.deliveryPhone,
+      required this.deliveryCity,
+      required this.pincode,
+      required this.productCount,
       required this.id});
 }

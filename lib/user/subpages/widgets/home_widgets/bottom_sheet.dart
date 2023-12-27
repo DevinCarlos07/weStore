@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:we_store/database/functions/addproduct/addproduct_models.dart';
+import 'package:we_store/database/functions/cart/addcart_btn.dart';
 
 Future<dynamic> bottom_sheet(BuildContext context, String imagepath,
-    String name, String details, String price) {
+    String name, String details, String price, addproduct) {
   return showModalBottomSheet(
       context: context,
       builder: (BuildContext builder) {
@@ -16,7 +18,7 @@ Future<dynamic> bottom_sheet(BuildContext context, String imagepath,
               Padding(
                 padding: const EdgeInsets.only(top: 26),
                 child: Text(
-                  'Buy This',
+                  'Details',
                   style: GoogleFonts.rubik(
                       fontSize: 20, fontWeight: FontWeight.w500),
                 ),
@@ -74,17 +76,17 @@ Future<dynamic> bottom_sheet(BuildContext context, String imagepath,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ElevatedButton(onPressed: () {}, child: Text('Cancel')),
                     ElevatedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.green),
-                        ),
-                        child: Text(
-                          'Buy Now',
-                          style: TextStyle(color: Colors.black),
-                        ))
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text('Back')),
+                    ElevatedButton(
+                        onPressed: () {
+                          checkCart(addproduct, context);
+                          Navigator.pop(context);
+                        },
+                        child: Text('Add to cart')),
                   ],
                 ),
               )

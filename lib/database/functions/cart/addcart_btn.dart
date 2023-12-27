@@ -9,7 +9,7 @@ import 'package:we_store/database/functions/cart/cart_functions.dart';
 import 'package:we_store/database/functions/cart/cart_models.dart';
 import 'package:we_store/user/subpages/cart.dart';
 
-void checkCart(Addproducts addproducts, BuildContext context) async {
+void checkCart(addproducts, BuildContext context) async {
   await Hive.openBox<AddCart>('add_cart');
 
   final cartBox = Hive.box<AddCart>('add_cart');

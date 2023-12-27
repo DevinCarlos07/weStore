@@ -9,6 +9,12 @@ Future<void> cancelbtn(Oredrplace ordercanl, BuildContext context) async {
       price: ordercanl.productPrice,
       details: ordercanl.productDetails,
       image: ordercanl.productImage,
+      deliveryAddress: ordercanl.deliveryAddress,
+      deliveryName: ordercanl.deliveryName,
+      deliveryCity: ordercanl.deliveryCity,
+      deliveryPhone: ordercanl.deliveryPhone,
+      pincode: ordercanl.pincode,
+      productCount: ordercanl.productCount.toString(),
       id: ordercanl.id);
   cancelthisorder(cancel);
   getcancel();

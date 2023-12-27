@@ -21,6 +21,12 @@ class CancelorderAdapter extends TypeAdapter<Cancelorder> {
       price: fields[2] as String,
       details: fields[3] as String,
       image: fields[4] as String,
+      deliveryAddress: fields[6] as String,
+      deliveryName: fields[7] as String,
+      deliveryPhone: fields[8] as String,
+      deliveryCity: fields[9] as String,
+      pincode: fields[10] as String,
+      productCount: fields[11] as String,
       id: fields[0] as int?,
     );
   }
@@ -28,7 +34,7 @@ class CancelorderAdapter extends TypeAdapter<Cancelorder> {
   @override
   void write(BinaryWriter writer, Cancelorder obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -38,7 +44,19 @@ class CancelorderAdapter extends TypeAdapter<Cancelorder> {
       ..writeByte(3)
       ..write(obj.details)
       ..writeByte(4)
-      ..write(obj.image);
+      ..write(obj.image)
+      ..writeByte(6)
+      ..write(obj.deliveryAddress)
+      ..writeByte(7)
+      ..write(obj.deliveryName)
+      ..writeByte(8)
+      ..write(obj.deliveryPhone)
+      ..writeByte(9)
+      ..write(obj.deliveryCity)
+      ..writeByte(10)
+      ..write(obj.pincode)
+      ..writeByte(11)
+      ..write(obj.productCount);
   }
 
   @override
