@@ -69,11 +69,11 @@ class _BuyPageState extends State<BuyPage> {
                 ),
                 Container(
                   width: double.infinity,
-                  height: 150,
                   decoration:
                       BoxDecoration(border: Border.all(color: Colors.black)),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 10, top: 10),
+                    padding:
+                        const EdgeInsets.only(left: 10, top: 10, bottom: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -120,6 +120,24 @@ class _BuyPageState extends State<BuyPage> {
                             ),
                             Text(
                               widget.address.address,
+                              style: GoogleFonts.rubik(
+                                  fontSize: 15, fontWeight: FontWeight.w400),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Pincode : ',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              widget.address.pincode,
                               style: GoogleFonts.rubik(
                                   fontSize: 15, fontWeight: FontWeight.w400),
                             ),

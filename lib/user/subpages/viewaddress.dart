@@ -85,81 +85,84 @@ class _ViewAddressState extends State<ViewAddress> {
                             border: Border.all(),
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          height: 120,
                           width: double.infinity,
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Radio(
-                                value: index,
-                                groupValue: selectedAddressIndex,
-                                onChanged: (int? value) {
-                                  // Handle Radio button change
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                // SizedBox(
+                                //   width: 20,
+                                // ),
+                                Radio(
+                                  value: index,
+                                  groupValue: selectedAddressIndex,
+                                  onChanged: (int? value) {
+                                    // Handle Radio button change
 
-                                  _handleRadioValueChange(value, addressadd);
-                                },
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    addressadd.name,
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                  Text(
-                                    addressadd.contact,
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                  Text(addressadd.address),
-                                  Text(addressadd.pincode)
-                                ],
-                              ),
-                              SizedBox(
-                                width: 90,
-                              ),
-                              Column(
-                                children: [
-                                  IconButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (ctx) => EditAddress(
-                                                    name: addressadd.name,
-                                                    contact: addressadd.contact,
-                                                    address: addressadd.address,
-                                                    city: addressadd.city,
-                                                    pincode: addressadd.pincode,
-                                                    id: addressadd.id!)));
-                                      },
-                                      icon: Icon(Icons.edit)),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          removeaddress(context, addressadd.id);
-                                        });
-                                      },
-                                      icon: Icon(
-                                        Icons.delete,
-                                        color: Colors.red,
-                                      ))
-                                ],
-                              ),
-                              SizedBox(
-                                width: 20,
-                              )
-                            ],
+                                    _handleRadioValueChange(value, addressadd);
+                                  },
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      addressadd.name,
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                    Text(
+                                      addressadd.contact,
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                    Text(addressadd.address),
+                                    Text(addressadd.pincode)
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 90,
+                                ),
+                                Column(
+                                  children: [
+                                    IconButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (ctx) => EditAddress(
+                                                      name: addressadd.name,
+                                                      contact:
+                                                          addressadd.contact,
+                                                      address:
+                                                          addressadd.address,
+                                                      city: addressadd.city,
+                                                      pincode:
+                                                          addressadd.pincode,
+                                                      id: addressadd.id!)));
+                                        },
+                                        icon: Icon(Icons.edit)),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    IconButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            removeaddress(
+                                                context, addressadd.id);
+                                          });
+                                        },
+                                        icon: Icon(
+                                          Icons.delete,
+                                          color: Colors.red,
+                                        ))
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),

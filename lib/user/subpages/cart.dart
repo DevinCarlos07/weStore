@@ -1,7 +1,4 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, sort_child_properties_last, unnecessary_import, prefer_const_constructors_in_immutables, annotate_overrides, sized_box_for_whitespace, duplicate_ignore, unnecessary_brace_in_string_interps
-
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -41,6 +38,9 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   Widget build(BuildContext context) {
+    Future.delayed(Duration(microseconds: 1), () {
+      setState(() {});
+    });
     total = 0;
 
     return Scaffold(

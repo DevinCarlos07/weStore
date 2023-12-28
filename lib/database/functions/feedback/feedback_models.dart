@@ -11,5 +11,13 @@ class UserFeedback {
 
   @HiveField(2)
   String name;
-  UserFeedback({required this.feedback, required this.name, this.id});
+
+  @HiveField(3)
+  String? currentdate;
+
+  UserFeedback(
+      {required this.feedback,
+      required this.name,
+      this.id,
+      required this.currentdate});
 }

@@ -42,6 +42,9 @@ class _UserHomeState extends State<UserHome> {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(microseconds: 1), () {
+      setState(() {});
+    });
     return DefaultTabController(
       length: 2,
       child: Scaffold(

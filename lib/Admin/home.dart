@@ -4,6 +4,7 @@ import 'package:we_store/Admin/addproduct.dart';
 import 'package:we_store/Admin/cancel_details.dart';
 
 import 'package:we_store/Admin/ordersdetails.dart';
+import 'package:we_store/Admin/show_feedback.dart';
 import 'package:we_store/Admin/userslist.dart';
 import 'package:we_store/Admin/viewproducts.dart';
 
@@ -185,7 +186,12 @@ class _AdminHomeState extends State<AdminHome> {
                       textAlign: TextAlign.center,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (feedback) => ShowFeedback()));
+                    },
                   ),
                 ),
                 SizedBox(

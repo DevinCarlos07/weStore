@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 import 'package:we_store/database/functions/cart/addcart_btn.dart';
 import 'package:we_store/database/functions/wishlist/addwishlist.dart';
 import 'package:we_store/database/functions/wishlist/fav_function.dart';
@@ -15,6 +16,8 @@ class Favourite extends StatefulWidget {
 }
 
 class _FavouriteState extends State<Favourite> {
+  late Box<AddFav> search = Hive.box<AddFav>('add_fav');
+  TextEditingController _searchController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -43,6 +46,12 @@ class _FavouriteState extends State<Favourite> {
             padding: const EdgeInsets.only(right: 40, left: 40),
             child: Form(
               child: TextFormField(
+                onChanged: (value) {
+                  setState(() {
+                    searchfav(value);
+                  });
+                },
+                controller: _searchController,
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.only(bottom: 2),
                     border: UnderlineInputBorder(
@@ -157,5 +166,15 @@ class _FavouriteState extends State<Favourite> {
         ],
       ),
     );
+  }
+
+  //search fav
+  void searchfav(String value) {
+    final fav = search.values.toList();
+    final filterdfav = fav
+        .where((products) =>
+            products.name.toLowerCase().contains(value.toLowerCase()))
+        .toList();
+    addfavlist.value = filterdfav;
   }
 }

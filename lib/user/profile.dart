@@ -7,6 +7,7 @@ import 'package:we_store/common/login.dart';
 import 'package:we_store/database/functions/signup/db_models.dart';
 import 'package:we_store/user/subpages/add_address_user.dart';
 import 'package:we_store/user/subpages/feedback.dart';
+import 'package:we_store/user/subpages/moreinfo.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -86,7 +87,7 @@ class _ProfileState extends State<Profile> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  left: 13, right: 13, top: 10, bottom: 10),
+                  left: 15, right: 15, top: 10, bottom: 10),
               child: Container(
                 decoration: BoxDecoration(
                     border: Border.all(
@@ -116,7 +117,7 @@ class _ProfileState extends State<Profile> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  left: 13, right: 13, top: 10, bottom: 10),
+                  left: 15, right: 15, top: 10, bottom: 10),
               child: Container(
                 decoration: BoxDecoration(
                     border: Border.all(
@@ -124,7 +125,10 @@ class _ProfileState extends State<Profile> {
                     ),
                     borderRadius: BorderRadius.circular(18)),
                 child: ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (moreinfo) => Moreinfo()));
+                  },
                   leading: Icon(
                     Icons.more_horiz_sharp,
                     color: Colors.black,
@@ -143,7 +147,7 @@ class _ProfileState extends State<Profile> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  left: 13, right: 13, top: 10, bottom: 10),
+                  left: 15, right: 15, top: 10, bottom: 10),
               child: Container(
                 decoration: BoxDecoration(
                     border: Border.all(
@@ -172,7 +176,7 @@ class _ProfileState extends State<Profile> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  left: 13, right: 13, top: 10, bottom: 10),
+                  left: 15, right: 15, top: 10, bottom: 10),
               child: Container(
                 decoration: BoxDecoration(
                     border: Border.all(
@@ -204,7 +208,7 @@ class _ProfileState extends State<Profile> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  left: 13, right: 13, top: 10, bottom: 10),
+                  left: 15, right: 15, top: 10, bottom: 10),
               child: Container(
                 decoration: BoxDecoration(
                     border: Border.all(
@@ -231,23 +235,23 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Column(
-                children: [
-                  Text(
-                    'Version',
-                    style: GoogleFonts.poppins(
-                        fontSize: 16, fontWeight: FontWeight.w600),
-                  ),
-                  Text(
-                    'WE Store 1.0',
-                    style: GoogleFonts.rubik(
-                        fontSize: 14, fontWeight: FontWeight.w500),
-                  ),
-                ],
-              ),
-            )
+            // Padding(
+            //   padding: const EdgeInsets.only(top: 20),
+            //   child: Column(
+            //     children: [
+            //       Text(
+            //         'Version',
+            //         style: GoogleFonts.poppins(
+            //             fontSize: 16, fontWeight: FontWeight.w600),
+            //       ),
+            //       Text(
+            //         'WE Store 1.0',
+            //         style: GoogleFonts.rubik(
+            //             fontSize: 14, fontWeight: FontWeight.w500),
+            //       ),
+            //     ],
+            //   ),
+            // )
           ],
         ),
       ),

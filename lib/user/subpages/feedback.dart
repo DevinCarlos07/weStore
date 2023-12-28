@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:we_store/database/functions/feedback/feedback_function.dart';
 import 'package:we_store/database/functions/feedback/feedback_models.dart';
 import 'package:we_store/database/functions/signup/db_models.dart';
+import 'package:intl/intl.dart';
 
 class FeedbackScreen extends StatefulWidget {
   const FeedbackScreen({super.key});
@@ -152,7 +153,19 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   Future<void> addfeed() async {
     final _name = _nameController.text;
     final _feed = _feedController.text;
-    final addfeed = UserFeedback(feedback: _feed, name: _name, id: -1);
+    // ignore: prefer_const_declarations
+    // final _date = DateTime.now;
+    // final formattedDate = DateFormat('yyyy-MM-dd HH:mm:ss');
+    // print(_date);
+    // print('Current Date and Time: ${formattedDate.toString()}');
+    // print('ike');
+    // print('this is data${_date.toString()}');
+    final addfeed = UserFeedback(
+      feedback: _feed,
+      name: _name,
+      id: -1,
+      currentdate: DateFormat('dd/MM/yyyy HH:mm').format(DateTime.now()),
+    );
     addtofeedback(addfeed);
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
       content: Text('Feedback added!!'),

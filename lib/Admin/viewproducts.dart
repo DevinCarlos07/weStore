@@ -25,6 +25,8 @@ class _ViewProductState extends State<ViewProduct> {
   final _prizeCorntroller = TextEditingController();
   final _detailsController = TextEditingController();
   File? _selectedImage;
+  late Box<Addproducts> search = Hive.box<Addproducts>('add_product');
+  TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -47,6 +49,12 @@ class _ViewProductState extends State<ViewProduct> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: TextFormField(
+              onChanged: (value) {
+                setState(() {
+                  searchProducts(value);
+                });
+              },
+              controller: _searchController,
               decoration: InputDecoration(
                   prefixIcon: Icon(
                     Icons.search,
@@ -176,6 +184,16 @@ class _ViewProductState extends State<ViewProduct> {
             ],
           );
         });
+  }
+
+  // search
+  void searchProducts(String value) {
+    final product = search.values.toList();
+    final filteredProducts = product
+        .where((products) =>
+            products.name.toLowerCase().contains(value.toLowerCase()))
+        .toList();
+    productlist.value = filteredProducts;
   }
 
   // ignore: non_constant_identifier_names
