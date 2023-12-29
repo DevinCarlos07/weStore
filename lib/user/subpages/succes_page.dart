@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: unused_field, sized_box_for_whitespace, duplicate_ignore
+
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:we_store/common/bottomnav.dart';
-import 'package:we_store/database/functions/feedback/feedback_function.dart';
-import 'package:we_store/database/functions/feedback/feedback_models.dart';
+
 import 'package:we_store/database/functions/signup/db_models.dart';
 
 class CnfrmPage extends StatefulWidget {
@@ -16,6 +16,7 @@ class CnfrmPage extends StatefulWidget {
 
 class _CnfrmPageState extends State<CnfrmPage> {
   SignupDetails? currentUser;
+  @override
   initState() {
     super.initState();
     getUser();
@@ -27,7 +28,6 @@ class _CnfrmPageState extends State<CnfrmPage> {
 
     //if(currentUser != null)
     var userEmail = prefs.getString('currentUser');
-    print(userEmail);
     // check the user in Hive using the email
     final userBox = await Hive.openBox<SignupDetails>('signup_db');
     currentUser = userBox.values.firstWhere(

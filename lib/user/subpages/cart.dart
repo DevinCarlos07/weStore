@@ -9,6 +9,7 @@ import 'package:we_store/database/functions/cart/addcart_btn.dart';
 import 'package:we_store/database/functions/cart/cart_functions.dart';
 import 'package:we_store/database/functions/cart/cart_models.dart';
 import 'package:we_store/user/subpages/viewaddress.dart';
+
 import 'package:we_store/user/subpages/widgets/cart_widgets/custom_image.dart';
 import 'package:we_store/user/subpages/widgets/cart_widgets/custom_product.dart';
 
@@ -97,7 +98,7 @@ class _CartScreenState extends State<CartScreen> {
                                         icon: Icons.delete,
                                         autoClose: true,
                                         backgroundColor: Colors.red,
-                                        borderRadius: BorderRadius.circular(20),
+                                        // borderRadius: BorderRadius.circular(20),
                                       )
                                     ]),
                                 child: Container(
@@ -173,8 +174,8 @@ class _CartScreenState extends State<CartScreen> {
                                   width: double.infinity,
                                   height: 120,
                                   decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black),
-                                      borderRadius: BorderRadius.circular(20)),
+                                    border: Border.all(color: Colors.black),
+                                  ),
                                 ),
                               ),
                             );

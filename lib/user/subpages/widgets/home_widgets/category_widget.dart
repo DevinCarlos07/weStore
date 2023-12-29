@@ -1,6 +1,7 @@
+// ignore_for_file: camel_case_types
+
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:we_store/database/functions/category/fuctions.dart';
 import 'package:we_store/database/functions/category/models.dart';

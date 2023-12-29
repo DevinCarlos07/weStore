@@ -30,6 +30,6 @@ Future<void> conformcancel(context, int? id) async {
   final cancel = await Hive.openBox<Oredrplace>('order');
   cancel.delete(id);
   getorder();
-  print('okey');
+
   Navigator.pop(context);
 }

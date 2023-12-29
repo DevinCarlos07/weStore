@@ -1,8 +1,9 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:we_store/database/functions/addproduct/addproduct_models.dart';
 import 'package:we_store/database/functions/cart/addcart_btn.dart';
 
 Future<dynamic> bottom_sheet(BuildContext context, String imagepath,

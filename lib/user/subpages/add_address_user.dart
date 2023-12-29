@@ -1,4 +1,4 @@
-// ignore_for_file: sized_box_for_whitespace
+// ignore_for_file: sized_box_for_whitespace, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
 import 'package:we_store/database/functions/address/address_fuction.dart';
@@ -49,7 +49,6 @@ class _UseraddressState extends State<Useraddress> {
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Container(
-          width: 600,
           child: ValueListenableBuilder(
             valueListenable: addresslist,
             builder: (context, List<Addressmodel> address, Widget? child) {
@@ -64,7 +63,6 @@ class _UseraddressState extends State<Useraddress> {
                           border: Border.all(),
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        height: 120,
                         width: double.infinity,
                         child: Row(
                           children: [
@@ -100,7 +98,10 @@ class _UseraddressState extends State<Useraddress> {
                                 ),
                                 Text(addressadd.address),
                                 Text(addressadd.city),
-                                Text(addressadd.pincode)
+                                Text(addressadd.pincode),
+                                SizedBox(
+                                  height: 5,
+                                )
                               ],
                             ),
                             SizedBox(

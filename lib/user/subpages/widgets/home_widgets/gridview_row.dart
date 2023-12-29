@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:we_store/database/functions/addproduct/addproduct_models.dart';
 
+// ignore: camel_case_types
 class home_products extends StatelessWidget {
   const home_products({
     super.key,

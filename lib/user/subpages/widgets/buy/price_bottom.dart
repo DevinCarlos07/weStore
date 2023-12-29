@@ -1,8 +1,7 @@
-// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_types, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:we_store/user/subpages/buy.dart';
-import 'package:we_store/user/subpages/payments.dart';
 
 class Price_bottom extends StatelessWidget {
   const Price_bottom(

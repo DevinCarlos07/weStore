@@ -35,7 +35,7 @@ class _MyBottamState extends State<MyBottam> {
           ),
           //iterm 2
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
+            icon: Icon(Icons.shopping_bag),
             label: 'Orders',
             backgroundColor: Color.fromARGB(255, 255, 255, 255),
           ),
@@ -59,7 +59,7 @@ class _MyBottamState extends State<MyBottam> {
         },
         iconSize: 30,
         showUnselectedLabels: true,
-        selectedItemColor: Color.fromARGB(255, 4, 133, 239),
+        selectedItemColor: Color.fromARGB(255, 48, 152, 236),
         unselectedItemColor: Colors.black,
       ),
     );

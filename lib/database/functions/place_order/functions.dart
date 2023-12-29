@@ -10,7 +10,7 @@ Future<void> addtoorder(Oredrplace value) async {
   final addorderBox = await Hive.openBox<Oredrplace>('order');
   final id = await addorderBox.add(value);
   final data = addorderBox.get(id);
-  print(id);
+
   await addorderBox.put(
       id,
       Oredrplace(

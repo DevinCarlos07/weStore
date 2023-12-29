@@ -18,6 +18,7 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   SignupDetails? currentUser;
+  @override
   initState() {
     super.initState();
     getUser();
@@ -26,7 +27,6 @@ class _ProfileState extends State<Profile> {
   Future<void> getUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var userEmail = prefs.getString('currentUser');
-    print(userEmail);
     final userBox = await Hive.openBox<SignupDetails>('signup_db');
     currentUser = userBox.values.firstWhere(
       (user) => user.email == userEmail,

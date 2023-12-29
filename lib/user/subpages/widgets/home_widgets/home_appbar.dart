@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
@@ -17,6 +18,7 @@ class home_appbar_text extends StatefulWidget {
 class _home_appbar_textState extends State<home_appbar_text> {
   // String email = "";
   SignupDetails? currentUser;
+  @override
   initState() {
     super.initState();
     getUser();
@@ -26,7 +28,6 @@ class _home_appbar_textState extends State<home_appbar_text> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var userEmail = prefs.getString('currentUser');
-    print(userEmail);
 
     final userBox = await Hive.openBox<SignupDetails>('signup_db');
     currentUser = userBox.values.firstWhere(

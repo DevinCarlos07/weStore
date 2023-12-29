@@ -21,6 +21,9 @@ class _SignUpState extends State<SignUp> {
   final _emailController = TextEditingController();
   final _createpasswordController = TextEditingController();
   final _conformpasswordController = TextEditingController();
+  bool isPhone(String input) =>
+      RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$')
+          .hasMatch(input);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,6 +62,13 @@ class _SignUpState extends State<SignUp> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     keyboardType: TextInputType.phone,
                     validator: validatePhone,
+                    // validator: (value) {
+                    //   if (!isPhone(value!)) {
+                    //     return 'Please enter valid number';
+                    //   } else {
+                    //     return null;
+                    //   }
+                    // },
                     controller: _phoneController,
                     decoration: InputDecoration(
                         labelText: 'Phone', border: UnderlineInputBorder()),
@@ -160,7 +170,8 @@ class _SignUpState extends State<SignUp> {
       return 'Enter your Phone Number';
     }
 
-    final RegExp phoneRegExp = RegExp(r'^[0-9 ]+$');
+    final RegExp phoneRegExp =
+        RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$');
 
     if (!phoneRegExp.hasMatch(trimmedvalue)) {
       return 'Enter your Number';
@@ -244,7 +255,6 @@ class _SignUpState extends State<SignUp> {
     final _email = _emailController.text.trim();
     final _createpassword = _createpasswordController.text.trim();
     final _conformpassword = _conformpasswordController.text.trim();
-    print(_name);
 
     if (_formKey.currentState!.validate() &&
         _createpasswordController.text == _conformpasswordController.text) {

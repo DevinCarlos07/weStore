@@ -264,14 +264,13 @@ class _BuyPageState extends State<BuyPage> {
                         borderRadius: BorderRadius.circular(20)),
                     width: double.infinity,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text('Total Price : ${widget.total}'),
                         SizedBox(
                           width: 75,
                         ),
                         SizedBox(
-                          width: 150,
                           child: ValueListenableBuilder(
                               valueListenable: addcartlist,
                               builder: (BuildContext context,
@@ -315,9 +314,9 @@ class _BuyPageState extends State<BuyPage> {
                                     child: Text('Place Order'));
                               }),
                         ),
-                        SizedBox(
-                          width: 1,
-                        )
+                        // SizedBox(
+                        //   width: 10,
+                        // )
                       ],
                     ),
                   ),
