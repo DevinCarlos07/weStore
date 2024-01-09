@@ -172,31 +172,6 @@ class _OrdersDetailsState extends State<OrdersDetailsAdmin> {
                                                 Color.fromARGB(
                                                     255, 147, 141, 141))),
                                     child: Text('Details')),
-                                // SizedBox(
-                                //   width: 40,
-                                // ),
-                                // ElevatedButton(
-                                //   onPressed: () {
-                                //     cancelbtn(orderdetail, context);
-
-                                //     // final cancel = Cancelorder(
-                                //     //     name: orderdetail.productName,
-                                //     //     price: orderdetail.productPrice,
-                                //     //     details: orderdetail.productDetails,
-                                //     //     image: orderdetail.productImage,
-                                //     //     id: orderdetail.id);
-                                //     // cancelthisorder(cancel);
-                                //     // getcancel();
-
-                                //     cancel(context, orderdetail.id);
-                                //   },
-                                //   style: ButtonStyle(
-                                //       backgroundColor:
-                                //           MaterialStateProperty.all<Color>(
-                                //               Color.fromARGB(
-                                //                   255, 191, 0, 255))),
-                                //   child: Text('Cancel'),
-                                // ),
                               ],
                             )
                           ],

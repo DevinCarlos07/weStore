@@ -19,7 +19,7 @@ class _MoreinfoState extends State<Moreinfo> {
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
         title: Text(
-          'About',
+          'About Us',
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,

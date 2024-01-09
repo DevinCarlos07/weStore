@@ -58,25 +58,6 @@ class _DetailsOrderState extends State<DetailsOrder> {
           padding: const EdgeInsets.only(left: 13, right: 13),
           child: Column(
             children: [
-              // Container(
-              //   decoration: BoxDecoration(border: Border(bottom: BorderSide())),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     children: [
-              //       Text("May 31, 05:42 PM"),
-              //       Row(
-              //         children: [
-              //           Icon(
-              //             Icons.circle,
-              //             color: Colors.blue,
-              //           ),
-              //           Text("delivered"),
-              //           SizedBox(height: 40),
-              //         ],
-              //       ),
-              //     ],
-              //   ),
-              // ),
               SizedBox(
                 height: 20,
               ),

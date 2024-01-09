@@ -8,6 +8,7 @@ import 'package:hive/hive.dart';
 import 'package:we_store/database/functions/addproduct/addproduct_fuctions.dart';
 import 'package:we_store/database/functions/addproduct/addproduct_models.dart';
 import 'package:we_store/database/functions/cart/addcart_btn.dart';
+import 'package:we_store/database/functions/cart/cart_models.dart';
 import 'package:we_store/database/functions/category/fuctions.dart';
 import 'package:we_store/database/functions/wishlist/addwishlist.dart';
 import 'package:we_store/database/functions/wishlist/fav_function.dart';
@@ -40,6 +41,7 @@ class _UserHomeState extends State<UserHome> {
     geterfav();
   }
 
+  final Box<AddCart> cartBox = Hive.box<AddCart>('add_cart');
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration(microseconds: 1), () {
@@ -59,17 +61,54 @@ class _UserHomeState extends State<UserHome> {
           ),
           title: home_appbar_text(),
           actions: [
-            IconButton(
-                onPressed: () {
-                  setState(() {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => CartScreen()));
-                  });
-                },
-                icon: Icon(
-                  Icons.shopping_cart_outlined,
-                  color: Colors.black,
-                ))
+            Stack(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CartScreen()),
+                      );
+                    });
+                  },
+                  icon: Icon(
+                    Icons.shopping_cart_outlined,
+                    color: Colors.black,
+                  ),
+                ),
+                Positioned(
+                  top: 8.0,
+                  right: 8.0,
+                  child: Container(
+                    padding: EdgeInsets.all(4.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.red, // You can customize the color
+                    ),
+                    child: Text(
+                      '${cartBox.length}', // Replace with the actual count or any text you want
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+
+            // IconButton(
+            //     onPressed: () {
+            //       setState(() {
+            //         Navigator.push(context,
+            //             MaterialPageRoute(builder: (context) => CartScreen()));
+            //       });
+            //     },
+            //     icon: Icon(
+            //       Icons.shopping_cart_outlined,
+            //       color: Colors.black,
+            //     ))
           ],
           elevation: 0,
         ),
@@ -212,7 +251,7 @@ class _UserHomeState extends State<UserHome> {
                                           ),
                                           IconButton(
                                             icon: Icon(
-                                              Icons.shopping_cart_outlined,
+                                              Icons.add_shopping_cart_outlined,
                                             ),
                                             onPressed: () {
                                               checkCart(addproducts, context);
@@ -240,13 +279,39 @@ class _UserHomeState extends State<UserHome> {
   }
 
   // search
+  // void searchProducts(String value) {
+  //   final product = search.values.toList();
+  //   final filteredProducts = product
+  //       .where((products) =>
+  //           products.name.toLowerCase().contains(value.toLowerCase()))
+  //       .toList();
+  //   productlist.value = filteredProducts;
+  // }
   void searchProducts(String value) {
     final product = search.values.toList();
     final filteredProducts = product
         .where((products) =>
             products.name.toLowerCase().contains(value.toLowerCase()))
         .toList();
-    productlist.value = filteredProducts;
+
+    if (filteredProducts.isEmpty) {
+      // Show error message
+      showErrorSnackBar("Product not found");
+    } else {
+      // Update the product list
+      productlist.value = filteredProducts;
+    }
+  }
+
+  void showErrorSnackBar(String message) {
+    // Show a snackbar with the error message
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 2),
+        backgroundColor: Colors.red,
+      ),
+    );
   }
 
   //bottomsheet

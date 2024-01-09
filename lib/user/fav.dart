@@ -28,6 +28,9 @@ class _FavouriteState extends State<Favourite> {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(microseconds: 1), () {
+      setState(() {});
+    });
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -42,141 +45,175 @@ class _FavouriteState extends State<Favourite> {
               color: Colors.black),
         ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 40, left: 40),
-            child: Form(
-              child: TextFormField(
-                onChanged: (value) {
-                  setState(() {
-                    searchfav(value);
-                  });
-                },
-                controller: _searchController,
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(bottom: 2),
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black)),
-                    labelText: 'Search'),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          ValueListenableBuilder(
-              valueListenable: addfavlist,
-              builder: (context, List<AddFav> addfavlist, Widget? child) {
-                return Expanded(
-                  child: GridView.builder(
-                    itemCount: addfavlist.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 12.0,
-                      mainAxisSpacing: 12.0,
-                      mainAxisExtent: 290,
+      body: search.isEmpty
+          ? Center(
+              child: Image.asset('assets/images/favempty.gif'),
+            )
+          : Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 40, left: 40),
+                  child: Form(
+                    child: TextFormField(
+                      onChanged: (value) {
+                        setState(() {
+                          searchfav(value);
+                        });
+                      },
+                      controller: _searchController,
+                      decoration: InputDecoration(
+                          contentPadding: EdgeInsets.only(bottom: 2),
+                          border: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)),
+                          labelText: 'Search'),
                     ),
-                    itemBuilder: (context, index) {
-                      final addfav = addfavlist.reversed.toList()[index];
+                  ),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                ValueListenableBuilder(
+                    valueListenable: addfavlist,
+                    builder: (context, List<AddFav> addfavlist, Widget? child) {
+                      return Expanded(
+                        child: GridView.builder(
+                          itemCount: addfavlist.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 12.0,
+                            mainAxisSpacing: 12.0,
+                            mainAxisExtent: 290,
+                          ),
+                          itemBuilder: (context, index) {
+                            final addfav = addfavlist.reversed.toList()[index];
 
-                      return GestureDetector(
-                        onTap: () {},
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16.0),
-                              color: Color.fromARGB(255, 234, 228, 228),
-                            ),
-                            child: Column(
-                              children: [
-                                ClipRRect(
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(16.0),
-                                      topRight: Radius.circular(16.0),
-                                    ),
-                                    child: Image.file(
-                                      File(addfav.imagepath),
-                                      fit: BoxFit.cover,
-                                      height: 163,
-                                      width: double.infinity,
-                                    )),
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
+                            return GestureDetector(
+                              onTap: () {},
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16.0),
+                                    color: Color.fromARGB(255, 234, 228, 228),
+                                  ),
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
                                     children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            addfav.name,
-                                            style: GoogleFonts.poppins(
-                                                fontWeight: FontWeight.w600),
+                                      ClipRRect(
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(16.0),
+                                            topRight: Radius.circular(16.0),
                                           ),
-                                          Text(addfav.price,
-                                              style: GoogleFonts.rubik(
-                                                  color: Colors.green,
-                                                  fontSize: 15))
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 4.0,
-                                      ),
-                                      Text(addfav.details,
-                                          style:
-                                              GoogleFonts.rubik(fontSize: 15)),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          IconButton(
-                                            icon: Icon(
-                                              Icons.favorite,
-                                              color: Colors.red,
+                                          child: Image.file(
+                                            File(addfav.imagepath),
+                                            fit: BoxFit.cover,
+                                            height: 163,
+                                            width: double.infinity,
+                                          )),
+                                      Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  addfav.name,
+                                                  style: GoogleFonts.poppins(
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
+                                                Text(addfav.price,
+                                                    style: GoogleFonts.rubik(
+                                                        color: Colors.green,
+                                                        fontSize: 15))
+                                              ],
                                             ),
-                                            onPressed: () {
-                                              setState(() {
-                                                removefav(context, addfav.id);
-                                              });
-                                            },
-                                          ),
-                                          IconButton(
-                                            icon: Icon(
-                                                Icons.shopping_cart_outlined),
-                                            onPressed: () {
-                                              checkCart(addfav, context);
-                                            },
-                                          ),
-                                        ],
+                                            const SizedBox(
+                                              height: 4.0,
+                                            ),
+                                            Text(addfav.details,
+                                                style: GoogleFonts.rubik(
+                                                    fontSize: 15)),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                IconButton(
+                                                  icon: Icon(
+                                                    Icons.favorite,
+                                                    color: Colors.red,
+                                                  ),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      removefav(
+                                                          context, addfav.id);
+                                                    });
+                                                  },
+                                                ),
+                                                IconButton(
+                                                  icon: Icon(Icons
+                                                      .shopping_cart_outlined),
+                                                  onPressed: () {
+                                                    checkCart(addfav, context);
+                                                  },
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
                                       )
                                     ],
                                   ),
-                                )
-                              ],
-                            ),
-                          ),
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       );
-                    },
-                  ),
-                );
-              })
-        ],
-      ),
+                    })
+              ],
+            ),
     );
   }
 
   //search fav
+  // void searchfav(String value) {
+  //   final fav = search.values.toList();
+  //   final filterdfav = fav
+  //       .where((products) =>
+  //           products.name.toLowerCase().contains(value.toLowerCase()))
+  //       .toList();
+  //   addfavlist.value = filterdfav;
+  // }
   void searchfav(String value) {
-    final fav = search.values.toList();
-    final filterdfav = fav
+    final product = search.values.toList();
+    final filteredProducts = product
         .where((products) =>
             products.name.toLowerCase().contains(value.toLowerCase()))
         .toList();
-    addfavlist.value = filterdfav;
+
+    if (filteredProducts.isEmpty) {
+      // Show error message
+      showErrorSnackBar("Product not found");
+    } else {
+      // Update the product list
+      addfavlist.value = filteredProducts;
+    }
+  }
+
+  void showErrorSnackBar(String message) {
+    // Show a snackbar with the error message
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 2),
+        backgroundColor: Colors.red,
+      ),
+    );
   }
 }

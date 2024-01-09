@@ -153,13 +153,6 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   Future<void> addfeed() async {
     final _name = _nameController.text;
     final _feed = _feedController.text;
-    // ignore: prefer_const_declarations
-    // final _date = DateTime.now;
-    // final formattedDate = DateFormat('yyyy-MM-dd HH:mm:ss');
-    // print(_date);
-    // print('Current Date and Time: ${formattedDate.toString()}');
-    // print('ike');
-    // print('this is data${_date.toString()}');
     final addfeed = UserFeedback(
       feedback: _feed,
       name: _name,

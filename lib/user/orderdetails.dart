@@ -171,16 +171,6 @@ class _OrderDetailsState extends State<OrderDetails> {
                                 ElevatedButton(
                                   onPressed: () {
                                     cancelbtn(orderdetail, context);
-
-                                    // final cancel = Cancelorder(
-                                    //     name: orderdetail.productName,
-                                    //     price: orderdetail.productPrice,
-                                    //     details: orderdetail.productDetails,
-                                    //     image: orderdetail.productImage,
-                                    //     id: orderdetail.id);
-                                    // cancelthisorder(cancel);
-                                    // getcancel();
-
                                     cancel(context, orderdetail.id);
                                   },
                                   style: ButtonStyle(

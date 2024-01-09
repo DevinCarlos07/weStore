@@ -314,9 +314,6 @@ class _BuyPageState extends State<BuyPage> {
                                     child: Text('Place Order'));
                               }),
                         ),
-                        // SizedBox(
-                        //   width: 10,
-                        // )
                       ],
                     ),
                   ),

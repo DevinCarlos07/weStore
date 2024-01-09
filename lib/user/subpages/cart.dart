@@ -57,240 +57,258 @@ class _CartScreenState extends State<CartScreen> {
                 color: Colors.black, fontSize: 22, fontWeight: FontWeight.w500),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 10,
-              ),
-              SizedBox(
-                height: 400,
-                child: ValueListenableBuilder(
-                    valueListenable: addcartlist,
-                    builder:
-                        (context, List<AddCart> addcartlist, Widget? child) {
-                      return ListView.builder(
-                          itemCount: addcartlist.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final cart = addcartlist.reversed.toList()[index];
+        body: cartBox.isEmpty
+            ? Center(
+                child: Image.asset(
+                'assets/images/ezgif.com-crop (1).gif',
+                width: double.infinity,
+              ))
+            : SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      height: 400,
+                      child: ValueListenableBuilder(
+                          valueListenable: addcartlist,
+                          builder: (context, List<AddCart> addcartlist,
+                              Widget? child) {
+                            return ListView.builder(
+                                itemCount: addcartlist.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  final cart =
+                                      addcartlist.reversed.toList()[index];
 
-                            int price = int.parse(cart.price);
-                            int quantity = cart.count;
-                            int totalPrice = price * quantity;
+                                  int price = int.parse(cart.price);
+                                  int quantity = cart.count;
+                                  int totalPrice = price * quantity;
 
-                            total += totalPrice;
+                                  total += totalPrice;
 
-                            return Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 10, bottom: 10, right: 10, left: 10),
-                              child: Slidable(
-                                startActionPane: ActionPane(
-                                    motion: StretchMotion(),
-                                    children: [
-                                      SlidableAction(
-                                        label: 'Remove',
-                                        onPressed: (context) {
-                                          setState(() {
-                                            // delete_cart(cart.id);
-                                            removecart(context, cart.id);
-                                          });
-                                        },
-                                        icon: Icons.delete,
-                                        autoClose: true,
-                                        backgroundColor: Colors.red,
-                                        // borderRadius: BorderRadius.circular(20),
-                                      )
-                                    ]),
-                                child: Container(
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10,
+                                        bottom: 10,
+                                        right: 10,
+                                        left: 10),
+                                    child: Slidable(
+                                      startActionPane: ActionPane(
+                                          motion: StretchMotion(),
+                                          children: [
+                                            SlidableAction(
+                                              label: 'Remove',
+                                              onPressed: (context) {
+                                                setState(() {
+                                                  // delete_cart(cart.id);
+                                                  removecart(context, cart.id);
+                                                });
+                                              },
+                                              icon: Icons.delete,
+                                              autoClose: true,
+                                              backgroundColor: Colors.red,
+                                              // borderRadius: BorderRadius.circular(20),
+                                            )
+                                          ]),
+                                      child: Container(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: cart_image(cart: cart),
+                                            ),
+                                            custom_productdetails(cart: cart),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10, right: 10),
+                                              child: Container(
+                                                height: 124,
+                                                decoration: BoxDecoration(
+                                                    color: Color.fromARGB(
+                                                        255, 67, 130, 178),
+                                                    border: Border.all(
+                                                        color: Colors.black),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20)),
+                                                child: Column(
+                                                  children: [
+                                                    IconButton(
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          //add(cart.count);
+                                                          // cart.count++;
+                                                          if (cart.count < 9) {
+                                                            cart.count++;
+                                                          } else {
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .showSnackBar(
+                                                                    SnackBar(
+                                                              content: Text(
+                                                                  'Max Limit'),
+                                                              duration:
+                                                                  Duration(
+                                                                      seconds:
+                                                                          2),
+                                                              backgroundColor:
+                                                                  Colors.red,
+                                                            ));
+                                                          }
+                                                        });
+                                                      },
+                                                      icon: Icon(
+                                                        CupertinoIcons.add,
+                                                      ),
+                                                      iconSize: 20,
+                                                    ),
+                                                    Text('${cart.count}'),
+                                                    IconButton(
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          if (cart.count > 1) {
+                                                            cart.count--;
+                                                          }
+                                                        });
+                                                      },
+                                                      icon: Icon(
+                                                          CupertinoIcons.minus),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        width: double.infinity,
+                                        height: 120,
+                                        decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                });
+                          }),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                      child: ValueListenableBuilder<Box<AddCart>>(
+                          valueListenable: cartBox.listenable(),
+                          builder: (context, cartBox, _) {
+                            return Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 10),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 10),
-                                        child: cart_image(cart: cart),
-                                      ),
-                                      custom_productdetails(cart: cart),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 10, right: 10),
-                                        child: Container(
-                                          height: 124,
-                                          decoration: BoxDecoration(
-                                              color: Color.fromARGB(
-                                                  255, 67, 130, 178),
-                                              border: Border.all(
-                                                  color: Colors.black),
-                                              borderRadius:
-                                                  BorderRadius.circular(20)),
-                                          child: Column(
-                                            children: [
-                                              IconButton(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    //add(cart.count);
-                                                    // cart.count++;
-                                                    if (cart.count < 9) {
-                                                      cart.count++;
-                                                    } else {
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                              SnackBar(
-                                                        content:
-                                                            Text('Max Limit'),
-                                                        duration: Duration(
-                                                            seconds: 2),
-                                                        backgroundColor:
-                                                            Colors.red,
-                                                      ));
-                                                    }
-                                                  });
-                                                },
-                                                icon: Icon(
-                                                  CupertinoIcons.add,
-                                                ),
-                                                iconSize: 20,
-                                              ),
-                                              Text('${cart.count}'),
-                                              IconButton(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    if (cart.count > 1) {
-                                                      cart.count--;
-                                                    }
-                                                  });
-                                                },
-                                                icon:
-                                                    Icon(CupertinoIcons.minus),
-                                              )
-                                            ],
-                                          ),
+                                      Text(
+                                        "Sub-Total",
+                                        style: TextStyle(
+                                          fontSize: 20,
                                         ),
-                                      )
+                                      ),
+                                      Text(
+                                        total.toString(),
+                                        style: TextStyle(fontSize: 20),
+                                      ),
                                     ],
                                   ),
-                                  width: double.infinity,
-                                  height: 120,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black),
+                                ),
+                                Divider(
+                                  color: Colors.black,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Delivery",
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      Text(
+                                        "Free",
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ),
+                                Divider(
+                                  color: Colors.black,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Total",
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                      Text(
+                                        "${total}", // Assuming total is the correct variable
+                                        style: TextStyle(
+                                            fontSize: 20, color: Colors.red),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 14, bottom: 10),
+                                  // ignore: sized_box_for_whitespace
+                                  child: Container(
+                                    height: 50,
+                                    width: 400,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        if (cartBox.isNotEmpty) {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (ctx) => ViewAddress(
+                                                        total: total,
+                                                      )));
+                                        } else {
+                                          Navigator.pop(context);
+                                          showDailogealert(context);
+                                        }
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        // ignore: deprecated_member_use
+                                        primary: Colors.redAccent.shade700,
+                                      ),
+                                      child: Text(
+                                        'Continue',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             );
-                          });
-                    }),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                child: ValueListenableBuilder<Box<AddCart>>(
-                    valueListenable: cartBox.listenable(),
-                    builder: (context, cartBox, _) {
-                      return Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Sub-Total",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                Text(
-                                  total.toString(),
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Divider(
-                            color: Colors.black,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Delivery",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                Text(
-                                  "Free",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Divider(
-                            color: Colors.black,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Total",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                Text(
-                                  "${total}", // Assuming total is the correct variable
-                                  style: TextStyle(
-                                      fontSize: 20, color: Colors.red),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 14, bottom: 10),
-                            // ignore: sized_box_for_whitespace
-                            child: Container(
-                              height: 50,
-                              width: 400,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  if (cartBox.isNotEmpty) {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (ctx) => ViewAddress(
-                                                  total: total,
-                                                )));
-                                  } else {
-                                    Navigator.pop(context);
-                                    showDailogealert(context);
-                                  }
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  // ignore: deprecated_member_use
-                                  primary: Colors.redAccent.shade700,
-                                ),
-                                child: Text(
-                                  'Continue',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
-                    }),
-              ),
-            ],
-          ),
-        ));
+                          }),
+                    ),
+                  ],
+                ),
+              ));
   }
 
   void showDailogealert(BuildContext context) {

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:we_store/database/functions/feedback/feedback_function.dart';
 import 'package:we_store/database/functions/feedback/feedback_models.dart';
 
@@ -17,8 +18,12 @@ class _ShowFeedbackState extends State<ShowFeedback> {
     getfeedback();
   }
 
+  late Box<UserFeedback> feedback = Hive.box<UserFeedback>('feedback');
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(microseconds: 1), () {
+      setState(() {});
+    });
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -31,126 +36,136 @@ class _ShowFeedbackState extends State<ShowFeedback> {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: ValueListenableBuilder(
-                  valueListenable: feedbacklist,
-                  builder:
-                      (context, List<UserFeedback> feedback, Widget? child) {
-                    return ListView.builder(
-                        itemCount: feedback.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final feedbackdata =
-                              feedback.reversed.toList()[index];
-                          return Column(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Column(
+      body: feedback.isEmpty
+          ? Center(
+              child: Image.asset('assets/images/favempty.gif'),
+            )
+          : Column(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: ValueListenableBuilder(
+                        valueListenable: feedbacklist,
+                        builder: (context, List<UserFeedback> feedback,
+                            Widget? child) {
+                          return ListView.builder(
+                              itemCount: feedback.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                final feedbackdata =
+                                    feedback.reversed.toList()[index];
+                                return Column(
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 15, top: 12, right: 15),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.black),
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: Column(
                                         children: [
-                                          Column(
-                                            children: [
-                                              Align(
-                                                  alignment: Alignment.topLeft,
-                                                  child: Row(
-                                                    children: [
-                                                      Icon(Icons.person),
-                                                      SizedBox(
-                                                        width: 11,
-                                                      ),
-                                                      Text(
-                                                        feedbackdata.name,
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                                fontSize: 18,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 12,
-                                                      )
-                                                    ],
-                                                  )),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10),
-                                                child: Align(
-                                                    alignment:
-                                                        Alignment.bottomLeft,
-                                                    child: Text(feedbackdata
-                                                        .currentdate
-                                                        .toString())),
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              )
-                                            ],
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15, top: 12, right: 15),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Column(
+                                                  children: [
+                                                    Align(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: Row(
+                                                          children: [
+                                                            Icon(Icons.person),
+                                                            SizedBox(
+                                                              width: 11,
+                                                            ),
+                                                            Text(
+                                                              feedbackdata.name,
+                                                              style: GoogleFonts.poppins(
+                                                                  fontSize: 18,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 12,
+                                                            )
+                                                          ],
+                                                        )),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 10),
+                                                      child: Align(
+                                                          alignment: Alignment
+                                                              .bottomLeft,
+                                                          child: Text(
+                                                              feedbackdata
+                                                                  .currentdate
+                                                                  .toString())),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    )
+                                                  ],
+                                                ),
+                                                IconButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      removefeedback(context,
+                                                          feedbackdata.id);
+                                                    });
+                                                  },
+                                                  icon: Icon(Icons.delete),
+                                                  color: Colors.red,
+                                                )
+                                              ],
+                                            ),
                                           ),
-                                          IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                removefeedback(
-                                                    context, feedbackdata.id);
-                                              });
-                                            },
-                                            icon: Icon(Icons.delete),
-                                            color: Colors.red,
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 20, right: 20),
+                                            child: Divider(
+                                              color: Colors.black,
+                                              thickness: 1,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 23,
+                                                right: 23,
+                                                top: 10,
+                                                bottom: 15),
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 5, right: 6),
+                                              child: Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: Text(
+                                                      feedbackdata.feedback)),
+                                            ),
                                           )
                                         ],
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 20, right: 20),
-                                      child: Divider(
-                                        color: Colors.black,
-                                        thickness: 1,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 23,
-                                          right: 23,
-                                          top: 10,
-                                          bottom: 15),
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 5, right: 6),
-                                        child: Align(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(feedbackdata.feedback)),
-                                      ),
+                                    SizedBox(
+                                      height: 10,
                                     )
                                   ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              )
-                            ],
-                          );
-                        });
-                  }),
+                                );
+                              });
+                        }),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }

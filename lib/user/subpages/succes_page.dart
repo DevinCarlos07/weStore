@@ -101,65 +101,9 @@ class _CnfrmPageState extends State<CnfrmPage> {
                 ),
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.all(10),
-            //   child: Container(
-            //     width: 240,
-            //     child: ElevatedButton(
-            //         onPressed: () {},
-            //         style: ElevatedButton.styleFrom(
-            //             primary: Color.fromARGB(255, 255, 255, 255),
-            //             side: const BorderSide(
-            //               width: 2.0,
-            //               color: Colors.red,
-            //             )),
-            //         child: const Text(
-            //           'Back Home',
-            //           style: TextStyle(color: Colors.black),
-            //         )),
-            //   ),
-            // )
           ],
         ),
       ),
     );
   }
-
-  // void showfeedback(BuildContext context) {
-  //   showDialog(
-  //       context: context,
-  //       builder: (builder) {
-  //         return AlertDialog(
-  //           title: Text('Feedback'),
-  //           content: TextFormField(
-  //             controller: _feedbackController,
-  //             maxLines: 6,
-  //             decoration: InputDecoration(
-  //                 hintText: 'Enter Your Anonymous Feedback here!!'),
-  //           ),
-  //           actions: [
-  //             ElevatedButton(
-  //                 onPressed: () {
-  //                   addfeed(context);
-  //                   Navigator.pop(context);
-  //                 },
-  //                 child: Text('Submit'))
-  //           ],
-  //         );
-  //       });
-  // }
-
-  // Future<void> addfeed(BuildContext context) async {
-  //   print(_feedbackController.text);
-  //   final feed = UserFeedback(
-  //       feedback: _feedbackController.text, name: currentUser.name, id: -1);
-  //   print(feed);
-  //   addtofeedback(feed);
-  //   getfeedback();
-  //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-  //     content: Text('Feedback added!!'),
-  //     duration: Duration(seconds: 2),
-  //     backgroundColor: Colors.green,
-  //   ));
-  // }
 }
