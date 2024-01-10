@@ -180,16 +180,6 @@ class _FavouriteState extends State<Favourite> {
             ),
     );
   }
-
-  //search fav
-  // void searchfav(String value) {
-  //   final fav = search.values.toList();
-  //   final filterdfav = fav
-  //       .where((products) =>
-  //           products.name.toLowerCase().contains(value.toLowerCase()))
-  //       .toList();
-  //   addfavlist.value = filterdfav;
-  // }
   void searchfav(String value) {
     final product = search.values.toList();
     final filteredProducts = product
